@@ -1,0 +1,61 @@
+h2, h2 {
+    text-align: center;
+    padding: 30px 0 30px 0;
+}
+
+.content {
+    max-width: 1200px;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+
+/*БЛОК СТИЛЕЙ ДЛЯ ФОРМЫ ДОБАВЛЕНИЯ И ПРОСМОТРА ТОВАРОВ*/
+.add-form, .edit-form {
+    background-color: lightsteelblue;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: left;
+    box-sizing: border-box;
+}
+
+.add-form > *, .edit-form > * {
+    margin: 7px 0 7px 0;
+    font-size: 20px;
+}
+
+.del-form-btn {
+    padding-top: 5px;
+}
+
+.add-form .button, .edit-form .button {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.add-btn, .save-btn, .del-btn {
+    font-size: 17px;
+    padding: 7px;
+    border-radius: 7px;
+    border: none;
+    width: 100px;
+    cursor: pointer;
+}
+
+.add-btn {
+    background-color: #309a30;
+    color: #ffffff;
+}
+
+.save-btn {
+    background-color: #309a30;
+    color: #ffffff;
+}
+
+.del-btn {
+    background-color: lightcoral;
+    color: #ffffff;
+}

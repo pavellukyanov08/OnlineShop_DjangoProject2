@@ -1,0 +1,34 @@
+{% extends 'main_page/base.html' %}
+{% load static %}
+
+{% block css %} <link rel="stylesheet" href="{% static 'css/about.css' %}"> {% endblock %}
+
+{% block content %}
+    <section>
+        <h1 >Информация о разработчике</h1>
+
+        <div class="info-block container">
+            <div class="dev-block">
+                <div class="auth-img">
+                    <img src="{% static 'about/auth-img.jpg' %}" width="400" height="300" alt="фотография">
+                </div>
+                <div class="auth-info">
+                    <p>Автор: Лукьянов Павел Юрьевич</p>
+                    <p>Группа: Python216</p>
+                    <p>Направление: Web Python Development</p>
+
+                    <h3>Изучаемые языки:</h3>
+                    <ul>
+                        <li>SQL</li>
+                        <li>Python (Django, Flask)</li>
+                        <li>HTML, CSS</li>
+                    </ul>
+                </div>
+                <div class="other-links">
+                    <h3>Прочие ссылки: </h3>
+                    <a href="https://github.com/pavellukyanov08?tab=repositories"><p>GitHub-профиль разработчика</p></a>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

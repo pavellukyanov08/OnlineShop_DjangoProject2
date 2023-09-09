@@ -1,0 +1,60 @@
+{% extends 'main_page/base.html' %}
+{% load static %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% endblock %}
+
+{% block title %}
+    {% if category %} {{ category.name }} {% else %} Products {% endif %}
+{% endblock %}
+
+{% block content %}
+    <h1>Our Products</h1>
+
+    <section class="main-content container">
+        <a class="add-product" href="{% url 'main_page:add_product' %}">Добавить продукт</a>
+
+        <h2>Категории</h2>
+
+        <ul>
+            <li {% if not category %} class="selected" {% endif %}>
+                <a href="{% url 'main_page:index' %}">Все</a>
+            </li>
+            {% for cat in categories %}
+            <li {% if category.slug == cat.slug %} class="selected" {% endif %}>
+                <a href="{{ cat.get_absolute_url }}">{{ cat.name }}</a>
+            </li>
+            {% endfor %}
+        </ul>
+        <div class="products-tape">
+            <h2>{% if category %} {{ category.name }} {% else %} {% endif %}</h2>
+            {% for product in products %}
+                <a href="{{ product.get_absolute_url }}">
+                    <div class="product-card">
+                        {% if product.img %}
+                            <img src="{{ product.img.url }}" height="301" width="280" alt="Товар">
+
+                            <div class="product-description">
+                            <h3>{{ product.name }}</h3>
+                            <p>{{ product.description }}</p>
+                            <span><b>{{ product.price }}</b></span>
+                            </div>
+
+                        {% else %}
+                            <div class="product-description">
+                                <h3>{{ product.title }}</h3>
+                                <p>{{ product.description }}</p>
+                                <span><b>{{ product.price }}</b></span>
+                            </div>
+                        {% endif %}
+
+                        <div class="add_cart">
+                            <a href="{% url 'add_item' product.id %}">Добавить в корзину</a>
+                        </div>
+                    </div>
+                </a>
+            {% endfor %}
+        </div>
+    </section>
+{% endblock %}

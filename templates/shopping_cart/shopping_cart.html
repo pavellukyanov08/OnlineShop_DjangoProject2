@@ -1,0 +1,55 @@
+{% extends 'main_page/base.html' %}
+{% load static %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/cart.css' %}">
+{% endblock %}
+
+{% block content %}
+    <h2>Корзина товаров</h2>
+
+    <section class="cart-content container">
+        <table class="products-tape">
+            <thead>
+                <tr class="row-titles">
+                    <th class="product-thumbnail">&nbsp;</th>
+                    <th class="product-name">Наименование</th>
+                    <th class="product-price">Цена</th>
+                    <th class="product-quantity">Количество</th>
+{#                    <th class="product-remove"></th>#}
+                </tr>
+            </thead>
+            <tbody>
+            {% if cart_items %}
+                {% for item in cart_items %}
+                    <tr class="row-titles">
+                    <td class="product-thumbnail"><a href="#"><img src="{{ item.img.url }}" alt="{{ item.title }}"
+                                                                   class="item-image"></a></td>
+                    <td class="product-name"><a href="#">{{ item.title }}</a></td>
+                    <td class="product-price"><a href="#">{{ item.price }}</a></td>
+                    <td class="product-quantity"><a href="#">
+{#                        <form method="POST" action="{% url 'update_cart' %}" class="update-quantity-form">#}
+{#                            {% csrf_token %}#}
+{#                            <input type="hidden" name="item_id" value="{{ item.id }}">#}
+{#                            <input type="number" name="quantity" value="{{ item.quantity }}" min="1">#}
+{#                            <button type="submit">UPDATE</button>#}
+{#                        </form>#}
+                    </a></td>
+                    </tr>
+                {% endfor %}
+            {% endif %}
+        </table>
+{#            {% for item in cart_items %}#}
+{#                <div class="product-card">#}
+{#                    <img src="{{ item.img.id }}" height="301" width="280" alt="Товар">#}
+{##}
+{#                    <div class="product-description">#}
+{#                        <h3>{{ item.name }}</h3>#}
+{#                        <p>{{ item.price }}</p>#}
+{#                        <span><b>{{ item.quantity }}</b></span>#}
+{#                    </div>#}
+{#                </div>#}
+{#            {% endfor %}#}
+        </div>
+    </section>
+{% endblock %}

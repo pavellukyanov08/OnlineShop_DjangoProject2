@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    {% block css %} {% endblock %}
+    <title>{% block title %} Наши продукты {% endblock %}</title>
+</head>
+<body>
+    <header class="page-header">
+        <div class="page-header__wrapper container">
+
+            <nav class="site-nav page-header__site-nav">
+                <div class="page-header__logo">
+                    <a href="{% url 'main_page:index' %}">
+                        <img src="{% static 'main_page/my_logo.svg' %}" width="80" height="80" alt="Логотип автора">
+                    </a>
+                </div>
+
+                <ul class="site-nav__list">
+                    <li class="site-nav__item"><a href="{% url 'main_page:index' %}">Товары</a></li>
+                    <li class="site-nav__item"><a href="{% url 'about' %}">Об авторе</a></li>
+                </ul>
+            </nav>
+
+            <div class="user-nav__user-block">
+                {% if user.is_authenticated %}
+
+                <div class="user-nav__profile">
+                    <a class="user-nav__logo" href="{% url 'main_page:index' %}">
+                        <img src="{% static 'main_page/user_logo.svg' %}"
+                             width="30" height="30" alt="Логотип автора">
+                    </a>
+                    <a class="user-nav__name" href="">{{ user.username }}</a>
+                </div>
+
+                <div class="user-nav__shop_block">
+                    <a href="{% url 'cart' %}"><img src="{% static 'main_page/shop_cart.svg' %}" height="40"
+                                                         width="40" alt="Корзина товаров"></a>
+                </div>
+                    
+                <div class="user-nav__user-logout">
+                    <a href="">
+                        <form action="{% url 'authentication:logout' %}" method="post">
+                            {% csrf_token %}
+                            <button class="logout-btn">Выйти</button>
+                        </form>
+                    </a>
+                </div>
+                {% else %}
+
+                <ul class="user-nav__user-auth">
+                    <li><a href="{% url 'authentication:signup' %}">Зарегистрироваться</a></li>
+                    <li><a href="{% url 'authentication:login' %}">Войти</a></li>
+                </ul>
+                {% endif %}
+            </div>
+        </div>
+    </header>
+
+    {% block content %}
+
+    {% endblock %}
+</body>
+</html>

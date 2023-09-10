@@ -17,6 +17,19 @@ def products_list(request, category_slug=None):
                    'products': products})
 
 
+def sort_products(request):
+    sort_by = request.GET.get('sort_by')
+    sort_prods = Product.objects.order_by('price')
+    # if sort_by == 'name':
+    #     sort_prods = Product.objects.order_by('name')
+    # elif sort_by == 'price':
+    #     sort_prods = Product.objects.order_by('price')
+
+    context = {'items': sort_prods}
+
+    return render(request, 'main_page/index.html', context)
+
+
 def add_product(request):
     if request.method == 'GET':
         return render(request, 'main_page/add_product.html', {'form': ProductForm()})

@@ -21,15 +21,52 @@ a {
     cursor: pointer;
 }
 
+.main-content {
+    display: flex;
+    margin-top: 15px;
+    /*justify-content: space-between;*/
+}
+
+.categories-list li {
+    display: flex;
+    align-items: center;
+    font-size: 20px;
+    padding: 5px;
+}
+
+.categories-list li:hover {
+    background-color: lightgray;
+}
+
+.categories-block {
+    margin-right: 10%;
+
+}
+
+.all-selected {
+    background-color: lightgray;
+}
+
 .add-product {
     display: inline-block;
-    margin-bottom: 20px;
+    /*margin-bottom: 20px;*/
     background-color: lightgrey;
     text-decoration: none;
     padding: 5px 10px 5px 10px;
     border-radius: 7px;
     color: black;
 }
+
+.categories-block {
+    /*padding: 20px 0 20px 0;*/
+}
+
+.categories-list li{
+    list-style: none;
+    height: 30px;
+}
+
+
 
 .products-tape {
     display: flex;

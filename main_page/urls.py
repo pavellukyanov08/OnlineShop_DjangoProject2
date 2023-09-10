@@ -11,6 +11,7 @@ urlpatterns = [
 
     path('<int:prod_id>/<slug:slug>', views.product_detail, name='product_detail'),
 
+    path('sort_products/', views.sort_products, name='sort_products'),
 
     # add product
     path('add_product/', views.add_product, name='add_product'),

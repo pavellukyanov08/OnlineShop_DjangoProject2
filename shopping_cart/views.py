@@ -15,7 +15,7 @@ def cart_view(request):
                    'total_price': total_price['total_price']})
 
 
-@login_required()
+@login_required
 def add_item(request, product_id):
     product = get_object_or_404(Product, id=product_id)
     cart_item, created = ShoppingCart.objects.get_or_create(product=product,
@@ -28,11 +28,12 @@ def add_item(request, product_id):
     return redirect('main_page:index')
 
 
+@login_required
 def remove_item(request, product_id):
     item = get_object_or_404(ShoppingCart, id=product_id, user=request.user)
     if request.method == 'GET':
         item.delete()
-    return redirect('shopping_cart:shop_cart')
+    return redirect('cart')
 
 
 @login_required

@@ -12,23 +12,35 @@
 {% block content %}
     <h1>Our Products</h1>
 
-    <section class="main-content container">
+    <div class="add-product-block container">
         <a class="add-product" href="{% url 'main_page:add_product' %}">Добавить продукт</a>
+    </div>
 
-        <h2>Категории</h2>
+    <div class="sorted-block container">
+        <h3>Сортировка по:</h3>
+        <a class="sort-by" href="?sort_by=name">Названию</a>
+        <a class="sort-by" href="?sort_by=price">Цене</a>
+    </div>
 
-        <ul>
-            <li {% if not category %} class="selected" {% endif %}>
-                <a href="{% url 'main_page:index' %}">Все</a>
-            </li>
-            {% for cat in categories %}
-            <li {% if category.slug == cat.slug %} class="selected" {% endif %}>
-                <a href="{{ cat.get_absolute_url }}">{{ cat.name }}</a>
-            </li>
-            {% endfor %}
-        </ul>
+    <section class="main-content container">
+        <aside class="categories-block">
+            <h2>Категории</h2>
+
+            <ul class="categories-list">
+                <li {% if not category %} class="all-selected" {% endif %}>
+                    <a href="{% url 'main_page:index' %}">Все</a>
+                </li>
+
+                {% for cat in categories %}
+                <li {% if category.slug == cat.slug %} class="cat-selected" {% endif %}>
+                    <a href="{{ cat.get_absolute_url }}">{{ cat.name }}</a>
+                </li>
+                {% endfor %}
+            </ul>
+        </aside>
+
         <div class="products-tape">
-            <h2>{% if category %} {{ category.name }} {% else %} {% endif %}</h2>
+{#            <h2>{% if category %} {{ category.name }} {% else %} {% endif %}</h2>#}
             {% for product in products %}
                 <a href="{{ product.get_absolute_url }}">
                     <div class="product-card">

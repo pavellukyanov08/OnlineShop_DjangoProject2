@@ -5,7 +5,7 @@ body {
 
 h2 {
     text-align: center;
-    padding: 30px 0 30px 0;
+    padding: 40px 0 40px 0;
 }
 
 .container {
@@ -15,36 +15,42 @@ h2 {
     box-sizing: border-box;
 }
 
-a {
-    text-decoration: none;
-    color: black;
-    cursor: pointer;
-}
-
-.add-product {
-    display: inline-block;
-    margin-bottom: 20px;
-    background-color: lightgrey;
-    text-decoration: none;
-    padding: 5px 10px 5px 10px;
-    border-radius: 7px;
-    color: black;
-}
-
 .products-tape {
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: column;
+    width: 100%;
 }
 
-.product-card {
-    margin: 0 20px 20px 0;
-    background-color: #f4f5f7;
-}
+.row-titles {}
 
-.product-description {
-    padding: 10px 0 25px 15px;
-}
+/*a {*/
+/*    text-decoration: none;*/
+/*    color: black;*/
+/*    cursor: pointer;*/
+/*}*/
+
+/*.add-product {*/
+/*    display: inline-block;*/
+/*    margin-bottom: 20px;*/
+/*    background-color: lightgrey;*/
+/*    text-decoration: none;*/
+/*    padding: 5px 10px 5px 10px;*/
+/*    border-radius: 7px;*/
+/*    color: black;*/
+/*}*/
+
+/*.products-tape {*/
+/*    display: flex;*/
+/*    flex-wrap: wrap;*/
+/*    flex-direction: column;*/
+/*}*/
+
+/*.product-card {*/
+/*    margin: 0 20px 20px 0;*/
+/*    background-color: #f4f5f7;*/
+/*}*/
+
+/*.product-description {*/
+/*    padding: 10px 0 25px 15px;*/
+/*}*/
 
 .product-description > * {
     padding-bottom: 5px;

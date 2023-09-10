@@ -24,7 +24,7 @@ class Product(models.Model):
     slug = models.SlugField(max_length=100, db_index=True, null=True)
     description = models.TextField(max_length=350, verbose_name='Описание', null=True)
     img = models.ImageField(upload_to='main_page/images', verbose_name='Изображение', null=True)
-    price = models.CharField(max_length=20, verbose_name='Цена', null=True)
+    price = models.CharField(max_length=10, verbose_name='Цена', null=True)
     available = models.BooleanField(default=True, null=True)
     created = models.DateTimeField(auto_now_add=True, null=True)
     updated = models.DateTimeField(auto_now=True, null=True)

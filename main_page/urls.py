@@ -5,13 +5,17 @@ app_name = 'main_page'
 
 urlpatterns = [
     # main_page
-    path('', views.products_list, name='index'),
+    path('index/', views.products_list, name='index'),
+
+    # path('index/', views.sort_products, name='index'),
 
     path('<slug:category_slug>/', views.products_list, name='product_list_by_category'),
 
     path('<int:prod_id>/<slug:slug>', views.product_detail, name='product_detail'),
 
-    path('sort_products/', views.sort_products, name='sort_products'),
+
+
+    # path('sort_products/', views.sort_products, name='sort_products'),
 
     # add product
     path('add_product/', views.add_product, name='add_product'),

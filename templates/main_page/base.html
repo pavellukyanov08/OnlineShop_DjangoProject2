@@ -42,7 +42,7 @@
                     
                 <div class="user-nav__user-logout">
                     <a href="">
-                        <form action="{% url 'authentication:logout' %}" method="post">
+                        <form action="{% url 'logout' %}" method="post">
                             {% csrf_token %}
                             <button class="logout-btn">Выйти</button>
                         </form>
@@ -51,8 +51,8 @@
                 {% else %}
 
                 <ul class="user-nav__user-auth">
-                    <li><a href="{% url 'authentication:signup' %}">Зарегистрироваться</a></li>
-                    <li><a href="{% url 'authentication:login' %}">Войти</a></li>
+                    <li><a href="{% url 'signup' %}">Зарегистрироваться</a></li>
+                    <li><a href="{% url 'login' %}">Войти</a></li>
                 </ul>
                 {% endif %}
             </div>

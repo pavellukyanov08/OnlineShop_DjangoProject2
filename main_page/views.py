@@ -7,6 +7,14 @@ def products_list(request, category_slug=None):
     category = None
     categories = Category.objects.all()
     products = Product.objects.filter(available=True)
+    # функционал сортировки
+    sort_by = request.GET.get('sort_by')
+
+    if sort_by == 'name':
+        products = Product.objects.order_by('name')
+    elif sort_by == 'price':
+        products = Product.objects.order_by('price')
+
     if category_slug:
         category = get_object_or_404(Category, slug=category_slug)
         products = products.filter(category=category)
@@ -17,17 +25,16 @@ def products_list(request, category_slug=None):
                    'products': products})
 
 
-def sort_products(request):
-    sort_by = request.GET.get('sort_by')
-    sort_prods = Product.objects.order_by('price')
-    # if sort_by == 'name':
-    #     sort_prods = Product.objects.order_by('name')
-    # elif sort_by == 'price':
-    #     sort_prods = Product.objects.order_by('price')
-
-    context = {'items': sort_prods}
-
-    return render(request, 'main_page/index.html', context)
+# def sort_products(request):
+#     products = Product.objects.all()
+#     if sort_by == 'name':
+#         products = Product.objects.order_by('name')
+#     elif sort_by == 'price':
+#         products = Product.objects.order_by('price')
+#
+#     context = {'products': products}
+#
+#     return render(request, 'main_page/index.html', context)
 
 
 def add_product(request):

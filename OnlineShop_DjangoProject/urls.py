@@ -9,6 +9,9 @@ urlpatterns = [
     # about
     path('about/', include('about.urls')),
 
+    # favourites
+    path('favourites/', include('favourites.urls')),
+
     # authentication
     path('authentication/', include('authentication.urls')),
 

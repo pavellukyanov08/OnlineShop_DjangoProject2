@@ -1,0 +1,39 @@
+{% extends 'main_page/base.html' %}
+{% load static %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/favourites.css' %}">
+{% endblock %}
+
+{% block content %}
+    <h2>Избранные товары</h2>
+
+    <section class="main-content">
+        <div class="favourites-tape container">
+            {% for item in favourites_item %}
+            <a href="{{ product.get_absolute_url }}">
+                <div class="product-card">
+                    {% if item.img %}
+                    <img src="{{ item.img.url }}" height="301" width="280" alt="Товар">
+
+                    <div class="product-description">
+                        <div class="product-info">
+                            <h3>{{ item.name }}</h3>
+                            <p>{{ item.description }}</p>
+                            <span><b>{{ item.price }} ₽</b></span>
+                        </div>
+                    </div>
+
+                    {% else %}
+                    <div class="product-description">
+                        <h3>{{ item.title }}</h3>
+                        <p>{{ item.description }}</p>
+                        <span><b>{{ item.price }}</b></span>
+                    </div>
+                    {% endif %}
+                </div>
+            </a>
+        </div>
+        {% endfor %}
+    </section>
+{% endblock %}

@@ -25,18 +25,6 @@ def products_list(request, category_slug=None):
                    'products': products})
 
 
-# def sort_products(request):
-#     products = Product.objects.all()
-#     if sort_by == 'name':
-#         products = Product.objects.order_by('name')
-#     elif sort_by == 'price':
-#         products = Product.objects.order_by('price')
-#
-#     context = {'products': products}
-#
-#     return render(request, 'main_page/index.html', context)
-
-
 def add_product(request):
     if request.method == 'GET':
         return render(request, 'main_page/add_product.html', {'form': ProductForm()})

@@ -29,6 +29,7 @@ INSTALLED_APPS = [
     'about.apps.AboutConfig',
     'shopping_cart.apps.ShoppingCartConfig',
     'authentication.apps.AuthenticationConfig',
+    'favourites.apps.FavouritesConfig'
 ]
 
 MIDDLEWARE = [

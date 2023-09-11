@@ -27,19 +27,29 @@
             <div class="user-nav__user-block">
                 {% if user.is_authenticated %}
 
-                <div class="user-nav__profile">
-                    <a class="user-nav__logo" href="{% url 'main_page:index' %}">
-                        <img src="{% static 'main_page/user_logo.svg' %}"
-                             width="30" height="30" alt="Логотип автора">
-                    </a>
-                    <a class="user-nav__name" href="">{{ user.username }}</a>
-                </div>
-
                 <div class="user-nav__shop_block">
                     <a href="{% url 'cart' %}"><img src="{% static 'main_page/shop_cart.svg' %}" height="40"
                                                          width="40" alt="Корзина товаров"></a>
                 </div>
-                    
+
+                <div class="user-nav__profile">
+                    <a class="user-nav__logo" id="user-icon" href="{% url 'main_page:index' %}">
+                        <img src="{% static 'main_page/user_logo.svg' %}"
+                             width="30" height="30" alt="Пользователь">
+                    </a>
+
+                    <ul class="user-dropdown" id="user-dropdown">
+                        <li><a href="{% url 'favourites_product' %}">Избранное</a></li>
+                        <li><a href="#">Сравнение</a></li>
+                    </ul>
+
+
+{#                    <ul class="user-dropdown" id="user-dropdown">#}
+{#                        <li><a href="">Избранное</a></li>#}
+{#                        <li><a href="">Сравнение</a></li>#}
+{#                    </ul>#}
+                </div>
+
                 <div class="user-nav__user-logout">
                     <a href="">
                         <form action="{% url 'logout' %}" method="post">
@@ -58,6 +68,16 @@
             </div>
         </div>
     </header>
+
+    <script>
+        document.getElementById('user-icon').addEventListener('mouseenter', function () {
+            document.getElementById('user-dropdown').style.display = 'block';
+        });
+
+        document.getElementById('user-icon').addEventListener('mouseleave', function () {
+            document.getElementById('user-dropdown').style.display = 'none';
+        });
+    </script>
 
     {% block content %}
 

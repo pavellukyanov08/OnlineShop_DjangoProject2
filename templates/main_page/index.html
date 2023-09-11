@@ -45,20 +45,28 @@
                 <a href="{{ product.get_absolute_url }}">
                     <div class="product-card">
                         {% if product.img %}
-                            <img src="{{ product.img.url }}" height="301" width="280" alt="Товар">
+                        <img src="{{ product.img.url }}" height="301" width="280" alt="Товар">
 
-                            <div class="product-description">
-                            <h3>{{ product.name }}</h3>
-                            <p>{{ product.description }}</p>
-                            <span><b>{{ product.price }} ₽</b></span>
+                        <div class="product-description">
+                            <div class="product-info">
+                                <h3>{{ product.name }}</h3>
+                                <p>{{ product.description }}</p>
+                                <span><b>{{ product.price }} ₽</b></span>
                             </div>
+
+                            <div class="interaction-item">
+                                <a href="{% url 'add_to_favourite' product.id%}">
+                                    <img src="{% static 'main_page/favourites-icon.svg' %}" height="30" width="30" alt="">
+                                </a>
+                            </div>
+                        </div>
 
                         {% else %}
-                            <div class="product-description">
-                                <h3>{{ product.title }}</h3>
-                                <p>{{ product.description }}</p>
-                                <span><b>{{ product.price }}</b></span>
-                            </div>
+                        <div class="product-description">
+                            <h3>{{ product.title }}</h3>
+                            <p>{{ product.description }}</p>
+                            <span><b>{{ product.price }}</b></span>
+                        </div>
                         {% endif %}
 
                         <div class="add_cart">

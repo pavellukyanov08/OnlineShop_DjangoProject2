@@ -7,9 +7,8 @@
 
 {% block content %}
     <h2>Избранные товары</h2>
-
-    <section class="main-content">
-        <div class="favourites-tape container">
+    <section class="favourites-content container">
+        <div class="favourites-tape">
             {% for item in favourites_item %}
             <a href="{{ product.get_absolute_url }}">
                 <div class="product-card">
@@ -22,7 +21,18 @@
                             <p>{{ item.description }}</p>
                             <span><b>{{ item.price }} ₽</b></span>
                         </div>
+
+                        <div class="interaction-item">
+                            <a href="{% url 'remove_favourite' product.id %}">
+                                <img src="{% static 'favourites/remove-icon.svg' %}" height="30" width="30"
+                                     alt="Удалить избранное">
+                            </a>
+                        </div>
                     </div>
+
+{#                    <div class="add_cart">#}
+{#                        <a href="{% url 'add_item' product.id %}">Добавить в корзину</a>#}
+{#                    </div>#}
 
                     {% else %}
                     <div class="product-description">
@@ -30,10 +40,14 @@
                         <p>{{ item.description }}</p>
                         <span><b>{{ item.price }}</b></span>
                     </div>
+
+                    <div class="add_cart">
+                        <a href="{% url 'add_item' product.id %}">Добавить в корзину</a>
+                    </div>
                     {% endif %}
                 </div>
             </a>
-        </div>
         {% endfor %}
+        </div>
     </section>
 {% endblock %}

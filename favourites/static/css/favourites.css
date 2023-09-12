@@ -22,7 +22,7 @@ a {
     cursor: pointer;
 }
 
-.main-content {
+.favourites-content {
     /*display: flex;*/
     margin-top: 15px;
 }
@@ -34,7 +34,7 @@ a {
 
 .product-card {
     margin: 0 20px 20px 0;
-    background-color: #f4f5f7;
+    background-color: #ffffff;
 }
 
 .product-description {
@@ -54,9 +54,9 @@ a {
     justify-content: space-between;
 }
 
-.interaction-item {
-    margin-right: 10px;
-}
+/*.interaction-item {*/
+/*    margin-right: 10px;*/
+/*}*/
 
 .add_cart {
     text-align: center;

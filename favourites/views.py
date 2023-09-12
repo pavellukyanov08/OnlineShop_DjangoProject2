@@ -18,3 +18,10 @@ def add_to_favourite(request, product_id):
     if not added:
         favourite_item.save()
     return redirect('main_page:index')
+
+
+def remove_favourite(request, product_id):
+    item = get_object_or_404(Favourite, id=product_id, user=request.user)
+    if request.method == 'GET':
+        item.delete()
+    return redirect('favourites_product')

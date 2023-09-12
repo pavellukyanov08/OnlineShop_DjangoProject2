@@ -1,8 +1,10 @@
 from django.urls import path
 from . import views
 
+app_name = 'favourites'
+
 urlpatterns = [
-    path('', views.favourites_product, name='favourites_product'),
-    path('favourites/<int:product_id>/', views.add_to_favourite, name='add_to_favourite'),
-    path('remove_favourite/<int:product_id>/', views.remove_favourite, name='remove_favourites')
+    path('', views.get_favourites_products, name='all_products'),
+    path('favourites/<int:product_id>/', views.add_item, name='add_item'),
+    path('remove_favourite/<int:product_id>/', views.remove_item, name='remove_item')
 ]

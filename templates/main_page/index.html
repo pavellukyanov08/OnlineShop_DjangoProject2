@@ -55,7 +55,7 @@
                             </div>
 
                             <div class="interaction-item">
-                                <a href="{% url 'add_to_favourite' product.id%}">
+                                <a href="{% url 'favourites:add_item' product.id %}">
                                     <img src="{% static 'main_page/favourites-icon.svg' %}" height="30" width="30" alt="">
                                 </a>
                             </div>

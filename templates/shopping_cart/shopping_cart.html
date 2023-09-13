@@ -33,7 +33,7 @@
                         <td class="product-price"><a href="#">{{ item.price }}</a></td>
                         <td class="product-quantity">
                             <a href="">
-                               <form method="POST" action="{% url 'update_cart' %}" class="update-quantity-form">
+                               <form method="POST" action="{% url 'cart:update_cart' %}" class="update-quantity-form">
                                    {% csrf_token %}
                                    <input type="hidden" name="item_id" value="{{ item.id }}">
                                    <input type="number" name="quantity" value="{{ item.quantity }}">
@@ -42,7 +42,7 @@
                             </a>
                         </td>
                         <td class="product-remove">
-                            <a href="{% url 'remove_item' item.id %}">
+                            <a href="{% url 'cart:remove_item' item.id %}">
                                 <img src="{% static 'shopping_cart/remove-icon.svg' %}" width="25px" height="25px"
                                      alt="Удалить товар">
                             </a>

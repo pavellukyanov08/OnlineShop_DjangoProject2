@@ -10,5 +10,10 @@ class ShoppingCart(models.Model):
     quantity = models.PositiveIntegerField(default=1)
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
 
+    class Meta:
+        ordering = ('product',)
+        verbose_name = 'Корзины'
+        verbose_name_plural = 'Корзина'
+
     def __str__(self):
         return self.product

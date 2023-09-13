@@ -10,44 +10,27 @@
     <section class="favourites-content container">
         <div class="favourites-tape">
             {% for item in favourites_item %}
-            <a href="{{ product.get_absolute_url }}">
                 <div class="product-card">
-                    {% if item.img %}
-                    <img src="{{ item.img.url }}" height="301" width="280" alt="Товар">
+                    <a href="{{ product.get_absolute_url }}">
+                        <img src="{{ item.img.url }}" height="200" width="150" alt="Товар">
+                    </a>
 
                     <div class="product-description">
-                        <div class="product-info">
-                            <h3>{{ item.name }}</h3>
-                            <p>{{ item.description }}</p>
-                            <span><b>{{ item.price }} ₽</b></span>
-                        </div>
-
-                        <div class="interaction-item">
-                            <a href="{% url 'favourites:remove_item' product.id %}">
-                                <img src="{% static 'favourites/remove-icon.svg' %}" height="30" width="30"
-                                     alt="Удалить избранное">
-                            </a>
-                        </div>
-                    </div>
-
-{#                    <div class="add_cart">#}
-{#                        <a href="{% url 'add_item' product.id %}">Добавить в корзину</a>#}
-{#                    </div>#}
-
-                    {% else %}
-                    <div class="product-description">
-                        <h3>{{ item.title }}</h3>
+{#                        <h3>{{ item.product }}</h3>#}
                         <p>{{ item.description }}</p>
-                        <span><b>{{ item.price }}</b></span>
+                        <span><b>{{ item.price }} ₽</b></span>
                     </div>
 
-                    <div class="add_cart">
-                        <a href="{% url 'add_item' product.id %}">Добавить в корзину</a>
+                    <div class="interaction-item">
+                        <a class="remove-prod" href="{% url 'favourites:remove_item' item.id %}">
+                            <img src="{% static 'favourites/remove-icon.svg' %}" height="30" width="30"
+                                 alt="Удалить избранное">
+                        </a>
+
+                        <a class="buy-prod" href="{% url 'cart:add_item' item.id %}">Купить</a>
                     </div>
-                    {% endif %}
                 </div>
-            </a>
-        {% endfor %}
+            {% endfor %}
         </div>
     </section>
 {% endblock %}

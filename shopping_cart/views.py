@@ -30,10 +30,10 @@ def add_item(request, product_id):
 
 @login_required
 def remove_item(request, product_id):
-    item = get_object_or_404(ShoppingCart, id=product_id, user=request.user)
+    product = get_object_or_404(ShoppingCart, id=product_id, user=request.user)
     if request.method == 'GET':
-        item.delete()
-    return redirect('cart')
+        product.delete()
+    return redirect('cart:cart')
 
 
 @login_required
@@ -44,4 +44,4 @@ def update_cart(request):
         cart_item = ShoppingCart.objects.get(id=item_id)
         cart_item.quantity = new_quantity
         cart_item.save()
-        return redirect('cart')
+        return redirect('cart:cart')

@@ -12,6 +12,8 @@ urlpatterns = [
     # favourites
     path('favourites/', include('favourites.urls')),
 
+    path('compare/', include('prod_comparison.urls')),
+
     # authentication
     path('authentication/', include('authentication.urls')),
 

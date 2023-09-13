@@ -104,7 +104,13 @@ a {
     justify-content: space-between;
 }
 
+.product-info > *:not(:last-child) {
+    padding-bottom: 5px;
+}
+
 .interaction-item {
+    display: flex;
+    flex-direction: column;
     margin-right: 10px;
 }
 

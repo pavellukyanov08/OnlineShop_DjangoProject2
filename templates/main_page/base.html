@@ -28,7 +28,7 @@
                 {% if user.is_authenticated %}
 
                 <div class="user-nav__shop_block">
-                    <a href="{% url 'cart' %}"><img src="{% static 'main_page/shop_cart.svg' %}" height="40"
+                    <a href="{% url 'cart:cart' %}"><img src="{% static 'main_page/shop_cart.svg' %}" height="40"
                                                          width="40" alt="Корзина товаров"></a>
                 </div>
 
@@ -40,7 +40,7 @@
 
                     <ul class="user-dropdown" id="user-dropdown">
                         <li><a href="{% url 'favourites:all_products' %}">Избранное</a></li>
-                        <li><a href="#">Сравнение</a></li>
+                        <li><a href="{% url 'compare:all_compare' %}">Сравнение</a></li>
                     </ul>
                 </div>
 

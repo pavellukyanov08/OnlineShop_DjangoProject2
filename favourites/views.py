@@ -25,7 +25,7 @@ def add_item(request, product_id):
 
 @login_required
 def remove_item(request, product_id):
-    item = get_object_or_404(Favourite, id=product_id, user=request.user)
+    product = get_object_or_404(Favourite, id=product_id, user=request.user)
     if request.method == 'GET':
-        item.delete()
+        product.delete()
     return redirect('favourites:all_products')

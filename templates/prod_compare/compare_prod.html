@@ -6,4 +6,45 @@
 {% endblock %}
 
 {% block content %}
+    <h1 class="compare-app__title">Сравнение товаров</h1>
+
+    <section class="container">
+        <div class="compare-group">
+            <table class="compare-product-table">
+                <thead>
+                    <tr class="row-titles">
+                        <th class="product-thumbnail">&nbsp;</th>
+                        <th class="product-name">Наименование</th>
+                        <th class="product-price">Цена (руб)</th>
+                        <th class="product-width">Ширина (см)</th>
+                        <th class="product-height">Высота (см)</th>
+                        <th class="product-weight">Вес (кг)</th>
+                        <th class="product-remove"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% if compare_items %}
+                        {% for spec in compare_items %}
+                            <tr>
+                                <td><img src="{{ spec.img.url }}" height="150" width="150" alt="Товар"></td>
+                                <td><p>{{ spec.product }}</p></td>
+                                <td><p>{{ spec.price }}</p></td>
+                                <td><p>{{ spec.width }}</p></td>
+                                <td><p>{{ spec.height }}</p></td>
+                                <td><p>{{ spec.weight }}</p></td>
+                                <td class="product-remove">
+                                    <a href="{% url 'compare:remove_item' spec.id %}">
+                                        <img src="{% static 'shopping_cart/remove-icon.svg' %}" width="25px" height="25px"
+                                        alt="Удалить товар">
+                                    </a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+    </section>
+    <section></section>
+    <section></section>
 {% endblock %}

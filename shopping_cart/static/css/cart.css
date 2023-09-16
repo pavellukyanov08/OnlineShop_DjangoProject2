@@ -17,40 +17,13 @@ h2 {
 
 .products-tape {
     width: 100%;
+    text-align: center;
 }
 
-.row-titles {}
-
-/*a {*/
-/*    text-decoration: none;*/
-/*    color: black;*/
-/*    cursor: pointer;*/
-/*}*/
-
-/*.add-product {*/
-/*    display: inline-block;*/
-/*    margin-bottom: 20px;*/
-/*    background-color: lightgrey;*/
-/*    text-decoration: none;*/
-/*    padding: 5px 10px 5px 10px;*/
-/*    border-radius: 7px;*/
-/*    color: black;*/
-/*}*/
-
-/*.products-tape {*/
-/*    display: flex;*/
-/*    flex-wrap: wrap;*/
-/*    flex-direction: column;*/
-/*}*/
-
-/*.product-card {*/
-/*    margin: 0 20px 20px 0;*/
-/*    background-color: #f4f5f7;*/
-/*}*/
-
-/*.product-description {*/
-/*    padding: 10px 0 25px 15px;*/
-/*}*/
+.product-remove {
+    padding-left: 10px;
+    border-left: 1px solid gray;
+}
 
 .product-description > * {
     padding-bottom: 5px;

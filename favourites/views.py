@@ -14,7 +14,11 @@ def get_favourites_products(request):
 def add_item(request, product_id):
     product = get_object_or_404(Product, id=product_id)
     favourite_item, added = Favourite.objects.get_or_create(product=product,
+                                                            slug=product.slug,
                                                             description=product.description,
+                                                            width=product.width,
+                                                            height=product.height,
+                                                            weight=product.weight,
                                                             img=product.img,
                                                             price=product.price,
                                                             user=request.user)

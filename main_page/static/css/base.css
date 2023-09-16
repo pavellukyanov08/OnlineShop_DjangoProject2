@@ -1,7 +1,7 @@
 body {
     padding: 0;
     margin: 0;
-    background-color: #f9fdff;
+    background-color: #f6f6f6;
 }
 
 h1, h2, h3, p {
@@ -91,32 +91,43 @@ ul {
 }
 
 /*Раскрывающийся список пользователя*/
-.user-dropdown li {
-  padding: 0;
-  /*position: absolute;*/
-  /*left: 0;*/
+.user-nav__profile {
+  position: relative;
+  display: inline-block;
 }
 
-.user-dropdown a {
-  color: #fff;
-  text-decoration: none;
-  display: block;
-  text-align: center;
-  padding: 0 10px;
-  height: 30px;
-}
-
-.user-dropdown a:hover {
-  background: gray;
-}
-
-.user-dropdown ul {
+.dropdown {
   position: absolute;
-  left: 0;
   top: 100%;
+  right: -40px;
   display: none;
-  padding: 0;
+  background-color: #d3d3d3;
+  border-radius: 5px;
 }
+
+.dropdown ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.dropdown ul li {
+  padding: 10px 10px 5px 10px;
+}
+
+.dropdown a {
+  font-size: 20px;
+}
+
+.dropdown a:hover {
+  color: white;
+}
+
+.user-nav__profile:hover .dropdown {
+  display: block;
+}
+
+
 
 .user-nav__user-profile a {
   text-decoration: none;

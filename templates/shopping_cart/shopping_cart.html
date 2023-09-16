@@ -14,8 +14,8 @@
                 <tr class="row-titles">
                     <th class="product-thumbnail">&nbsp;</th>
                     <th class="product-name">Продукт</th>
-                    <th class="product-price">Цена</th>
-                    <th class="product-quantity">Количество</th>
+                    <th class="product-price">Цена (руб)</th>
+                    <th class="product-quantity">Количество (шт)</th>
                     <th class="product-remove"></th>
                 </tr>
             </thead>
@@ -52,17 +52,5 @@
                 {% endif %}
             </tbody>
         </table>
-{#            {% for item in cart_items %}#}
-{#                <div class="product-card">#}
-{#                    <img src="{{ item.img.id }}" height="301" width="280" alt="Товар">#}
-{##}
-{#                    <div class="product-description">#}
-{#                        <h3>{{ item.name }}</h3>#}
-{#                        <p>{{ item.price }}</p>#}
-{#                        <span><b>{{ item.quantity }}</b></span>#}
-{#                    </div>#}
-{#                </div>#}
-{#            {% endfor %}#}
-        </div>
     </section>
 {% endblock %}

@@ -38,10 +38,12 @@
                              width="30" height="30" alt="Пользователь">
                     </a>
 
-                    <ul class="user-dropdown" id="user-dropdown">
-                        <li><a href="{% url 'favourites:all_products' %}">Избранное</a></li>
-                        <li><a href="{% url 'compare:all_compare' %}">Сравнение</a></li>
-                    </ul>
+                    <div class="dropdown">
+                        <ul class="user-dropdown" id="user-dropdown">
+                            <li><a href="{% url 'favourites:all_products' %}">Избранное</a></li>
+                            <li><a href="{% url 'compare:all_compare' %}">Сравнение</a></li>
+                        </ul>
+                    </div>
                 </div>
 
                 <div class="user-nav__user-logout">
@@ -62,16 +64,6 @@
             </div>
         </div>
     </header>
-
-    <script>
-        document.getElementById('user-icon').addEventListener('mouseenter', function () {
-            document.getElementById('user-dropdown').style.display = 'block';
-        });
-
-        document.getElementById('user-icon').addEventListener('mouseleave', function () {
-            document.getElementById('user-dropdown').style.display = 'none';
-        });
-    </script>
 
     {% block content %}
 

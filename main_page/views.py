@@ -31,10 +31,10 @@ def add_product(request):
     else:
         try:
             form = ProductForm(request.POST, request.FILES)
-            new_product = form.save(commit=True)
+            new_product = form.save(commit=False)
             new_product.user = request.user
             new_product.save()
-            return redirect('index')
+            return redirect('main_page:index')
         except ValueError:
             return render(request, 'main_page/add_product.html',
                           {'form': ProductForm(),

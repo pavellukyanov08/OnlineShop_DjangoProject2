@@ -28,14 +28,17 @@
             <h2>Категории</h2>
 
             <ul class="categories-list">
-                <li {% if not category %} class="all-selected" {% endif %}>
-                    <a href="{% url 'main_page:index' %}">Все</a>
-                </li>
+                <a {% if not category %} class="all-selected" {% endif %} href="{% url 'main_page:index' %}">
+                    <li>
+                        Все
+                    </li>
+                </a>
 
                 {% for cat in categories %}
-                    <li {% if category.slug == cat.slug %} class="cat-selected" {% endif %}>
-                        <a href="{{ cat.get_absolute_url }}">{{ cat.name }}</a>
-                    </li>
+                    <a {% if category.slug == cat.slug %} {% endif %} class="cat-selected"
+                                                                      href="{{ cat.get_absolute_url }}">
+                        <li>{{ cat.name }}</li>
+                    </a>
                 {% endfor %}
             </ul>
         </aside>

@@ -1,28 +1,28 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import ProductForm
 from .models import Product, Category
+from django.utils import timezone
 
 
 def products_list(request, category_slug=None):
     category = None
     categories = Category.objects.all()
+    curr_time = timezone.now()
     products = Product.objects.filter(available=True)
     # функционал сортировки
     sort_by = request.GET.get('sort_by')
 
-    if sort_by == 'name':
-        products = Product.objects.order_by('name')
-    elif sort_by == 'price':
-        products = Product.objects.order_by('price')
+    if sort_by:
+        products = Product.objects.order_by(sort_by).all()
 
     if category_slug:
         category = get_object_or_404(Category, slug=category_slug)
         products = products.filter(category=category)
-    return render(request,
-                  'main_page/index.html',
-                  {'category': category,
-                   'categories': categories,
-                   'products': products})
+
+    return render(request, 'main_page/index.html', {'category': category,
+                                                    'categories': categories,
+                                                    'products': products,
+                                                    'curr_time': curr_time})
 
 
 def add_product(request):
@@ -50,7 +50,7 @@ def product_detail(request, prod_id, slug):
         try:
             form = ProductForm(request.POST, instance=product)
             form.save()
-            return redirect('index')
+            return redirect('main_page:index')
         except ValueError:
             return render(request, 'main_page/product_detail.html',
                           {'form': form,

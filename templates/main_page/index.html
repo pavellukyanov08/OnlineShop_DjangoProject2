@@ -1,5 +1,6 @@
 {% extends 'main_page/base.html' %}
 {% load static %}
+{% load tz %}
 
 {% block css %}
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
@@ -32,54 +33,51 @@
                 </li>
 
                 {% for cat in categories %}
-                <li {% if category.slug == cat.slug %} class="cat-selected" {% endif %}>
-                    <a href="{{ cat.get_absolute_url }}">{{ cat.name }}</a>
-                </li>
+                    <li {% if category.slug == cat.slug %} class="cat-selected" {% endif %}>
+                        <a href="{{ cat.get_absolute_url }}">{{ cat.name }}</a>
+                    </li>
                 {% endfor %}
             </ul>
         </aside>
 
         <div class="products-tape">
-{#            <h2>{% if category %} {{ category.name }} {% else %} {% endif %}</h2>#}
             {% for product in products %}
-                    <div class="product-card">
-                        {% if product.img %}
-                        <a href="{{ product.get_absolute_url }}">
-                            <img src="{{ product.img.url }}" height="301" width="280" alt="Товар">
-                        </a>
+                <div class="product-card">
+                    <a href="{{ product.get_absolute_url }}">
+                        <img src="{{ product.img.url }}" height="301" width="280" alt="Товар">
+                    </a>
 
-                        <div class="product-description">
-                            <div class="product-info">
-                                <h3>{{ product.name }}</h3>
-                                <p>{{ product.description }}</p>
-                                <span><b>{{ product.price }} ₽</b></span>
-                            </div>
-
-                            <div class="interaction-item">
-                                <a href="{% url 'favourites:add_item' product.id %}">
-                                    <img src="{% static 'main_page/favourites-icon.svg' %}" height="30" width="30"
-                                         alt="Избранное">
-                                </a>
-
-                                <a href="{% url 'compare:add_item' product.id %}">
-                                    <img src="{% static 'main_page/compare.svg' %}" height="30" width="30"
-                                         alt="Сравнить">
-                                </a>
-                            </div>
-                        </div>
-
-                        {% else %}
-                        <div class="product-description">
-                            <h3>{{ product.title }}</h3>
+                    <div class="product-description">
+                        <div class="product-info">
+                            <h3>{{ product.name }}</h3>
                             <p>{{ product.description }}</p>
-                            <span><b>{{ product.price }}</b></span>
+                            {% if product.discount_price and product.start_date <= curr_time and curr_time <= product.end_date %}
+                                <div class="current_and_disc_price">
+                                    <strike class="current-price"><b>{{ product.price }} ₽</b></strike>
+                                    <span class="disc-price"><b>{{ product.discount_price }} ₽</b></span>
+                                </div>
+                            {% else %}
+                                <span class="current-price"><b>{{ product.price }} ₽</b></span>
+                            {% endif %}
                         </div>
-                        {% endif %}
 
-                        <div class="add_cart">
-                            <a href="{% url 'cart:add_item' product.id %}">Добавить в корзину</a>
+                        <div class="interaction-item">
+                            <a href="{% url 'favourites:add_item' product.id %}">
+                                <img src="{% static 'main_page/favourites-icon.svg' %}" height="30" width="30"
+                                     alt="Избранное">
+                            </a>
+
+                            <a href="{% url 'compare:add_item' product.id %}">
+                                <img src="{% static 'main_page/compare.svg' %}" height="30" width="30"
+                                     alt="Сравнить">
+                            </a>
                         </div>
                     </div>
+
+                    <div class="add_cart">
+                        <a href="{% url 'cart:add_item' product.id %}">Добавить в корзину</a>
+                    </div>
+                </div>
             {% endfor %}
         </div>
     </section>

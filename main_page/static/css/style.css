@@ -108,6 +108,10 @@ a {
     padding-bottom: 5px;
 }
 
+.disc-price {
+    color: red;
+}
+
 .interaction-item {
     display: flex;
     flex-direction: column;

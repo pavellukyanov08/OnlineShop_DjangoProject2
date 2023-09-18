@@ -98,11 +98,29 @@ ul {
 
 .dropdown {
   position: absolute;
-  top: 100%;
-  right: -40px;
   display: none;
+  top: 20px;
+  right: -90px;
+  text-align: center;
   background-color: #d3d3d3;
   border-radius: 5px;
+  border: 1px solid white;
+}
+
+.user-section {
+  /*display: flex;*/
+  /*flex-direction: column;*/
+  padding-bottom: 5px;
+  font-size: 20px;
+  border-bottom: 2px solid white;
+}
+
+.username {
+  padding-bottom: 7px;
+}
+
+.add-product {
+  font-size: 17px;
 }
 
 .dropdown ul {
@@ -115,19 +133,26 @@ ul {
   padding: 10px 10px 5px 10px;
 }
 
-.dropdown a {
-  font-size: 20px;
-}
-
 .dropdown a:hover {
   color: white;
-}
+  }
 
 .user-nav__profile:hover .dropdown {
   display: block;
+  width: 200px;
 }
 
+.user-dropdown-nav li a{
+  font-size: 20px;
+}
 
+.logout-btn {
+  width: 70%;
+}
+
+.user-auth {
+  border-top: 2px solid white;
+}
 
 .user-nav__user-profile a {
   text-decoration: none;
@@ -141,7 +166,7 @@ ul {
   list-style: none;
 }
 
-.logout-btn {
+.logout-link {
   font-size: 15px;
 }
 

@@ -40,19 +40,38 @@
 
                     <div class="dropdown">
                         <ul class="user-dropdown" id="user-dropdown">
+                            <li class="user-section">
+                                <a class="username" href="#">{{ user }}</a>
+
+                                {% if user.is_superuser and user.is_staff %}
+                                    <a class="add-product" href="{% url 'main_page:add_product' %}">Добавить продукт</a>
+                                {% endif %}
+                            </li>
+                        </ul>
+
+                        <ul class="user-dropdown-nav">
                             <li><a href="{% url 'favourites:all_products' %}">Избранное</a></li>
                             <li><a href="{% url 'compare:all_compare' %}">Сравнение</a></li>
+
+                        </ul>
+
+                        <ul class="user-auth">
+                            <li><a href="{% url 'login' %}">Сменить пользователя</a></li>
+                            <li>
+                                <form action="{% url 'logout' %}" method="post">
+                                    {% csrf_token %}
+                                    <button class="logout-btn">Выйти</button>
+                                </form>
+                            </li>
                         </ul>
                     </div>
                 </div>
 
                 <div class="user-nav__user-logout">
-                    <a href="">
-                        <form action="{% url 'logout' %}" method="post">
-                            {% csrf_token %}
-                            <button class="logout-btn">Выйти</button>
-                        </form>
-                    </a>
+{#                    <form action="{% url 'logout' %}" method="post">#}
+{#                        {% csrf_token %}#}
+{#                        <button class="logout-btn">Выйти</button>#}
+{#                    </form>#}
                 </div>
                 {% else %}
 

@@ -20,6 +20,7 @@ a {
 .main-content {
     display: flex;
     padding-top: 40px;
+    font-size: 22px;
 }
 
 .user-section {
@@ -27,14 +28,14 @@ a {
 }
 
 .categories-block h2 {
-    margin: 10px;
+    padding: 10px;
 }
 
 .categories-list {
-    background-color: #f6f6f6;
+    background-color: #e0dddd;
     padding: 10px;
     width: 200px;
-    border-radius: 10px;
+    border-radius: 7px;
 }
 
 .categories-list li {
@@ -45,35 +46,35 @@ a {
 }
 
 .categories-list li:hover {
-    background-color: lightgray;
+    background-color: #b7b7b7;
+    color: white;
+}
+
+.categories-list li:focus {
+    background-color: #b7b7b7;
 }
 
 .categories-block {
     margin-right: 30px;
-
 }
 
 .all-selected {
     background-color: lightgray;
 }
 
-.add-product {
-    display: inline-block;
-    /*margin-bottom: 20px;*/
-    background-color: lightgrey;
-    text-decoration: none;
-    padding: 5px 10px 5px 10px;
-    border-radius: 7px;
-    color: black;
-}
-
-.categories-block {
-    /*padding: 20px 0 20px 0;*/
-}
-
 .categories-list li{
     list-style: none;
     height: 30px;
+}
+
+.sorted-block {
+    display: flex;
+    align-items: center;
+    padding: 20px 0 20px 0;
+}
+
+.sorted-block > *:not(:last-child) {
+    padding-right: 20px;
 }
 
 .products-tape {

@@ -6,7 +6,7 @@
 {% endblock %}
 
 {% block content %}
-    <h2>Корзина товаров</h2>
+    <h1>Корзина товаров</h1>
 
     <section class="cart-content container">
         <table class="products-tape">
@@ -25,7 +25,7 @@
                     <tr class="row-titles">
                         <td class="product-thumbnail">
                             <a href="#">
-                                <img src="{{ item.img.url }}" alt="{{ item.title }}" height="100" width="100"
+                                <img src="{{ item.img.url }}" alt="{{ item.title }}" height="120" width="120"
                                       class="item-img">
                             </a>
                         </td>
@@ -36,7 +36,7 @@
                                <form method="POST" action="{% url 'cart:update_cart' %}" class="update-quantity-form">
                                    {% csrf_token %}
                                    <input type="hidden" name="item_id" value="{{ item.id }}">
-                                   <input type="number" name="quantity" value="{{ item.quantity }}">
+                                   <input type="number" name="quantity" value="{{ item.quantity }}" min="1">
                                    <button type="submit">Обновить</button>
                                </form>
                             </a>

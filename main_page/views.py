@@ -45,14 +45,17 @@ def product_detail(request, prod_id, slug):
     product = get_object_or_404(Product, id=prod_id, slug=slug, available=True)
     form = ProductForm(instance=product)
     if request.method == 'GET':
-        return render(request, 'main_page/product_detail.html', {'product': product, 'form': form})
+        if request.user.is_staff or request.user.is_superuser:
+            return render(request, 'main_page/edit_prod.html', {'product': product, 'form': form})
+        else:
+            return render(request, 'main_page/view_prod.html', {'product': product})
     else:
         try:
             form = ProductForm(request.POST, instance=product)
             form.save()
             return redirect('main_page:index')
         except ValueError:
-            return render(request, 'main_page/product_detail.html',
+            return render(request, 'main_page/view_prod.html',
                           {'form': form,
                            'error': 'Неверные данные!'})
 

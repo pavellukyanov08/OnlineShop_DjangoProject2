@@ -32,11 +32,13 @@
                                 <td><p>{{ spec.width }}</p></td>
                                 <td><p>{{ spec.height }}</p></td>
                                 <td><p>{{ spec.weight }}</p></td>
-                                <td class="product-remove">
+                                <td class="product-action">
                                     <a href="{% url 'compare:remove_item' spec.id %}">
                                         <img src="{% static 'shopping_cart/remove-icon.svg' %}" width="25px" height="25px"
                                         alt="Удалить товар">
                                     </a>
+
+                                    <a href="{% url 'cart:add_item' spec.id %}">Купить</a>
                                 </td>
                             </tr>
                         {% endfor %}

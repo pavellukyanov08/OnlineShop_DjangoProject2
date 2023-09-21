@@ -70,7 +70,8 @@ a {
 .sorted-block {
     display: flex;
     align-items: center;
-    padding: 20px 0 20px 0;
+    font-size: 17px;
+    padding: 15px 0 15px 0;
 }
 
 .sorted-block > *:not(:last-child) {

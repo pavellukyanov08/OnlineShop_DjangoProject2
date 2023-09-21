@@ -1,7 +1,11 @@
+html, body {
+  height: 100%;
+}
+
 body {
-    padding: 0;
-    margin: 0;
-    background-color: #f6f6f6;
+  padding: 0;
+  margin: 0;
+  background-color: #f6f6f6;
 }
 
 h1, h2, h3, p {
@@ -13,6 +17,11 @@ a {
   text-decoration: none;
   color: black;
   cursor: pointer;
+}
+
+.page-header {
+  position: sticky;
+  top: 0;
 }
 
 .container {
@@ -233,8 +242,7 @@ ul {
 }
 
 .rights p {
-  text-align: right;
+  text-align: center;
   font-size: 16px;
   font-weight: 400;
-  opacity: 0.4;
 }

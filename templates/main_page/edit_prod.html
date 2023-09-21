@@ -2,11 +2,11 @@
 {% load static %}
 
 {% block css %}
-    <link rel="stylesheet" href="{% static 'css/form-prod-style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/edit-prod.css' %}">
 {% endblock %}
 
 {% block content %}
-    <h2>Просмотр товара: <b>{{ product.title }}</b></h2>
+    <h2>Управление товаром: <b>{{ product.name }}</b></h2>
 
     <div class="content">
         <form method="post" class="edit-form">

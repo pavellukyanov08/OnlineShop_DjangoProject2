@@ -13,12 +13,14 @@ h1 {
 
 .info-block {
   margin: 0 auto;
+  width: 1050px;
 }
 
 .dev-block {
   display: flex;
-  padding: 6px;
+  padding: 10px;
   border: 2px solid black;
+  font-size: 20px;
   border-radius: 10px;
 }
 
@@ -30,6 +32,10 @@ h1 {
   padding: 0 10px;
   line-height: 1.5;
   border-right: 2px solid black;
+}
+
+.auth-info p {
+
 }
 
 h3 {

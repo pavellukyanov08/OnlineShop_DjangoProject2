@@ -2,18 +2,18 @@
 {% load static %}
 
 {% block css %}
-    <link rel="stylesheet" href="{% static 'css/form-prod-style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/add_prod.css' %}">
 {% endblock %}
 
 {% block content %}
-    <h2>Добавление продукта</h2>
+    <h1>Добавление продукта</h1>
 
-    <div class="content">
-        <form method="post" enctype="multipart/form-data" class="add-form">
+    <div class="add-product-content container">
+        <form method="post" class="add-form" enctype="multipart/form-data">
             {% csrf_token %}
             {{ form.as_p }}
             <div class="button">
-                <button class="add-btn">Добавить</button>
+                <button class="add">Добавить</button>
             </div>
         </form>
     </div>

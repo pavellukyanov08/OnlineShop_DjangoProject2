@@ -11,7 +11,7 @@ class Compare(models.Model):
     height = models.CharField(max_length=10, verbose_name='Высота (см)', null=True)
     weight = models.CharField(max_length=10, verbose_name='Вес (кг)', null=True)
     price = models.CharField(max_length=10, verbose_name='Цена (руб)', null=True)
-    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     class Meta:
         ordering = ('product',)

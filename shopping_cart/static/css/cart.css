@@ -8,13 +8,6 @@ h1 {
     padding: 40px 0 40px 0;
 }
 
-.container {
-    max-width: 1200px;
-    min-width: 320px;
-    margin: 0 auto;
-    box-sizing: border-box;
-}
-
 .cart-content {
     font-size: 25px;
 }

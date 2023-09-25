@@ -12,7 +12,7 @@ class Favourite(models.Model):
     weight = models.CharField(max_length=10, verbose_name='Вес (кг)', null=True)
     img = models.ImageField(upload_to='main_page/images', verbose_name='Изображение', null=True)
     price = models.CharField(max_length=10, verbose_name='Цена', null=True)
-    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     class Meta:
         ordering = ('product',)

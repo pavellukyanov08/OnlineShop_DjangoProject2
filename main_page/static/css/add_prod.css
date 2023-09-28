@@ -8,20 +8,32 @@ select, input, p {
     margin: 0;
 }
 
-.add-product-content {
+.content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.add-product {
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 30px;
+    border: 3px dashed black;
+    border-radius: 10px;
 }
 
 .add-form {
     font-size: 20px;
-    width: 700px;
-    background-color: lightsteelblue;
-    padding: 20px;
+    width: 600px;
     border-radius: 7px;
     text-align: left;
     box-sizing: border-box;
+}
+
+.add-form input {
+    border: 1px solid black;
 }
 
 .add-form select {
@@ -33,12 +45,12 @@ select, input, p {
 }
 
 .add-form input, textarea {
+    padding: 5px;
     width: 100%;
+    border: 1px solid black;
     margin: 7px 0 0 0;
     height: 30px;
     border-radius: 5px;
-    /*border: 1px solid black;*/
-    border: none;
 }
 
 .add-form textarea {
@@ -46,7 +58,7 @@ select, input, p {
 }
 
 .add-form > * {
-    padding: 10px 0 10px 0;
+    margin: 10px 0 10px 0;
 }
 
 .button {
@@ -54,15 +66,15 @@ select, input, p {
     text-align: center;
 }
 
-.add {
+.add-btn {
     font-size: 20px;
     padding: 10px;
     border-radius: 7px;
-    border: none;
     width: 100%;
     cursor: pointer;
+    border: 1px solid black;
 }
 
-.add:hover {
+.add-btn:hover {
     background-color: #d3d3d3;
 }

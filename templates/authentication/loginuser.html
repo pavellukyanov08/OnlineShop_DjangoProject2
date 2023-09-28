@@ -8,13 +8,29 @@
 {% block content %}
     <h2>Авторизация</h2>
 
-    <div class="content">
-        <form method="post" class="auth-form">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <div class="button">
-                <button class="auth-btn">Авторизация</button>
+    <section>
+        <div class="content container">
+            <div class="auth-block">
+                <form method="post" class="auth-form">
+                    {% csrf_token %}
+
+                    <p>
+                        <label for="id_username">Имя пользователя:</label>
+                        <input type="text" name="username" maxlength="100" id="id_username">
+                    </p>
+
+                    <p>
+                        <label for="id_password">Пароль:</label>
+                        <input type="password" name="password" maxlength="100" id="id_password">
+                    </p>
+
+                    <div class="button">
+                        <button class="auth-btn">Авторизоваться</button>
+                    </div>
+                </form>
+
+                <p class="signup-link">Не имеете аккаунта? <a href="{% url 'signup' %}">Зарегистрируйтесь!</a></p>
             </div>
-        </form>
-    </div>
+        </div>
+    </section>
 {% endblock %}

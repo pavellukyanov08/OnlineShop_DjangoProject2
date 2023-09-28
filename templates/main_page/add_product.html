@@ -8,13 +8,17 @@
 {% block content %}
     <h1>Добавление продукта</h1>
 
-    <div class="add-product-content container">
-        <form method="post" class="add-form" enctype="multipart/form-data">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <div class="button">
-                <button class="add">Добавить</button>
+    <section>
+        <div class="content container">
+            <div class="add-product">
+                <form method="post" class="add-form" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <div class="button">
+                        <button class="add-btn">Добавить</button>
+                    </div>
+                </form>
             </div>
-        </form>
-    </div>
+        </div>
+    </section>
 {% endblock %}

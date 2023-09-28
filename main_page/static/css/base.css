@@ -6,6 +6,7 @@ body {
   padding: 0;
   margin: 0;
   background-color: #f6f6f6;
+  height: 100%;
 }
 
 h1, h2, h3, p {
@@ -104,8 +105,8 @@ ul {
   margin-right: 30px;
 }
 
-/*Раскрывающийся список пользователя*/
 
+/*Раскрывающийся список пользователя*/
 .user-nav__profile {
   position: relative;
   display: inline-block;

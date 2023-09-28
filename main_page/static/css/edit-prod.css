@@ -4,8 +4,6 @@ h2 {
 }
 
 .content {
-    max-width: 1200px;
-    margin: auto;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -13,17 +11,20 @@ h2 {
 }
 
 
-.edit-product-content {
+.edit-product {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+    padding: 30px;
+    border-radius: 10px;
+    /*background-color: rgba(176, 196, 222, 0.75);*/
+    border: 3px dashed black;
 }
 
 .edit-form {
-    font-size: 20px;
     width: 600px;
-    background-color: lightsteelblue;
-    padding: 20px;
+    font-size: 20px;
     border-radius: 7px;
     text-align: left;
     box-sizing: border-box;
@@ -38,11 +39,12 @@ h2 {
 }
 
 .edit-form input, textarea {
+    padding: 5px;
     width: 100%;
+    border: 1px solid black;
     margin: 7px 0 0 0;
     height: 30px;
     border-radius: 5px;
-    border: none;
 }
 
 .edit-form textarea {
@@ -53,32 +55,42 @@ h2 {
     padding: 10px 0 10px 0;
 }
 
-.del-form-btn {
-    padding-top: 5px;
+.control-buttons {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
 }
 
-.edit-form .button {
-    margin-top: 20px;
+.control-buttons .button {
     text-align: center;
+    width: 100%;
 }
 
 .save-btn, .del-btn {
+    width: 100%;
     font-size: 17px;
     padding: 7px;
     border-radius: 7px;
-    border: none;
-    width: 100px;
     cursor: pointer;
+    border: 1px solid black;
 }
 
 .save-btn {
+    color: black;
+}
+
+.save-btn:hover {
     background-color: #309a30;
-    color: #ffffff;
 }
 
 .del-btn {
+    color: black;
+}
+
+.del-btn:hover {
     background-color: lightcoral;
-    color: #ffffff;
 }
 
 

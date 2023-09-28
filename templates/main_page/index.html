@@ -39,13 +39,13 @@
             <div class="products-tape">
                 {% for product in products %}
                     <div class="product-card">
-                        <a href="{{ product.get_absolute_url }}">
-                            <img src="{{ product.img.url }}" height="301" width="280" alt="Товар">
-                        </a>
+                        <img src="{{ product.img.url }}" height="301" width="280" alt="Товар">
 
                         <div class="product-description">
                             <div class="product-info">
-                                <h3>{{ product.name }}</h3>
+                                <a class="product-link" href="{{ product.get_absolute_url }}">
+                                    <h3>{{ product.name }}</h3>
+                                </a>
                                 <p>{{ product.description }}</p>
                                 {% if product.discount_price and product.start_date <= curr_time and curr_time <= product.end_date %}
                                     <div class="current_and_disc_price">

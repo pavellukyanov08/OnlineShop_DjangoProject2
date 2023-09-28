@@ -10,6 +10,10 @@ a {
     cursor: pointer;
 }
 
+.product-link:hover {
+    color: #d3d3d3;
+}
+
 .main-content {
     display: flex;
     padding-top: 40px;

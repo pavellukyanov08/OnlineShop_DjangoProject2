@@ -19,8 +19,9 @@
                 </div>
 
                 <ul class="site-nav__list">
-                    <li class="site-nav__item"><a href="{% url 'main_page:index' %}">Товары</a></li>
-                    <li class="site-nav__item"><a href="{% url 'about' %}">Об авторе</a></li>
+                    {% for item in menu %}
+                        <li class="site-nav__item"><a href="{{ item.url }}">{{ item.title }}</a></li>
+                    {% endfor %}
                 </ul>
             </nav>
 

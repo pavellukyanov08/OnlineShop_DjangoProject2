@@ -8,21 +8,23 @@
 {% block content %}
     <h2>Управление товаром: <b>{{ product.name }}</b></h2>
 
-    <div class="content">
-        <form method="post" class="edit-form">
-            {% csrf_token %}
-            {{ form.as_p }}
+    <section>
+        <div class="edit-product-content">
+            <form method="post" class="edit-form">
+                {% csrf_token %}
+                {{ form.as_p }}
 
-            <div class="button">
-                <button class="save-btn btn">Сохранить</button>
-            </div>
-        </form>
+                <div class="button">
+                    <button class="save-btn btn">Сохранить</button>
+                </div>
+            </form>
 
-        <form action="{% url 'main_page:delete' product.id %}" method="post" class="del-form-btn">
-            {% csrf_token %}
-            <div class="button">
-                <button class="del-btn btn">Удалить</button>
-            </div>
-        </form>
-    </div>
+            <form action="{% url 'main_page:delete' product.id %}" method="post" class="edit-form">
+                {% csrf_token %}
+                <div class="button">
+                    <button class="del-btn btn">Удалить</button>
+                </div>
+            </form>
+        </div>
+    </section>
 {% endblock %}

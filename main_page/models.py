@@ -2,6 +2,18 @@ from django.db import models
 from django.urls import reverse
 
 
+class Menu(models.Model):
+    title = models.CharField(max_length=50)
+    url = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        verbose_name = 'Меню'
+        verbose_name_plural = 'Меню'
+
+
 class Category(models.Model):
     name = models.CharField(max_length=100, db_index=True)
     slug = models.SlugField(max_length=100, db_index=True, unique=True)

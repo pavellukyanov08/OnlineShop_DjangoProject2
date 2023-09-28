@@ -1,13 +1,14 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
-from main_page.models import Product
+from main_page.models import Product, Menu
 from .models import Favourite
 
 
 @login_required
 def get_favourites_products(request):
+    menu = Menu.objects.all()
     favourites_item = Favourite.objects.filter(user=request.user)
-    return render(request, 'favourites/favourites.html', {'favourites_item': favourites_item})
+    return render(request, 'favourites/favourites.html', {'favourites_item': favourites_item, 'menu': menu})
 
 
 @login_required

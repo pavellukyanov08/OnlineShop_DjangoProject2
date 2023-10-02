@@ -68,4 +68,4 @@ def delete_prod(request, prod_id):
     product = get_object_or_404(Product, id=prod_id)
     if request.method == 'POST':
         product.delete()
-        return redirect('index')
+        return redirect('main_page:index')

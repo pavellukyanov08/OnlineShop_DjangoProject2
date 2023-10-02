@@ -15,12 +15,13 @@
                     {% csrf_token %}
 
                     {{ form.as_p }}
-                </form>
-
-                <div class="control-buttons">
                     <div class="button">
                         <button class="save-btn btn">Сохранить</button>
                     </div>
+                </form>
+
+                <div class="control-buttons">
+
 
                     <form action="{% url 'main_page:delete' product.id %}" method="post" class="edit-form">
                         {% csrf_token %}

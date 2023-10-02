@@ -40,7 +40,7 @@ class Product(models.Model):
     width = models.CharField(max_length=10, verbose_name='Ширина (см)', null=True)
     height = models.CharField(max_length=10, verbose_name='Высота (см)', null=True)
     weight = models.CharField(max_length=10, verbose_name='Вес (кг)', null=True)
-    price = models.CharField(max_length=5, verbose_name='Цена (руб)', null=True)
+    price = models.DecimalField(max_digits=12, decimal_places=2, verbose_name='Цена (руб)', null=True)
     discount_price = models.CharField(max_length=10, null=True, verbose_name='Цена со скидкой')
     start_date = models.DateTimeField(null=True, blank=True, verbose_name='Дата старта распродажи')
     end_date = models.DateTimeField(null=True, blank=True, verbose_name='Дата окончания распродажи')

@@ -7,8 +7,8 @@ from .models import Favourite
 @login_required
 def get_favourites_products(request):
     menu = Menu.objects.all()
-    # prods = Product.objects.all()
-    favourites_item = Product.favourite_set.all()
+    user = request.user
+    favourites_item = user.favourite_set.filter(user=request.user)
     return render(request, 'favourites/favourites.html', {'favourites_item': favourites_item, 'menu': menu})
 
 

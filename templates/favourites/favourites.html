@@ -9,7 +9,7 @@
     <h2>Избранные товары</h2>
     <section class="favourites-content container">
         <div class="favourites-tape">
-            {% for item in favourites_item %}
+            {% for item in user.favourite_set.all %}
                 <div class="product-card">
                     <a href="{{ item.get_absolute_url }}">
                         <img src="{{ item.img.url }}" height="200" width="150" alt="Товар">

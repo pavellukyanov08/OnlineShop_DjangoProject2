@@ -64,11 +64,24 @@ a {
     height: 30px;
 }
 
-.sorted-block {
+.sorting-product-section {
     display: flex;
     align-items: center;
     font-size: 18px;
     padding: 15px 0 15px 0;
+}
+
+.sorting-product-section ul {
+    display: flex;
+    justify-content: space-between;
+}
+
+.sorting-criteria li {
+    list-style: none;
+}
+
+.sorting-criteria li:not(:last-child) {
+    padding-right: 15px;
 }
 
 .sorted-block > *:not(:last-child) {

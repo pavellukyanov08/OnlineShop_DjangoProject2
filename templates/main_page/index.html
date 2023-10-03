@@ -1,6 +1,7 @@
 {% extends 'main_page/base.html' %}
 {% load static %}
 {% load tz %}
+{% load i18n %}
 
 {% block css %}
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
@@ -27,13 +28,28 @@
                     </a>
                 {% endfor %}
             </ul>
+
+            <ul class="products-availability">
+                <a href="{% url 'main_page:index' %}">
+                    <li>Все товары</li>
+                </a>
+
+{#                {% for product in products %}#}
+{#                    <a {% if product.is_available == True %} {% endif %} href="{{ product.get_absolute_url }}">#}
+{#                        <li>{{ product.is_available|yesno }}</li>#}
+{#                    </a>#}
+{#                {% endfor %}#}
+            </ul>
         </aside>
 
         <div class="catalog">
-            <div class="sorted-block">
+            <div class="sorting-product-section">
                 <h3>Сортировка:</h3>
-                <a class="sort-by" href="?sort_by=name">Название</a>
-                <a class="sort-by" href="?sort_by=price">Цена</a>
+                <ul class="sorting-criteria">
+                    <li><a class="sort-by" href="?sort_by=name">Название</a></li>
+                    <li><a class="sort-by" href="?sort_by=price">Цена</a></li>
+{#                    <li><a class="sort-by" href="?sort_by=available|yesno">В наличии</a></li>#}
+                </ul>
             </div>
 
             <div class="products-tape">
@@ -49,11 +65,11 @@
                                 <p>{{ product.description }}</p>
                                 {% if product.discount_price and product.start_date <= curr_time and curr_time <= product.end_date %}
                                     <div class="current_and_disc_price">
-                                        <strike class="current-price"><b>{{ product.price }} ₽</b></strike>
-                                        <span class="disc-price"><b>{{ product.discount_price }} ₽</b></span>
+                                        <strike class="current-price"><b>{% language 'ru' %}{{ product.price|floatformat:'2' }} ₽ {% endlanguage %}</b></strike>
+                                        <span class="disc-price"><b>{% language 'ru' %}{{ product.discount_price|floatformat:'2' }} ₽ {% endlanguage %}</b></span>
                                     </div>
                                 {% else %}
-                                    <span class="current-price"><b>{{ product.price }} ₽</b></span>
+                                    <span class="current-price"><b>{% language 'ru' %}{{ product.price|floatformat:'2' }} ₽ {% endlanguage %}</b></span>
                                 {% endif %}
                             </div>
 

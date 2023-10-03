@@ -45,7 +45,7 @@
                                 <a class="username" href="#">{{ user }}</a>
 
                                 {% if user.is_superuser and user.is_staff %}
-                                    <a class="add-product" href="{% url 'main_page:add_product' %}">Добавить продукт</a>
+                                    <a class="add-product product-controls" href="{% url 'main_page:add_product' %}">Добавить продукт</a>
                                 {% endif %}
                             </li>
                         </ul>
@@ -81,24 +81,6 @@
 
     {% endblock %}
 
-    <section class="basement-content">
-        <div class="footer container">
-            <div class="info-line">
-                <div class="info-line__logo">
-                    <img src="{% static 'main_page/my_logo.svg' %}" width="80" height="80" alt="Логотип автора">
-                </div>
-
-                <div class="rights">
-                    <p>Designed and developed by Pavel Lukyanov</p>
-                    <p>Copyright © 2023</p>
-                </div>
-
-                <div class="info-line__menu">
-                    <a class="top-line__menu-item" href="{% url 'about' %}">Связь с разработчиком</a>
-                </div>
-
-            </div>
-        </div>
-    </section>
+{#    {% include 'main_page/footer.html' %}#}
 </body>
 </html>

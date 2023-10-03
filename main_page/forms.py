@@ -7,7 +7,7 @@ class ProductForm(ModelForm):
     class Meta:
         model = Product
         fields = ['category', 'name', 'slug', 'description', 'img', 'width', 'height', 'weight', 'price',
-                  'discount_price', 'start_date', 'end_date', 'available']
+                  'discount_price', 'start_date', 'end_date', 'is_available']
         widgets = {
             'start_date': forms.DateTimeInput(attrs={'type': 'datetime-local'}),
             'end_date': forms.DateTimeInput(attrs={'type': 'datetime-local'})

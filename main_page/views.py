@@ -9,7 +9,9 @@ def products_list(request, category_slug=None):
     category = None
     categories = Category.objects.all()
     curr_time = timezone.now()
-    products = Product.objects.filter(available=True)
+    products = Product.objects.all()
+    # products = Product.objects.all().order_by('-available').order_by('available')
+    # prods_not_available = Product.objects.filter(available=False)
     # функционал сортировки
     sort_by = request.GET.get('sort_by')
 
@@ -69,3 +71,7 @@ def delete_prod(request, prod_id):
     if request.method == 'POST':
         product.delete()
         return redirect('main_page:index')
+
+
+def view_products(request):
+    return None

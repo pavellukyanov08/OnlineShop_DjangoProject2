@@ -31,6 +31,10 @@ class Category(models.Model):
 
 
 class Product(models.Model):
+    status_choices = (
+        ('в наличии', 'В наличии'),
+        ('не в наличии', 'Не в наличии')
+    )
     category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True,
                                  verbose_name='Категория')
     name = models.CharField(max_length=50, db_index=True, verbose_name='Наименование', null=True)
@@ -40,11 +44,11 @@ class Product(models.Model):
     width = models.CharField(max_length=10, verbose_name='Ширина (см)', null=True)
     height = models.CharField(max_length=10, verbose_name='Высота (см)', null=True)
     weight = models.CharField(max_length=10, verbose_name='Вес (кг)', null=True)
-    price = models.DecimalField(max_digits=12, decimal_places=2, verbose_name='Цена (руб)', null=True)
+    price = models.FloatField(max_length=6, verbose_name='Цена (руб)', null=True)
     discount_price = models.CharField(max_length=10, null=True, verbose_name='Цена со скидкой')
     start_date = models.DateTimeField(null=True, blank=True, verbose_name='Дата старта распродажи')
     end_date = models.DateTimeField(null=True, blank=True, verbose_name='Дата окончания распродажи')
-    available = models.BooleanField(default=True, null=True, verbose_name='В наличии')
+    is_available = models.CharField(max_length=12, default='в наличии', null=True, choices=status_choices, verbose_name='Наличие')
     created = models.DateTimeField(auto_now_add=True, null=True)
     updated = models.DateTimeField(auto_now=True, null=True)
 

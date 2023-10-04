@@ -15,7 +15,8 @@ h1 {
 .products-tape {
     width: 100%;
     text-align: center;
-    border: 1px solid rgb(128, 128, 128);
+    border-top: 1px solid rgb(128, 128, 128);
+    border-bottom: 1px solid rgb(128, 128, 128);
     padding: 10px;
     border-radius: 7px;
 }
@@ -38,6 +39,17 @@ h1 {
 
 .product-remove img:hover {
     background-color: #ef2b2b;
+}
+
+.count-total-price {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 30px 10px
+}
+
+.count-total-price > * {
+    padding-right: 10px;
 }
 
 

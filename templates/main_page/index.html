@@ -34,11 +34,11 @@
                     <li>Все товары</li>
                 </a>
 
-{#                {% for product in products %}#}
-{#                    <a {% if product.is_available == True %} {% endif %} href="{{ product.get_absolute_url }}">#}
-{#                        <li>{{ product.is_available|yesno }}</li>#}
-{#                    </a>#}
-{#                {% endfor %}#}
+                {% for product in products %}
+                    <a {% if product.is_available == True %} {% endif %} href="{{ product.get_absolute_url }}">
+                        <li>{{ product.status_choices }}</li>
+                    </a>
+                {% endfor %}
             </ul>
         </aside>
 

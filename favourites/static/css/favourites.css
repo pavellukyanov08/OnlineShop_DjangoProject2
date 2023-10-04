@@ -52,6 +52,10 @@ a {
     padding: 10px 5px 10px 20px;
 }
 
+.remove-prod img:hover {
+    background-color: #ef2b2b;
+}
+
 .buy-prod {
     border-radius: 5px;
     border: 1px solid lightgray;

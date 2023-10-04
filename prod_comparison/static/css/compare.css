@@ -32,11 +32,34 @@ section {
 }
 
 .compare-product-table tr {
-    margin: 10px;
+    margin-bottom: 100px;
+}
+
+.product-action-section {
+    border-left: 1px solid rgb(128, 128, 128);
 }
 
 .product-action {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 158px;
     padding-left: 10px;
-    border-left: 1px solid rgb(128, 128, 128);
 }
+
+.remove-prod img:hover {
+    background-color: #ef2b2b;
+}
+
+.buy-prod {
+    font-size: 17px;
+    border-radius: 5px;
+    border: 1px solid lightgray;
+    padding: 7px;
+}
+
+.buy-prod:hover {
+    background-color: lightsalmon;
+}
+
 

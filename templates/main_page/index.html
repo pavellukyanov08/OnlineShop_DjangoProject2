@@ -1,6 +1,7 @@
 {% extends 'main_page/base.html' %}
 {% load static %}
 {% load tz %}
+{% load i18n %}
 
 {% block css %}
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
@@ -11,27 +12,13 @@
 {% endblock %}
 
 {% block content %}
-    <h1>Our Products</h1>
-
-    <div class="add-product-block container">
-        <a class="add-product" href="{% url 'main_page:add_product' %}">Добавить продукт</a>
-    </div>
-
-    <div class="sorted-block container">
-        <h3>Сортировка по:</h3>
-        <a class="sort-by" href="?sort_by=name">Названию</a>
-        <a class="sort-by" href="?sort_by=price">Цене</a>
-    </div>
-
     <section class="main-content container">
         <aside class="categories-block">
             <h2>Категории</h2>
 
             <ul class="categories-list">
-                <a {% if not category %} class="all-selected" {% endif %} href="{% url 'main_page:index' %}">
-                    <li>
-                        Все
-                    </li>
+                <a {% if not category or availability %} class="all-category-selected" {% endif %} href="{% url 'main_page:index' %}">
+                    <li>Все</li>
                 </a>
 
                 {% for cat in categories %}
@@ -41,47 +28,66 @@
                     </a>
                 {% endfor %}
             </ul>
+
+            <ul class="products-availability">
+                {% for avail in availabilities %}
+                    <a {% if availability.availability_status == avail.availability_status %} {% endif %} href="{{ avail.get_absolute_url }}">
+                        <li>{{ avail.availability_status }}</li>
+                    </a>
+                {% endfor %}
+            </ul>
         </aside>
 
-        <div class="products-tape">
-            {% for product in products %}
-                <div class="product-card">
-                    <a href="{{ product.get_absolute_url }}">
+        <div class="catalog">
+            <div class="sorting-product-section">
+                <h3>Сортировка:</h3>
+                <ul class="sorting-criteria">
+                    <li><a class="sort-by" href="?sort_by=name">Название</a></li>
+                    <li><a class="sort-by" href="?sort_by=price">Цена</a></li>
+{#                    <li><a class="sort-by" href="?sort_by=availability_status">В наличии</a></li>#}
+                </ul>
+            </div>
+
+            <div class="products-tape">
+                {% for product in products %}
+                    <div class="product-card">
                         <img src="{{ product.img.url }}" height="301" width="280" alt="Товар">
-                    </a>
 
-                    <div class="product-description">
-                        <div class="product-info">
-                            <h3>{{ product.name }}</h3>
-                            <p>{{ product.description }}</p>
-                            {% if product.discount_price and product.start_date <= curr_time and curr_time <= product.end_date %}
-                                <div class="current_and_disc_price">
-                                    <strike class="current-price"><b>{{ product.price }} ₽</b></strike>
-                                    <span class="disc-price"><b>{{ product.discount_price }} ₽</b></span>
-                                </div>
-                            {% else %}
-                                <span class="current-price"><b>{{ product.price }} ₽</b></span>
-                            {% endif %}
+                        <div class="product-description">
+                            <div class="product-info">
+                                <a class="product-link" href="{{ product.get_absolute_url }}">
+                                    <h3>{{ product.name }}</h3>
+                                </a>
+                                <p>{{ product.description }}</p>
+                                {% if product.discount_price and product.start_date <= curr_time and curr_time <= product.end_date %}
+                                    <div class="current_and_disc_price">
+                                        <strike class="current-price"><b>{% language 'ru' %}{{ product.price|floatformat:'2' }} ₽ {% endlanguage %}</b></strike>
+                                        <span class="disc-price"><b>{% language 'ru' %}{{ product.discount_price|floatformat:'2' }} ₽ {% endlanguage %}</b></span>
+                                    </div>
+                                {% else %}
+                                    <span class="current-price"><b>{% language 'ru' %}{{ product.price|floatformat:'2' }} ₽ {% endlanguage %}</b></span>
+                                {% endif %}
+                            </div>
+
+                            <div class="interaction-item">
+                                <a href="{% url 'favourites:add_item' product.id %}">
+                                    <img src="{% static 'main_page/favourites-icon.svg' %}" height="30" width="30"
+                                         alt="Избранное">
+                                </a>
+
+                                <a href="{% url 'compare:add_item' product.id %}">
+                                    <img src="{% static 'main_page/compare.svg' %}" height="30" width="30"
+                                         alt="Сравнить">
+                                </a>
+                            </div>
                         </div>
 
-                        <div class="interaction-item">
-                            <a href="{% url 'favourites:add_item' product.id %}">
-                                <img src="{% static 'main_page/favourites-icon.svg' %}" height="30" width="30"
-                                     alt="Избранное">
-                            </a>
-
-                            <a href="{% url 'compare:add_item' product.id %}">
-                                <img src="{% static 'main_page/compare.svg' %}" height="30" width="30"
-                                     alt="Сравнить">
-                            </a>
+                        <div class="add_cart">
+                            <a href="{% url 'cart:add_item' product.id %}">Добавить в корзину</a>
                         </div>
                     </div>
-
-                    <div class="add_cart">
-                        <a href="{% url 'cart:add_item' product.id %}">Добавить в корзину</a>
-                    </div>
-                </div>
-            {% endfor %}
+                {% endfor %}
+            </div>
         </div>
     </section>
 {% endblock %}

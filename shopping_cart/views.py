@@ -1,28 +1,31 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
-from main_page.models import Product
+from main_page.models import Product, Menu
 from .models import ShoppingCart
 from django.db.models import Sum, ExpressionWrapper, F, DecimalField
 
 
 def cart_view(request):
+    menu = Menu.objects.all()
     cart_items = ShoppingCart.objects.filter(user=request.user)
+    total_price = None
     total_price = cart_items.aggregate(
         total_price=Sum(ExpressionWrapper(F('price') * F('quantity'),
                                           output_field=DecimalField())))
     return render(request, 'shopping_cart/shopping_cart.html',
-                  {'cart_items': cart_items,
+                  {'menu': menu,
+                   'cart_items': cart_items,
                    'total_price': total_price['total_price']})
 
 
 @login_required
 def add_item(request, product_id):
     product = get_object_or_404(Product, id=product_id)
-    cart_item, created = ShoppingCart.objects.get_or_create(product=product,
-                                                            price=product.price,
-                                                            img=product.img,
-                                                            user=request.user)
-    if not created:
+    cart_item, added = ShoppingCart.objects.get_or_create(product=product,
+                                                          price=product.price,
+                                                          img=product.img,
+                                                          user=request.user)
+    if not added:
         cart_item.quantity += 1
         cart_item.save()
     return redirect('main_page:index')

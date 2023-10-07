@@ -3,24 +3,62 @@ h1 {
     padding: 30px 0 30px 0;
 }
 
+select, input, p {
+    padding: 0;
+    margin: 0;
+}
+
 .content {
-    max-width: 1200px;
-    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.add-product {
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 30px;
+    border: 3px dashed black;
+    border-radius: 10px;
 }
 
 .add-form {
-    background-color: lightsteelblue;
-    padding: 20px;
-    border-radius: 10px;
+    font-size: 20px;
+    width: 600px;
+    border-radius: 7px;
     text-align: left;
     box-sizing: border-box;
 }
 
+.add-form input {
+    border: 1px solid black;
+}
+
+.add-form select {
+    width: 100px;
+}
+
+.add-form label {
+    margin: 0 0 7px 0;
+}
+
+.add-form input, textarea {
+    padding: 5px;
+    width: 100%;
+    border: 1px solid black;
+    margin: 7px 0 0 0;
+    height: 30px;
+    border-radius: 5px;
+}
+
+.add-form textarea {
+    height: 70px;
+}
+
 .add-form > * {
-    margin: 7px 0 7px 0;
+    margin: 10px 0 10px 0;
 }
 
 .button {
@@ -30,9 +68,13 @@ h1 {
 
 .add-btn {
     font-size: 20px;
-    padding: 7px;
+    padding: 10px;
     border-radius: 7px;
-    border: none;
-    width: 110px;
+    width: 100%;
+    cursor: pointer;
+    border: 1px solid black;
 }
 
+.add-btn:hover {
+    background-color: #d3d3d3;
+}

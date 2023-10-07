@@ -1,0 +1,40 @@
+{% extends 'main_page/base.html' %}
+{% load static %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/view_prod.css' %}">
+{% endblock %}
+
+{% block content %}
+    <h2>Просмотр товара: <b>{{ product.name }}</b></h2>
+
+    <section class="content">
+        <div class="view-product">
+            {#            <div class="prod-img">#}
+            <img src="{{ product.img.url }}" alt="">
+            {#            </div>#}
+
+            <table class="specific-product-table">
+                <thead>
+                    <tr class="row-titles">
+                        <th class="product-name">Наименование</th>
+                        <th class="product-price">Цена (руб)</th>
+                        <th class="product-width">Ширина (см)</th>
+                        <th class="product-height">Высота (см)</th>
+                        <th class="product-weight">Вес (кг)</th>
+                        <th class="product-remove"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><p>{{ product.name }}</p></td>
+                        <td><p>{{ product.price }}</p></td>
+                        <td><p>{{ product.width }}</p></td>
+                        <td><p>{{ product.height }}</p></td>
+                        <td><p>{{ product.weight }}</p></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+{% endblock %}

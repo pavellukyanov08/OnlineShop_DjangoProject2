@@ -1,14 +1,18 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import ProductForm
-from .models import Product, Category
+from .models import *
 from django.utils import timezone
 
 
-def products_list(request, category_slug=None):
-    category = None
-    categories = Category.objects.all()
+def products_list(request, category_slug=None, product_availability=None):
     curr_time = timezone.now()
-    products = Product.objects.filter(available=True)
+
+    menu = Menu.objects.all()
+    categories = Category.objects.all()
+    availabilities = ProductAvailability.objects.all()
+    products = Product.objects.all()
+
+    category, availability = None, None
     # функционал сортировки
     sort_by = request.GET.get('sort_by')
 
@@ -19,15 +23,23 @@ def products_list(request, category_slug=None):
         category = get_object_or_404(Category, slug=category_slug)
         products = products.filter(category=category)
 
-    return render(request, 'main_page/index.html', {'category': category,
+    if product_availability:
+        availability = get_object_or_404(ProductAvailability, availability_status=product_availability)
+        products = products.filter(availability_status=availability)
+
+    return render(request, 'main_page/index.html', {'menu': menu,
+                                                    'category': category,
                                                     'categories': categories,
+                                                    'availability': availability,
+                                                    'availabilities': availabilities,
                                                     'products': products,
                                                     'curr_time': curr_time})
 
 
 def add_product(request):
+    menu = Menu.objects.all()
     if request.method == 'GET':
-        return render(request, 'main_page/add_product.html', {'form': ProductForm()})
+        return render(request, 'main_page/add_product.html', {'form': ProductForm(), 'menu': menu})
     else:
         try:
             form = ProductForm(request.POST, request.FILES)
@@ -38,21 +50,25 @@ def add_product(request):
         except ValueError:
             return render(request, 'main_page/add_product.html',
                           {'form': ProductForm(),
-                           'error': 'Переданы неверные данные'})
+                           'error': 'Переданы неверные данные', 'menu': menu})
 
 
 def product_detail(request, prod_id, slug):
-    product = get_object_or_404(Product, id=prod_id, slug=slug, available=True)
+    menu = Menu.objects.all()
+    product = get_object_or_404(Product, id=prod_id, slug=slug)
     form = ProductForm(instance=product)
     if request.method == 'GET':
-        return render(request, 'main_page/product_detail.html', {'product': product, 'form': form})
+        if request.user.is_staff or request.user.is_superuser:
+            return render(request, 'main_page/edit_prod.html', {'product': product, 'form': form, 'menu': menu})
+        else:
+            return render(request, 'main_page/view_prod.html', {'product': product, 'menu': menu})
     else:
         try:
             form = ProductForm(request.POST, instance=product)
             form.save()
             return redirect('main_page:index')
         except ValueError:
-            return render(request, 'main_page/product_detail.html',
+            return render(request, 'main_page/view_prod.html',
                           {'form': form,
                            'error': 'Неверные данные!'})
 
@@ -61,4 +77,4 @@ def delete_prod(request, prod_id):
     product = get_object_or_404(Product, id=prod_id)
     if request.method == 'POST':
         product.delete()
-        return redirect('index')
+        return redirect('main_page:index')

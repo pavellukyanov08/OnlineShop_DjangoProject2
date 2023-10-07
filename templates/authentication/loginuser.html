@@ -27,6 +27,10 @@
                     <div class="button">
                         <button class="auth-btn">Авторизоваться</button>
                     </div>
+
+                    <div class="error">
+                        {{ error }}
+                    </div>
                 </form>
 
                 <p class="signup-link">Не имеете аккаунта? <a href="{% url 'signup' %}">Зарегистрируйтесь!</a></p>

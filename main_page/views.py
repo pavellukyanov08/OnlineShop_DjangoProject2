@@ -1,17 +1,18 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import ProductForm
-from .models import Product, Category, Menu
+from .models import *
 from django.utils import timezone
 
 
-def products_list(request, category_slug=None):
-    menu = Menu.objects.all()
-    category = None
-    categories = Category.objects.all()
+def products_list(request, category_slug=None, product_availability=None):
     curr_time = timezone.now()
+
+    menu = Menu.objects.all()
+    categories = Category.objects.all()
+    availabilities = ProductAvailability.objects.all()
     products = Product.objects.all()
-    # products = Product.objects.all().order_by('-available').order_by('available')
-    # prods_not_available = Product.objects.filter(available=False)
+
+    category, availability = None, None
     # функционал сортировки
     sort_by = request.GET.get('sort_by')
 
@@ -22,9 +23,15 @@ def products_list(request, category_slug=None):
         category = get_object_or_404(Category, slug=category_slug)
         products = products.filter(category=category)
 
+    if product_availability:
+        availability = get_object_or_404(ProductAvailability, availability_status=product_availability)
+        products = products.filter(availability_status=availability)
+
     return render(request, 'main_page/index.html', {'menu': menu,
                                                     'category': category,
                                                     'categories': categories,
+                                                    'availability': availability,
+                                                    'availabilities': availabilities,
                                                     'products': products,
                                                     'curr_time': curr_time})
 
@@ -48,7 +55,7 @@ def add_product(request):
 
 def product_detail(request, prod_id, slug):
     menu = Menu.objects.all()
-    product = get_object_or_404(Product, id=prod_id, slug=slug, available=True)
+    product = get_object_or_404(Product, id=prod_id, slug=slug)
     form = ProductForm(instance=product)
     if request.method == 'GET':
         if request.user.is_staff or request.user.is_superuser:
@@ -71,7 +78,3 @@ def delete_prod(request, prod_id):
     if request.method == 'POST':
         product.delete()
         return redirect('main_page:index')
-
-
-def view_products(request):
-    return None

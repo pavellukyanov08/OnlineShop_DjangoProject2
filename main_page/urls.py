@@ -16,14 +16,10 @@ urlpatterns = [
     # delete prod
     path('product/<int:prod_id>/delete', views.delete_prod, name='delete'),
 
-
-
     # product category
-    path('<slug:category_slug>/', views.products_list, name='product_list_by_category'),
+    path('category/<slug:category_slug>/', views.products_list, name='product_list_by_category'),
 
-
-
-
+    # product availability
+    path('<str:product_availability>/', views.products_list, name='product_list_by_availability'),
 
 ]
-

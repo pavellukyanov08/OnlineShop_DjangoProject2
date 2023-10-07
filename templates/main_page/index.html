@@ -17,7 +17,7 @@
             <h2>Категории</h2>
 
             <ul class="categories-list">
-                <a {% if not category %} class="all-selected" {% endif %} href="{% url 'main_page:index' %}">
+                <a {% if not category or availability %} class="all-category-selected" {% endif %} href="{% url 'main_page:index' %}">
                     <li>Все</li>
                 </a>
 
@@ -30,13 +30,9 @@
             </ul>
 
             <ul class="products-availability">
-                <a href="{% url 'main_page:index' %}">
-                    <li>Все товары</li>
-                </a>
-
-                {% for product in products %}
-                    <a {% if product.is_available == True %} {% endif %} href="{{ product.get_absolute_url }}">
-                        <li>{{ product.status_choices }}</li>
+                {% for avail in availabilities %}
+                    <a {% if availability.availability_status == avail.availability_status %} {% endif %} href="{{ avail.get_absolute_url }}">
+                        <li>{{ avail.availability_status }}</li>
                     </a>
                 {% endfor %}
             </ul>
@@ -48,7 +44,7 @@
                 <ul class="sorting-criteria">
                     <li><a class="sort-by" href="?sort_by=name">Название</a></li>
                     <li><a class="sort-by" href="?sort_by=price">Цена</a></li>
-{#                    <li><a class="sort-by" href="?sort_by=available|yesno">В наличии</a></li>#}
+{#                    <li><a class="sort-by" href="?sort_by=availability_status">В наличии</a></li>#}
                 </ul>
             </div>
 

@@ -78,3 +78,10 @@ input {
     font-size: 20px;
     text-align: center;
 }
+
+.auth-form .error {
+    color: red;
+    text-align: center;
+}
+
+.

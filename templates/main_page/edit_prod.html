@@ -11,10 +11,11 @@
     <section>
         <div class="content container">
             <div class="edit-product">
-                <form method="post" class="edit-form">
+                <form method="post" class="edit-form" enctype="multipart/form-data">
                     {% csrf_token %}
 
                     {{ form.as_p }}
+
                     <div class="button">
                         <button class="save-btn btn">Сохранить</button>
                     </div>

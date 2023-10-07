@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from django.utils.safestring import mark_safe
 
 
 class Menu(models.Model):
@@ -30,11 +31,21 @@ class Category(models.Model):
         return self.name
 
 
+class ProductAvailability(models.Model):
+    availability_status = models.CharField(max_length=12, verbose_name='Статус товара', null=True)
+
+    class Meta:
+        verbose_name = 'Статус наличия'
+        verbose_name_plural = 'Статусы наличия'
+
+    def get_absolute_url(self):
+        return reverse('main_page:product_list_by_availability', args=[self.availability_status])
+
+    def __str__(self):
+        return self.availability_status
+
+
 class Product(models.Model):
-    status_choices = (
-        ('в наличии', 'В наличии'),
-        ('не в наличии', 'Не в наличии')
-    )
     category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True,
                                  verbose_name='Категория')
     name = models.CharField(max_length=50, db_index=True, verbose_name='Наименование', null=True)
@@ -48,7 +59,7 @@ class Product(models.Model):
     discount_price = models.CharField(max_length=10, null=True, verbose_name='Цена со скидкой')
     start_date = models.DateTimeField(null=True, blank=True, verbose_name='Дата старта распродажи')
     end_date = models.DateTimeField(null=True, blank=True, verbose_name='Дата окончания распродажи')
-    is_available = models.CharField(max_length=12, default='в наличии', null=True, choices=status_choices, verbose_name='Наличие')
+    availability_status = models.ForeignKey(ProductAvailability, on_delete=models.CASCADE, null=True, verbose_name='Наличие')
     created = models.DateTimeField(auto_now_add=True, null=True)
     updated = models.DateTimeField(auto_now=True, null=True)
 

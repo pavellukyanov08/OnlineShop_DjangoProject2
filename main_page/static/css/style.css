@@ -4,77 +4,93 @@ body {
     background-color: #f6f6f6;
 }
 
-.container {
-    max-width: 1200px;
-    min-width: 320px;
-    margin: 0 auto;
-    box-sizing: border-box
-}
-
-h1 {
-    text-align: center;
-    padding: 30px 0 30px 0;
-}
-
 a {
     text-decoration: none;
     color: black;
     cursor: pointer;
 }
 
+.product-link:hover {
+    color: #d3d3d3;
+}
+
 .main-content {
     display: flex;
-    margin-top: 15px;
+    padding-top: 40px;
+    font-size: 22px;
+}
+
+.user-section {
+    padding-bottom: 7px;
 }
 
 .categories-block h2 {
-    margin: 10px;
+    padding: 10px;
 }
 
-.categories-list {
-    background-color: #f6f6f6;
+.categories-block .categories-list {
+    margin-bottom: 20px;
+}
+
+.categories-list, .products-availability {
+    background-color: #e0dddd;
     padding: 10px;
     width: 200px;
-    border-radius: 10px;
+    border-radius: 7px;
 }
 
-.categories-list li {
+.categories-list li, .products-availability li {
     display: flex;
     align-items: center;
     font-size: 20px;
     padding: 5px;
 }
 
-.categories-list li:hover {
-    background-color: lightgray;
+.categories-list li:hover, .products-availability li:hover {
+    background-color: #b7b7b7;
+    color: white;
+    border-radius: 7px;
 }
 
 .categories-block {
     margin-right: 30px;
-
 }
 
-.all-selected {
+.all-category-selected {
     background-color: lightgray;
 }
 
-.add-product {
-    display: inline-block;
-    /*margin-bottom: 20px;*/
-    background-color: lightgrey;
-    text-decoration: none;
-    padding: 5px 10px 5px 10px;
-    border-radius: 7px;
-    color: black;
-}
-
-.categories-block {
-    /*padding: 20px 0 20px 0;*/
-}
-
-.categories-list li{
+.categories-list li, .products-availability li {
     list-style: none;
     height: 30px;
+}
+
+.sorting-product-section {
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+    padding: 15px 0 15px 0;
+}
+
+.sorting-product-section h3 {
+    padding-right: 10px;
+}
+
+.sorting-product-section ul {
+    display: flex;
+    justify-content: space-between;
+}
+
+.sorting-criteria li {
+    list-style: none;
+}
+
+.sorting-criteria li:not(:last-child) {
+    padding-right: 15px;
+}
+
+.sorted-block > *:not(:last-child) {
+    padding-right: 20px;
 }
 
 .products-tape {

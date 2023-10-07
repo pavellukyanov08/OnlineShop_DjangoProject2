@@ -2,19 +2,23 @@
 {% load static %}
 
 {% block css %}
-    <link rel="stylesheet" href="{% static 'css/form-prod-style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/add_prod.css' %}">
 {% endblock %}
 
 {% block content %}
-    <h2>Добавление продукта</h2>
+    <h1>Добавление продукта</h1>
 
-    <div class="content">
-        <form method="post" enctype="multipart/form-data" class="add-form">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <div class="button">
-                <button class="add-btn">Добавить</button>
+    <section>
+        <div class="content container">
+            <div class="add-product">
+                <form method="post" class="add-form" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <div class="button">
+                        <button class="add-btn">Добавить</button>
+                    </div>
+                </form>
             </div>
-        </form>
-    </div>
+        </div>
+    </section>
 {% endblock %}

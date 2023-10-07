@@ -25,18 +25,22 @@
                 <tbody>
                     {% if compare_items %}
                         {% for spec in compare_items %}
-                            <tr>
+                            <tr class="table-row">
                                 <td><img src="{{ spec.img.url }}" height="150" width="150" alt="Товар"></td>
                                 <td><p>{{ spec.product }}</p></td>
                                 <td><p>{{ spec.price }}</p></td>
                                 <td><p>{{ spec.width }}</p></td>
                                 <td><p>{{ spec.height }}</p></td>
                                 <td><p>{{ spec.weight }}</p></td>
-                                <td class="product-remove">
-                                    <a href="{% url 'compare:remove_item' spec.id %}">
-                                        <img src="{% static 'shopping_cart/remove-icon.svg' %}" width="25px" height="25px"
-                                        alt="Удалить товар">
-                                    </a>
+                                <td class="product-action-section">
+                                    <div class="product-action">
+                                        <a class="remove-prod" href="{% url 'compare:remove_item' spec.id %}">
+                                            <img src="{% static 'shopping_cart/remove-icon.svg' %}" width="25px" height="25px"
+                                            alt="Удалить товар">
+                                        </a>
+
+                                        <a class="buy-prod" href="{% url 'cart:add_item' spec.id %}">Купить</a>
+                                    </div>
                                 </td>
                             </tr>
                         {% endfor %}
@@ -45,6 +49,4 @@
             </table>
         </div>
     </section>
-    <section></section>
-    <section></section>
 {% endblock %}

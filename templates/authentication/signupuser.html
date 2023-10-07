@@ -9,13 +9,41 @@
 {% block content %}
     <h2>Регистрация</h2>
 
-    <div class="content">
-        <form method="post" class="reg-form">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <div class="button">
-                <button class="reg-btn">Зарегистрироваться</button>
+    <section>
+        <div class="content container">
+            <div class="reg-block">
+                <form method="post" class="reg-form">
+                    {% csrf_token %}
+
+                    <p>
+                        <label for="username">Имя пользователя:</label>
+                        <input type="text" name="username" maxlength="100">
+                    </p>
+
+                    <p>
+                        <label for="password">Пароль:</label>
+                        <input type="password" name="password1" maxlength="100">
+                    </p>
+
+                    <ul>
+                        <li>Ваш пароль не может содержать данных, схожих с вашими персональными данными</li>
+                        <li>Ваш пароль должен содержать не менее 8 символов</li>
+                        <li>Ваш пароль не может быть часто используемым паролем</li>
+                        <li>Ваш пароль не может быть полностью числовой</li>
+                    </ul>
+
+                    <p>
+                        <label for="password">Подтвердите пароль:</label>
+                        <input type="password" name="password2" maxlength="100">
+                    </p>
+
+                    <div class="button">
+                        <button class="reg-btn">Зарегистрироваться</button>
+                    </div>
+                </form>
+
+                <p class="signup-link">Уже имеется аккаунт? <a href="{% url 'login' %}">Авторизируйтесь!</a></p>
             </div>
-        </form>
-    </div>
+        </div>
+    </section>
 {% endblock %}

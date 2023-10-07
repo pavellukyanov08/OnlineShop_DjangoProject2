@@ -1,7 +1,11 @@
+html, body {
+  height: 100%;
+}
+
 body {
-    padding: 0;
-    margin: 0;
-    background-color: #f6f6f6;
+  padding: 0;
+  margin: 0;
+  background-color: #f6f6f6;
 }
 
 h1, h2, h3, p {
@@ -14,6 +18,17 @@ h1, h2, h3, p {
   min-width: 320px;
   margin: 0 auto;
   box-sizing: border-box
+}
+
+a {
+  text-decoration: none;
+  color: black;
+  cursor: pointer;
+}
+
+.page-header {
+  position: sticky;
+  top: 0;
 }
 
 ul {
@@ -55,7 +70,6 @@ ul {
 }
 
 .site-nav__item a {
-  text-decoration: none;
   font-size: 18px;
   line-height: 19px;
   color: #303032;
@@ -90,47 +104,84 @@ ul {
   margin-right: 30px;
 }
 
+
 /*Раскрывающийся список пользователя*/
 .user-nav__profile {
   position: relative;
   display: inline-block;
 }
 
-.dropdown {
+.dropdown-menu {
   position: absolute;
-  top: 100%;
-  right: -40px;
   display: none;
+  padding: 10px;
+  top: 0;
+  right: 0;
+  text-align: center;
   background-color: #d3d3d3;
-  border-radius: 5px;
-}
-
-.dropdown ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.dropdown ul li {
-  padding: 10px 10px 5px 10px;
-}
-
-.dropdown a {
+  border-radius: 7px;
+  border: 1px solid white;
   font-size: 20px;
 }
 
-.dropdown a:hover {
+.dropdown-menu ul li {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  line-height: 25px;
+}
+
+.controls-elem li {
+  padding: 5px;
+}
+
+.controls-elem .user-section {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 10px;
+  border-bottom: 2px solid white;
+}
+
+.username {
+  padding-bottom: 5px;
+}
+
+.add-product {
+  font-size: 17px;
+}
+
+.dropdown-menu .user-dropdown-nav {
+  padding: 10px 0 10px 0;
+  border-bottom: 2px solid white;
+}
+
+.dropdown-menu a:hover {
   color: white;
 }
 
-.user-nav__profile:hover .dropdown {
-  display: block;
+.dropdown-menu .user-dropdown-auth {
+  padding: 10px 0 10px 0;
 }
 
+.user-nav__profile:hover .dropdown-menu {
+  display: block;
+  width: 200px;
+  z-index: 0;
+}
 
+.user-dropdown-nav li a{
+  font-size: 20px;
+}
+
+.logout-btn {
+  width: 70%;
+}
+
+.user-auth {
+  border-top: 2px solid white;
+}
 
 .user-nav__user-profile a {
-  text-decoration: none;
   font-size: 18px;
   line-height: 19px;
   color: #303032;
@@ -141,12 +192,11 @@ ul {
   list-style: none;
 }
 
-.logout-btn {
+.logout-link {
   font-size: 15px;
 }
 
 .user-nav__user-auth a {
-  text-decoration: none;
   font-size: 17px;
   line-height: 20px;
   color: #303032;
@@ -156,3 +206,33 @@ ul {
   margin-right: 30px;
 }
 
+
+/* ФУТЕР */
+
+/*.basement-content {*/
+/*  margin-top: 40px;*/
+/*  background-color: #d3d3d3;*/
+/*}*/
+
+/*.info-line {*/
+/*  display: flex;*/
+/*  justify-content: space-between;*/
+/*  align-items: center;*/
+/*  font-size: 17px;*/
+/*}*/
+
+/*.info-line__menu-item {*/
+/*  margin-left: 0;*/
+/*  margin-top: 0;*/
+/*  width: 140px;*/
+/*  text-decoration: none;*/
+/*  color: #303032;*/
+/*  text-transform: uppercase;*/
+/*  padding-left: 40px;*/
+/*  font-weight: 600;*/
+/*}*/
+
+/*.rights p {*/
+/*  text-align: center;*/
+/*  font-weight: 400;*/
+/*}*/

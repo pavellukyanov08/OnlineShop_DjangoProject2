@@ -1,0 +1,38 @@
+{% extends 'main_page/base.html' %}
+{% load static %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/edit-prod.css' %}">
+{% endblock %}
+
+{% block content %}
+    <h2>Управление товаром: <b>{{ product.name }}</b></h2>
+
+    <section>
+        <div class="content container">
+            <div class="edit-product">
+                <form method="post" class="edit-form" enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                    {{ form.as_p }}
+
+                    <div class="button">
+                        <button class="save-btn btn">Сохранить</button>
+                    </div>
+                </form>
+
+                <div class="control-buttons">
+
+
+                    <form action="{% url 'main_page:delete' product.id %}" method="post" class="edit-form">
+                        {% csrf_token %}
+
+                        <div class="button">
+                            <button class="del-btn btn">Удалить</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

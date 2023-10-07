@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
     {% block css %} {% endblock %}
-    <title>{% block title %} Наши продукты {% endblock %}</title>
+    <title></title>
 </head>
 <body>
     <header class="page-header">
@@ -19,8 +19,9 @@
                 </div>
 
                 <ul class="site-nav__list">
-                    <li class="site-nav__item"><a href="{% url 'main_page:index' %}">Товары</a></li>
-                    <li class="site-nav__item"><a href="{% url 'about' %}">Об авторе</a></li>
+                    {% for item in menu %}
+                        <li class="site-nav__item"><a href="{{ item.url }}">{{ item.title }}</a></li>
+                    {% endfor %}
                 </ul>
             </nav>
 
@@ -35,24 +36,35 @@
                 <div class="user-nav__profile">
                     <a class="user-nav__logo" id="user-icon" href="{% url 'main_page:index' %}">
                         <img src="{% static 'main_page/user_logo.svg' %}"
-                             width="30" height="30" alt="Пользователь">
+                             width="32" height="33" alt="Пользователь">
                     </a>
 
-                    <div class="dropdown">
-                        <ul class="user-dropdown" id="user-dropdown">
+                    <div class="dropdown-menu">
+                        <ul class="controls-elem">
+                            <li class="user-section">
+                                <a class="username" href="#">{{ user }}</a>
+
+                                {% if user.is_superuser and user.is_staff %}
+                                    <a class="add-product product-controls" href="{% url 'main_page:add_product' %}">Добавить продукт</a>
+                                {% endif %}
+                            </li>
+                        </ul>
+
+                        <ul class="user-dropdown-nav">
                             <li><a href="{% url 'favourites:all_products' %}">Избранное</a></li>
                             <li><a href="{% url 'compare:all_compare' %}">Сравнение</a></li>
                         </ul>
-                    </div>
-                </div>
 
-                <div class="user-nav__user-logout">
-                    <a href="">
-                        <form action="{% url 'logout' %}" method="post">
-                            {% csrf_token %}
-                            <button class="logout-btn">Выйти</button>
-                        </form>
-                    </a>
+                        <ul class="user-dropdown-auth">
+                            <li><a href="{% url 'login' %}">Сменить пользователя</a></li>
+                            <li>
+                                <form action="{% url 'logout' %}" method="post">
+                                    {% csrf_token %}
+                                    <button class="logout-btn">Выйти</button>
+                                </form>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
                 {% else %}
 
@@ -68,5 +80,7 @@
     {% block content %}
 
     {% endblock %}
+
+{#    {% include 'main_page/footer.html' %}#}
 </body>
 </html>

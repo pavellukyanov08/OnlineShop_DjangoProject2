@@ -1,14 +1,10 @@
 /* Начало блога */
+
 h1 {
   text-align: center;
   padding: 30px 30px;
-  /*font-size: 20px;*/
   text-transform: uppercase;
 
-}
-
-section {
-  /*margin-top: 30px;*/
 }
 
 .auth-info p {
@@ -17,12 +13,14 @@ section {
 
 .info-block {
   margin: 0 auto;
+  width: 1050px;
 }
 
 .dev-block {
   display: flex;
-  padding: 6px;
+  padding: 10px;
   border: 2px solid black;
+  font-size: 20px;
   border-radius: 10px;
 }
 
@@ -34,6 +32,10 @@ section {
   padding: 0 10px;
   line-height: 1.5;
   border-right: 2px solid black;
+}
+
+.auth-info p {
+
 }
 
 h3 {
@@ -52,58 +54,3 @@ h3 {
   padding: 0 10px;
   text-align: justify;
 }
-
-
-/* Футер */
-
-.basement {
-  padding-top: 200px;
-  display: flex;
-  flex-direction: column;
-}
-
-.top-line {
-  display: flex;
-  justify-content: space-between;
-  padding-bottom: 30px;
-}
-
-.top-line__menu a {
-  text-decoration: none;
-  color: #303032;
-  text-transform: uppercase;
-  padding-left: 40px;
-  font-weight: 600;
-}
-
-.top-line__menu-item {
-  margin-left: 0;
-  margin-top: 0;
-  width: 140px;
-  flex-shrink: 1;
-  margin-bottom: 17px;
-}
-
-.bottom-line, .phone-number, .main-adress {
-  display: flex;
-}
-
-.phone-number {
-  padding-right: 50px;
-}
-
-.bottom-line {
-  margin-bottom: 30px;
-}
-
-.bottom-line img {
-  padding-right: 10px;
-}
-
-.rights p {
-  text-align: right;
-  font-size: 16px;
-  font-weight: 400;
-  opacity: 0.4;
-}
-

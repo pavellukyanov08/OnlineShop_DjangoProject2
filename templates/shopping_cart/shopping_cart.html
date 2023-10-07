@@ -6,51 +6,65 @@
 {% endblock %}
 
 {% block content %}
-    <h2>Корзина товаров</h2>
+    <h1>Корзина товаров</h1>
 
     <section class="cart-content container">
-        <table class="products-tape">
-            <thead>
-                <tr class="row-titles">
-                    <th class="product-thumbnail">&nbsp;</th>
-                    <th class="product-name">Продукт</th>
-                    <th class="product-price">Цена (руб)</th>
-                    <th class="product-quantity">Количество (шт)</th>
-                    <th class="product-remove"></th>
-                </tr>
-            </thead>
-            <tbody>
-                {% if cart_items %}
-                    {% for item in cart_items %}
+        {% if cart_items %}
+            <table class="products-tape">
+                <thead>
                     <tr class="row-titles">
-                        <td class="product-thumbnail">
-                            <a href="#">
-                                <img src="{{ item.img.url }}" alt="{{ item.title }}" height="100" width="100"
-                                      class="item-img">
-                            </a>
-                        </td>
-                        <td class="product-name"><a href="#">{{ item.product }}</a></td>
-                        <td class="product-price"><a href="#">{{ item.price }}</a></td>
-                        <td class="product-quantity">
-                            <a href="">
-                               <form method="POST" action="{% url 'cart:update_cart' %}" class="update-quantity-form">
-                                   {% csrf_token %}
-                                   <input type="hidden" name="item_id" value="{{ item.id }}">
-                                   <input type="number" name="quantity" value="{{ item.quantity }}">
-                                   <button type="submit">Обновить</button>
-                               </form>
-                            </a>
-                        </td>
-                        <td class="product-remove">
-                            <a href="{% url 'cart:remove_item' item.id %}">
-                                <img src="{% static 'shopping_cart/remove-icon.svg' %}" width="25px" height="25px"
-                                     alt="Удалить товар">
-                            </a>
-                        </td>
+                        <th class="product-thumbnail">&nbsp;</th>
+                        <th class="product-name">Продукт</th>
+                        <th class="product-price">Цена (руб)</th>
+                        <th class="product-quantity">Количество (шт)</th>
+                        <th class="product-remove"></th>
                     </tr>
-                    {% endfor %}
-                {% endif %}
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    {% if cart_items %}
+                        {% for item in cart_items %}
+                        <tr class="row-titles">
+                            <td class="product-thumbnail">
+                                <a href="#">
+                                    <img src="{{ item.img.url }}" alt="{{ item.title }}" height="120" width="120"
+                                          class="item-img">
+                                </a>
+                            </td>
+                            <td class="product-name"><a href="#">{{ item.product }}</a></td>
+                            <td class="product-price"><a href="#">{{ item.price }}</a></td>
+                            <td class="product-quantity">
+                                <a href="">
+                                   <form method="POST" action="{% url 'cart:update_cart' %}" class="update-quantity-form">
+                                       {% csrf_token %}
+                                       <input type="hidden" name="item_id" value="{{ item.id }}">
+                                       <input type="number" name="quantity" value="{{ item.quantity }}" min="1">
+                                       <button type="submit">Обновить</button>
+                                   </form>
+                                </a>
+                            </td>
+                            <td class="product-remove">
+                                <a href="{% url 'cart:remove_item' item.id %}">
+                                    <img src="{% static 'shopping_cart/remove-icon.svg' %}" width="25px" height="25px"
+                                         alt="Удалить товар">
+                                </a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    {% endif %}
+                </tbody>
+            </table>
+
+            <div class="count-total-price">
+                <h3>Итого: </h3>
+                <p>{{ total_price }} ₽</p>
+            </div>
+
+            {% else %}
+            <div class="cart-is-empty">
+                <img src="{% static 'shopping_cart/empty-cart.svg' %}" height="100" width="100" alt="Корзина товаров">
+                <p id="cart-empty">Корзина пуста</p>
+                <p id="go-shop">Возвращайтесь к <a href="{% url 'main_page:index' %}">покупкам</a></p>
+            </div>
+        {% endif %}
     </section>
 {% endblock %}

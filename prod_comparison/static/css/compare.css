@@ -27,13 +27,12 @@ section {
 }
 
 .compare-product-table {
-    text-align: center;
     width: 100%;
+    text-align: center;
 }
 
-.compare-product-table tbody tr {
-    width: 100%;
-    margin-bottom: 10px;
+.compare-product-table tr {
+    margin-bottom: 100px;
 }
 
 .product-action-section {

@@ -1,4 +1,4 @@
-h2, h2 {
+h1, h2 {
     text-align: center;
     padding: 40px 0 40px 0;
 }
@@ -31,4 +31,16 @@ img {
     text-align: center;
     border: 1px solid rgb(128, 128, 128);
     border-radius: 7px;
+}
+
+.product-reviews-content {
+    margin-top: 50px;
+}
+
+.reviews-tape h2 {
+    padding: 20px 0 20px 0;
+}
+.reviews-tape {
+    border-top: 1px solid black;
+    border-radius: 10px;
 }

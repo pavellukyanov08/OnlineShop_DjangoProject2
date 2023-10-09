@@ -1,5 +1,6 @@
+from django.contrib import messages
 from django.shortcuts import render, redirect, get_object_or_404
-from .forms import ProductForm
+from .forms import ProductForm, ReviewForm
 from .models import *
 from django.utils import timezone
 
@@ -56,20 +57,34 @@ def add_product(request):
 def product_detail(request, prod_id, slug):
     menu = Menu.objects.all()
     product = get_object_or_404(Product, id=prod_id, slug=slug)
-    form = ProductForm(instance=product)
+    form_prod = ProductForm(instance=product)
+    form_review = ReviewForm()
+
     if request.method == 'GET':
         if request.user.is_staff or request.user.is_superuser:
-            return render(request, 'main_page/edit_prod.html', {'product': product, 'form': form, 'menu': menu})
+            return render(request, 'main_page/edit_prod.html', {'product': product, 'form_prod': form_prod, 'menu': menu})
         else:
-            return render(request, 'main_page/view_prod.html', {'product': product, 'menu': menu})
+            return render(request, 'main_page/view_prod.html', {'product': product, 'form_review': form_review, 'menu': menu})
     else:
         try:
-            form = ProductForm(request.POST, instance=product)
-            form.save()
-            return redirect('main_page:index')
+            if form_prod:
+                form_prod = ProductForm(request.POST, instance=product)
+                form_prod.save()
+                return redirect('main_page:index')
+            elif form_review:
+                form_review = ReviewForm(request.POST)
+                review = form_review.save(commit=False)
+                review.product = product
+                review.reviewer = request.user.profile
+                review.save()
+                product.get_vote_count()
+
+                messages.success(request, 'Ваш отзыв успешно сохранен')
+                return redirect('product_detail', id=prod_id, slug=slug)
         except ValueError:
             return render(request, 'main_page/view_prod.html',
-                          {'form': form,
+                          {'form_prod': form_prod,
+                           'form_review': form_review,
                            'error': 'Неверные данные!'})
 
 

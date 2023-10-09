@@ -48,20 +48,20 @@
             </h5>
             {% if request.user.profile.id in product.reviewers %}
                 <p>Вы уже оставили свой отзыв на этот продукт</p>
-            {% elif request.user.is_authenticated%}
-            <form class="form" action="{% url 'main_page:product_detail' product.id product.slug %}" method="POST">
-                {% csrf_token %}
+            {% elif request.user.is_authenticated %}
+                <form class="form" action="{% url 'main_page:product_detail' product.id product.slug %}" method="POST">
+                    {% csrf_token %}
 
-                {% for field in form %}
-                <div class="form_field">
-                    <label>{{ field.label }}</label>
-                    {{ field }}
-                </div>
-                {% endfor %}
-                <button class="leave_review" type="submit">Оставить отзыв</button>
-            </form>
+                    {% for field in form %}
+{#                    <div class="form_field">#}
+                        <label>{{ field.label }}</label>
+                        {{ field }}
+{#                    </div>#}
+                    {% endfor %}
+                    <button class="leave_review" type="submit">Оставить отзыв</button>
+                </form>
             {% else %}
-            <a href="{% url 'login' %}"></a>
+                <a href="{% url 'login' %}"></a>
             {% endif %}
             <div class="review-card">
 

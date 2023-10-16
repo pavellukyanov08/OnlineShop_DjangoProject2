@@ -8,7 +8,6 @@ from django.db.models import Sum, ExpressionWrapper, F, DecimalField
 def cart_view(request):
     menu = Menu.objects.all()
     cart_items = ShoppingCart.objects.filter(user=request.user)
-    total_price = None
     total_price = cart_items.aggregate(
         total_price=Sum(ExpressionWrapper(F('price') * F('quantity'),
                                           output_field=DecimalField())))

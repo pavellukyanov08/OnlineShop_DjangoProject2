@@ -13,6 +13,10 @@ def products_list(request, category_slug=None, product_availability=None):
     availabilities = ProductAvailability.objects.all()
     products = Product.objects.all()
 
+    cart_prod = request.user
+    cart_prod_count = cart_prod.shoppingcart_set.all()
+    cart_prod_count = [item.product for item in cart_prod_count]
+
     category, availability = None, None
     # функционал сортировки
     sort_by = request.GET.get('sort_by')
@@ -34,6 +38,7 @@ def products_list(request, category_slug=None, product_availability=None):
                                                     'availability': availability,
                                                     'availabilities': availabilities,
                                                     'products': products,
+                                                    'cart_prod_count': cart_prod_count,
                                                     'curr_time': curr_time})
 
 
@@ -57,35 +62,70 @@ def add_product(request):
 def product_detail(request, prod_id, slug):
     menu = Menu.objects.all()
     product = get_object_or_404(Product, id=prod_id, slug=slug)
-    form_prod = ProductForm(instance=product)
-    form_review = ReviewForm()
 
     if request.method == 'GET':
         if request.user.is_staff or request.user.is_superuser:
+            form_prod = ProductForm(instance=product)
             return render(request, 'main_page/edit_prod.html', {'product': product, 'form_prod': form_prod, 'menu': menu})
         else:
+            form_review = ReviewForm(request.GET)
             return render(request, 'main_page/view_prod.html', {'product': product, 'form_review': form_review, 'menu': menu})
     else:
+        form_review = ReviewForm(request.POST)
         try:
-            if form_prod:
-                form_prod = ProductForm(request.POST, instance=product)
-                form_prod.save()
-                return redirect('main_page:index')
-            elif form_review:
-                form_review = ReviewForm(request.POST)
-                review = form_review.save(commit=False)
-                review.product = product
-                review.reviewer = request.user.profile
-                review.save()
-                product.get_vote_count()
+            review = form_review.save(commit=False)
+            review.product = product
+            review.owner = request.user.profile
+            review.save()
+            product.get_vote_count()
 
-                messages.success(request, 'Ваш отзыв успешно сохранен')
-                return redirect('product_detail', id=prod_id, slug=slug)
+            messages.success(request, 'Ваш отзыв успешно сохранен')
+            return redirect('main_page:product_detail', prod_id=product.id, slug=product.slug)
         except ValueError:
             return render(request, 'main_page/view_prod.html',
-                          {'form_prod': form_prod,
+                          {'product': product,
                            'form_review': form_review,
                            'error': 'Неверные данные!'})
+
+
+# def product_detail(request, prod_id, slug):
+#     menu = Menu.objects.all()
+#     product = get_object_or_404(Product, id=prod_id, slug=slug)
+#
+#     if request.method == 'GET':
+#         if request.user.is_staff or request.user.is_superuser:
+#             form_prod = ProductForm(instance=product)
+#             return render(request, 'main_page/edit_prod.html', {'product': product, 'form_prod': form_prod, 'menu': menu})
+#         else:
+#             return render(request, 'main_page/view_prod.html', {'product': product, 'menu': menu})
+#     else:
+#         form_review = ReviewForm(request.POST)
+#         try:
+#             form = ProductForm(request.POST, instance=product)
+#             form.save()
+#             return redirect('main_page:index')
+#         except ValueError:
+#             return render(request, 'main_page/view_prod.html',
+#                           {'form': form,
+#                            'error': 'Неверные данные!'})
+
+
+# def edit_product(request, id, slug):
+#     menu = Menu.objects.all()
+#     product = get_object_or_404(Product, id=id, slug=slug)
+#     form_prod = ProductForm(instance=product)
+#     if request.method == 'GET':
+#         if request.user.is_staff or request.user.is_superuser:
+#             return render(request, 'main_page/edit_prod.html', {'product': product, 'form_prod': form_prod, 'menu': menu})
+#     else:
+#         try:
+#             form_prod = ProductForm(request.POST, instance=product)
+#             form_prod.save()
+#             return redirect('main_page:index')
+#         except ValueError:
+#             return render(request, 'main_page/edit_prod.html',
+#                           {'form_prod': form_prod,
+#                            'error': 'Неверные данные!'})
 
 
 def delete_prod(request, prod_id):

@@ -52,19 +52,29 @@
                 <form class="form" action="{% url 'main_page:product_detail' product.id product.slug %}" method="POST">
                     {% csrf_token %}
 
-                    {% for field in form %}
-{#                    <div class="form_field">#}
-                        <label>{{ field.label }}</label>
-                        {{ field }}
-{#                    </div>#}
+                    {% for field in form_review %}
+                        <div class="form_field">
+                            <label>{{ field.label }}</label>
+                            {{ field }}
+                        </div>
                     {% endfor %}
                     <button class="leave_review" type="submit">Оставить отзыв</button>
                 </form>
             {% else %}
                 <a href="{% url 'login' %}"></a>
             {% endif %}
-            <div class="review-card">
-
+            <div class="review-list">
+                {% for review in product.review_set.all %}
+                    {% if review.body %}
+                        <div class="review">
+                            {% if review.reviewer %}
+                                <div class="review_details">
+                                    <a href="{% url '' %}"></a>                                    
+                                </div>
+                            {% endif %}
+                        </div>                                                
+                    {% endif %} 
+                {% endfor %}
             </div>
         </div>
     </section>

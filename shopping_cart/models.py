@@ -1,5 +1,4 @@
 from django.db import models
-from main_page.models import Product
 from django.contrib.auth.models import User
 
 

@@ -1,8 +1,8 @@
 from django.db import models
 from django.urls import reverse
 from users.models import Profile
+# from shopping_cart.models import ShoppingCart
 from django.contrib.auth.models import User
-from django.utils.safestring import mark_safe
 
 
 class Menu(models.Model):
@@ -62,7 +62,7 @@ class Product(models.Model):
     start_date = models.DateTimeField(null=True, blank=True, verbose_name='Дата старта распродажи')
     end_date = models.DateTimeField(null=True, blank=True, verbose_name='Дата окончания распродажи')
     availability_status = models.ForeignKey(ProductAvailability, on_delete=models.CASCADE, null=True, verbose_name='Наличие')
-    reviewer = models.ForeignKey(Profile, on_delete=models.SET_NULL, null=True, blank=True)
+    reviewer = models.ForeignKey(Profile, on_delete=models.CASCADE, null=True, blank=True)
     vote_total = models.IntegerField(default=0, null=True, blank=True)
     vote_ratio = models.IntegerField(default=0, null=True, blank=True)
     created = models.DateTimeField(auto_now_add=True, null=True)
@@ -101,7 +101,7 @@ class Review(models.Model):
         ('down', 'Down Vote')
     )
 
-    reviewer = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    owner = models.ForeignKey(Profile, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     body = models.TextField(null=True, blank=True)
     value = models.CharField(max_length=200, choices=VOTE_TYPE)
@@ -113,4 +113,4 @@ class Review(models.Model):
     class Meta:
         verbose_name = 'Отзыв'
         verbose_name_plural = 'Отзывы'
-        unique_together = [['reviewer', 'product'], ]
+        unique_together = [['owner', 'product'], ]

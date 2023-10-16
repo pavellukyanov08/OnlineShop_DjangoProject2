@@ -29,6 +29,7 @@
                 {% if user.is_authenticated %}
 
                 <div class="user-nav__shop_block">
+{#                    <p>Кол-во товаров: {{ cart_prod_count.count }}</p>#}
                     <a href="{% url 'cart:cart' %}"><img src="{% static 'main_page/shop_cart.svg' %}" height="40"
                                                          width="40" alt="Корзина товаров"></a>
                 </div>

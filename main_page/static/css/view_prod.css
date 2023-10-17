@@ -33,15 +33,81 @@ img {
     border-radius: 7px;
 }
 
-.product-reviews-content {
+.reviews-content {
     margin-top: 50px;
 }
 
-.reviews-tape h2 {
+.feedback-wrapper h2 {
     padding: 20px 0 20px 0;
+    border-top: 1px solid black;
 }
 
-.reviews-tape {
+.feedback-tape {
     border-top: 1px solid black;
     border-radius: 10px;
 }
+
+/* Лента слайдов */
+.slick-track {
+    display: flex;
+}
+
+/*Стилизация кнопок для слайдера комментариев */
+.feedback {
+    position: relative;
+    padding: 0 50px;
+}
+
+.feedback .slick-arrow {
+    position: absolute;
+    font-size: 0;
+    width: 85px;
+    height: 85px;
+    border-color: rgba(189, 189, 189, 1);
+    border-radius: 50px;
+    top: 110px;
+    cursor: pointer;
+}
+
+/* Стрелка влево */
+.feedback .slick-arrow.slick-prev {
+    left: 0;
+    background: url(../main_page/arrow-left.svg) 0 0 / 100% no-repeat;
+}
+
+/* Стрелка вправо */
+.feedback .slick-arrow.slick-next{
+  right: 0;
+  background: url(../main_page/arrow-right.svg) 0 0 / 100% no-repeat;
+}
+
+/**стилизация нижних точек слайдера**/
+.feedback .slick-dots{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+  width: 650px;
+  margin: 0 auto;
+}
+
+.feedback .slick-dots li{
+  list-style: none;
+}
+
+.feedback .slick-dots button{
+  font-size: 0;
+  width: 15px;
+  height: 15px;
+  border-radius: 100%;
+  background-color: transparent;
+  border: 1px solid rgba(179, 179, 179, 1);
+  margin: 3px;
+
+}
+
+.feedback .slick-dots li.slick-active button {
+  background-color: rgba(179, 179, 179, 1);
+}
+

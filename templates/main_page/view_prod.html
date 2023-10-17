@@ -5,15 +5,6 @@
     <link rel="stylesheet" href="{% static 'css/view_prod.css' %}">
 {% endblock %}
 
-{% block script %}
-    <!--Подключение jQuery-->
-    <script type="module" src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
-    <!--Подключение слайдера slick-->
-    <script type="module" src="{% static 'js/slider/slick.min.js' %}src/js/slider/slick.min.js"></script>
-    <!--подключение файла скриптов-->
-    <script type="module" src="{% static 'js/slider/script.js' %}src/js/slider/script.js"></script>
-{% endblock %}
-
 {% block content %}
     <h2>Просмотр товара: <b>{{ product.name }}</b></h2>
 
@@ -51,6 +42,11 @@
         <div class="feedback-wrapper container">
             <h2>Отзывы</h2>
 
+            <h3 class="feedback-rating">
+                {{ product.vote_ratio }}% Положительных отзывов
+                ({{ product.vote_total }} Vote{{ product.vote_total | pluralize:'s' }})
+            </h3>
+
             <div class="feedback">
                 <div class="feedback__item">
                     {% for review in product.review_set.all %}
@@ -74,11 +70,6 @@
             </div>
 
             <div class="create-feedback">
-                <h5 class="feedback-rating">
-                    {{ product.vote_ratio }}% Положительных отзывов
-                    ({{ product.vote_total }} Vote {{ product.vote_total | pluralize:'s' }})
-                </h5>
-
                 {% if request.user.profile.id in product.reviewers %}
                     <p>Вы уже оставили свой отзыв на этот продукт</p>
                 {% elif request.user.is_authenticated %}
@@ -96,7 +87,15 @@
                     <a href="{% url 'login' %}"></a>
                 {% endif %}
             </div>
-        </div>
 
+            {% block script %}
+                <!--Подключение jQuery-->
+                <script type="module" src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+                <!--Подключение слайдера slick-->
+                <script type="module" src="{% static 'js/slider/slick.min.js' %}"></script>
+                <!--подключение файла скриптов-->
+                <script type="module" src="{% static 'js/slider/script.js' %}"></script>
+            {% endblock %}
+        </div>
     </section>
 {% endblock %}

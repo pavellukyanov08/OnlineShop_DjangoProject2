@@ -1,4 +1,9 @@
-h1, h2 {
+* {
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
     text-align: center;
     padding: 40px 0 40px 0;
 }
@@ -33,82 +38,70 @@ img {
     border-radius: 7px;
 }
 
-.reviews-content {
+.feedback-content {
     margin-top: 50px;
+    /*border-top: 1px solid black;*/
 }
 
-.feedback-wrapper h2 {
-    padding: 20px 0 20px 0;
-    border-top: 1px solid black;
+.feedback-content h2 {
+    text-align: center;
+    padding: 0 0 20px 0;
 }
 
-.feedback-tape {
+.feedback_info {
+    display: flex;
+    justify-content: space-between;
+}
+
+.feedback-rating {
+    text-align: center;
+    padding-bottom: 10px;
+}
+
+.form_field label, select {
+    width: 100%;
+}
+
+.form_field h3 {
+    padding: 0 0 7px 0;
+}
+
+.form_field textarea {
+    width: 500px;
+}
+
+.form_field select {
+    height: 30px;
+}
+
+.leave-button {
+    margin-top: 15px;
+}
+
+.leave-review-btn {
+    padding: 7px 5px 7px 5px;
+    font-size: 17px;
+}
+
+.feedback-wrapper {
+    margin-top: 30px;
+    padding: 20px;
     border-top: 1px solid black;
+    border-bottom: 1px solid black;
     border-radius: 10px;
 }
 
-
-/* Лента слайдов */
-.slick-track {
+.feedbacks-tape {
     display: flex;
+    flex-wrap: wrap;
 }
 
-/*Стилизация кнопок для слайдера комментариев */
-.feedback {
-    position: relative;
-    padding: 0 50px;
+.feedback__item {
+    border: 1px solid black;
+    padding: 15px;
+    border-radius: 7px;
+    margin-right: 20px;
 }
 
-.feedback .slick-arrow {
-    position: absolute;
-    font-size: 0;
-    width: 85px;
-    height: 85px;
-    border-color: rgba(189, 189, 189, 1);
-    border-radius: 50px;
-    top: 110px;
-    cursor: pointer;
-}
 
-/* Стрелка влево */
-.feedback .slick-arrow.slick-prev {
-    left: 0;
-    background: url(../main_page/arrow-left.svg) 0 0 / 100% no-repeat;
-}
-
-/* Стрелка вправо */
-.feedback .slick-arrow.slick-next{
-  right: 0;
-  background: url(../main_page/arrow-right.svg) 0 0 / 100% no-repeat;
-}
-
-/**стилизация нижних точек слайдера**/
-.feedback .slick-dots{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  padding: 0;
-  width: 650px;
-  margin: 0 auto;
-}
-
-.feedback .slick-dots li{
-  list-style: none;
-}
-
-.feedback .slick-dots button{
-  font-size: 0;
-  width: 15px;
-  height: 15px;
-  border-radius: 100%;
-  background-color: transparent;
-  border: 1px solid rgba(179, 179, 179, 1);
-  margin: 3px;
-
-}
-
-.feedback .slick-dots li.slick-active button {
-  background-color: rgba(179, 179, 179, 1);
-}
 

@@ -6,7 +6,7 @@
 {% endblock %}
 
 {% block content %}
-    <h2>Просмотр товара: <b>{{ product.name }}</b></h2>
+    <h1>Просмотр товара: <b>{{ product.name }}</b></h1>
 
     <section class="content">
         <div class="view-product">
@@ -39,35 +39,13 @@
     </section>
 
     <section class="feedback-content">
-        <div class="feedback-wrapper container">
-            <h2>Отзывы</h2>
+        <h2 class="container">Отзывы</h2>
 
+        <div class="feedback_info container">
             <h3 class="feedback-rating">
                 {{ product.vote_ratio }}% Положительных отзывов
                 ({{ product.vote_total }} Vote{{ product.vote_total | pluralize:'s' }})
             </h3>
-
-            <div class="feedback">
-                <div class="feedback__item">
-                    {% for review in product.review_set.all %}
-                        {% if review.body %}
-                            <div class="feedback__item">
-                                <div class="avatar-block">
-                                    <img src="#" alt="">
-                                </div>
-
-                                <div class="name-block">
-                                    {{ review.owner.username }}
-                                </div>
-
-                                <div class="feedback-block">
-                                    <p><i>{{ review.body | linebreaksbr }}</i></p>
-                                </div>
-                            </div>
-                        {% endif %}
-                    {% endfor %}
-                </div>
-            </div>
 
             <div class="create-feedback">
                 {% if request.user.profile.id in product.reviewers %}
@@ -75,27 +53,45 @@
                 {% elif request.user.is_authenticated %}
                     <form class="form" action="{% url 'main_page:product_detail' product.id product.slug %}" method="POST">
                         {% csrf_token %}
+
                         {% for field in form_review %}
                             <div class="form_field">
-                                <label>{{ field.label }}</label>
-                                {{ field }}
+                                <h3>{{ field.label }}</h3>
+                                <p>{{ field }}</p>
                             </div>
                         {% endfor %}
-                        <button class="leave_review" type="submit">Оставить отзыв</button>
+
+                        <div class="leave-button">
+                            <button class="leave-review-btn" type="submit">Оставить отзыв</button>
+                        </div>
                     </form>
                 {% else %}
                     <a href="{% url 'login' %}"></a>
                 {% endif %}
             </div>
+        </div>
 
-            {% block script %}
-                <!--Подключение jQuery-->
-                <script type="module" src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
-                <!--Подключение слайдера slick-->
-                <script type="module" src="{% static 'js/slider/slick.min.js' %}"></script>
-                <!--подключение файла скриптов-->
-                <script type="module" src="{% static 'js/slider/script.js' %}"></script>
-            {% endblock %}
+
+        <div class="feedback-wrapper container">
+            <div class="feedbacks-tape">
+                {% for review in product.review_set.all %}
+                    {% if review.body %}
+                        <div class="feedback__item">
+                            <div class="avatar-block">
+                                <img src="#" alt="">
+                            </div>
+
+                            <div class="name-block">
+                                <h3>{{ review.owner.username }}</h3>
+                            </div>
+
+                            <div class="feedback-block">
+                                <p>{{ review.body | linebreaksbr }}</p>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
         </div>
     </section>
 {% endblock %}

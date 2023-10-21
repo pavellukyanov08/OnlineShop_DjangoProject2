@@ -97,15 +97,15 @@ class Product(models.Model):
 
 class Review(models.Model):
     VOTE_TYPE = (
-        ('up', 'Up Vote'),
-        ('down', 'Down Vote')
+        ('За', 'За'),
+        ('Против', 'Против')
     )
 
-    owner = models.ForeignKey(Profile, on_delete=models.CASCADE)
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    body = models.TextField(null=True, blank=True)
-    value = models.CharField(max_length=200, choices=VOTE_TYPE)
-    created = models.DateTimeField(auto_now_add=True)
+    owner = models.ForeignKey(Profile, on_delete=models.CASCADE, verbose_name='Автор')
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name='Отзыв на')
+    body = models.TextField(null=True, blank=True, verbose_name='Комментарий')
+    value = models.CharField(max_length=200, choices=VOTE_TYPE, verbose_name='Голос', null=True)
+    created = models.DateTimeField(auto_now_add=True, verbose_name='Создан')
 
     def __str__(self):
         return self.value

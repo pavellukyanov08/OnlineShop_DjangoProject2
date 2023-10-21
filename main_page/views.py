@@ -14,8 +14,8 @@ def products_list(request, category_slug=None, product_availability=None):
     products = Product.objects.all()
 
     cart_prod = request.user
-    cart_prod_count = cart_prod.shoppingcart_set.all()
-    cart_prod_count = [item.product for item in cart_prod_count]
+    # cart_prod_count = cart_prod.shoppingcart_set.all()
+    # cart_prod_count = [item.product for item in cart_prod_count]
 
     category, availability = None, None
     # функционал сортировки
@@ -38,7 +38,7 @@ def products_list(request, category_slug=None, product_availability=None):
                                                     'availability': availability,
                                                     'availabilities': availabilities,
                                                     'products': products,
-                                                    'cart_prod_count': cart_prod_count,
+                                                    # 'cart_prod_count': cart_prod_count,
                                                     'curr_time': curr_time})
 
 

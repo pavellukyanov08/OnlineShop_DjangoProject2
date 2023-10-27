@@ -4,7 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <title>{% block title %}{% endblock %}</title>
     {% block css %} {% endblock %}
+    {% block script %} {% endblock %}
     <title></title>
 </head>
 <body>
@@ -29,6 +31,7 @@
                 {% if user.is_authenticated %}
 
                 <div class="user-nav__shop_block">
+                    <p>Кол-во товаров: {{ item.count }}</p>
                     <a href="{% url 'cart:cart' %}"><img src="{% static 'main_page/shop_cart.svg' %}" height="40"
                                                          width="40" alt="Корзина товаров"></a>
                 </div>

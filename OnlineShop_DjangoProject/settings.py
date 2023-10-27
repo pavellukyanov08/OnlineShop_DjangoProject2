@@ -31,6 +31,8 @@ INSTALLED_APPS = [
     'authentication.apps.AuthenticationConfig',
     'favourites.apps.FavouritesConfig',
     'prod_comparison.apps.ProdComparisonConfig',
+    'home_page.apps.HomePageConfig',
+    'users.apps.UsersConfig',
 ]
 
 MIDDLEWARE = [

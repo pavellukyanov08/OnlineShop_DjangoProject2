@@ -1,6 +1,8 @@
 from django.db import models
 from django.urls import reverse
-from django.utils.safestring import mark_safe
+from users.models import Profile
+from shopping_cart.models import ShoppingCart
+from django.contrib.auth.models import User
 
 
 class Menu(models.Model):
@@ -60,11 +62,17 @@ class Product(models.Model):
     start_date = models.DateTimeField(null=True, blank=True, verbose_name='Дата старта распродажи')
     end_date = models.DateTimeField(null=True, blank=True, verbose_name='Дата окончания распродажи')
     availability_status = models.ForeignKey(ProductAvailability, on_delete=models.CASCADE, null=True, verbose_name='Наличие')
+    reviewer = models.ForeignKey(Profile, on_delete=models.CASCADE, null=True, blank=True)
+    vote_total = models.IntegerField(default=0, null=True, blank=True)
+    vote_ratio = models.IntegerField(default=0, null=True, blank=True)
     created = models.DateTimeField(auto_now_add=True, null=True)
     updated = models.DateTimeField(auto_now=True, null=True)
 
+    def __str__(self):
+        return self.name
+
     class Meta:
-        ordering = ('name',)
+        ordering = ('name', '-vote_ratio', '-vote_total')
         index_together = ('id', 'slug',)
         verbose_name = 'Товар'
         verbose_name_plural = 'Товары'
@@ -72,5 +80,37 @@ class Product(models.Model):
     def get_absolute_url(self):
         return reverse('main_page:product_detail', args=[self.id, self.slug])
 
+    def reviewers(self):
+        queryset = self.review_set.all().values_list('reviewer_id', flat=True)
+        return queryset
+
+    def get_vote_count(self):
+        reviews = self.review_set.all()
+        up_votes = reviews.filter(value='up').count()
+        total_votes = reviews.count()
+        ratio = int((up_votes / total_votes) * 100)
+        self.vote_total = total_votes
+        self.vote_ratio = ratio
+
+        self.save()
+
+
+class Review(models.Model):
+    VOTE_TYPE = (
+        ('За', 'За'),
+        ('Против', 'Против')
+    )
+
+    owner = models.ForeignKey(Profile, on_delete=models.CASCADE, verbose_name='Автор')
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name='Отзыв на')
+    body = models.TextField(null=True, blank=True, verbose_name='Комментарий')
+    value = models.CharField(max_length=200, choices=VOTE_TYPE, verbose_name='Голос', null=True)
+    created = models.DateTimeField(auto_now_add=True, verbose_name='Создан')
+
     def __str__(self):
-        return self.name
+        return self.value
+
+    class Meta:
+        verbose_name = 'Отзыв'
+        verbose_name_plural = 'Отзывы'
+        unique_together = [['owner', 'product'], ]

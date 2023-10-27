@@ -1,7 +1,7 @@
 from django.db import models
 from django.urls import reverse
 from users.models import Profile
-# from shopping_cart.models import ShoppingCart
+from shopping_cart.models import ShoppingCart
 from django.contrib.auth.models import User
 
 

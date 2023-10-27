@@ -19,10 +19,10 @@ def cart_view(request):
 
 @login_required
 def add_item(request, product_id):
-    product = get_object_or_404(Product, id=product_id)
-    cart_item, added = ShoppingCart.objects.get_or_create(product=product,
-                                                          price=product.price,
-                                                          img=product.img,
+    name = get_object_or_404(Product, id=product_id)
+    cart_item, added = ShoppingCart.objects.get_or_create(name=name,
+                                                          price=name.price,
+                                                          img=name.img,
                                                           user=request.user)
     if not added:
         cart_item.quantity += 1

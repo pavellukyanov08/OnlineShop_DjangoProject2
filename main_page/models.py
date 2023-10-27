@@ -48,6 +48,8 @@ class ProductAvailability(models.Model):
 
 
 class Product(models.Model):
+    card_prod = models.ForeignKey(ShoppingCart, on_delete=models.CASCADE, null=True)
+
     category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True,
                                  verbose_name='Категория')
     name = models.CharField(max_length=50, db_index=True, verbose_name='Наименование', null=True)

@@ -13,9 +13,7 @@ def products_list(request, category_slug=None, product_availability=None):
     availabilities = ProductAvailability.objects.all()
     products = Product.objects.all()
 
-    prods = request.user
-    cart_prod = prods.shoppingcart_set.all()
-    cart_prod = [item.product for item in cart_prod]
+    cart_prods = request.user.shoppingcart_set.all()
 
     category, availability = None, None
     # функционал сортировки
@@ -38,14 +36,15 @@ def products_list(request, category_slug=None, product_availability=None):
                                                     'availability': availability,
                                                     'availabilities': availabilities,
                                                     'products': products,
-                                                    'cart_prod': cart_prod,
+                                                    'cart_prods': cart_prods,
                                                     'curr_time': curr_time})
 
 
 def add_product(request):
     menu = Menu.objects.all()
+    cart_prods = request.user.shoppingcart_set.all()
     if request.method == 'GET':
-        return render(request, 'main_page/add_product.html', {'form': ProductForm(), 'menu': menu})
+        return render(request, 'main_page/add_product.html', {'form': ProductForm(), 'menu': menu, 'cart_prods': cart_prods})
     else:
         try:
             form = ProductForm(request.POST, request.FILES)
@@ -56,7 +55,7 @@ def add_product(request):
         except ValueError:
             return render(request, 'main_page/add_product.html',
                           {'form': ProductForm(),
-                           'error': 'Переданы неверные данные', 'menu': menu})
+                           'error': 'Переданы неверные данные', 'menu': menu, 'cart_prods': cart_prods})
 
 
 def product_detail(request, prod_id, slug):

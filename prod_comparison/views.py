@@ -9,9 +9,10 @@ from .models import Compare
 def get_all_products(request):
     menu = Menu.objects.all()
     comp_prods = request.user
+    cart_prods = request.user.shoppingcart_set.all()
     compare_items = comp_prods.compare_set.all()
     compare_items = [item.product for item in compare_items]
-    return render(request, 'prod_compare/compare_prod.html', {'compare_items': compare_items, 'menu': menu})
+    return render(request, 'prod_compare/compare_prod.html', {'compare_items': compare_items, 'menu': menu, 'cart_prods': cart_prods})
 
 
 @login_required

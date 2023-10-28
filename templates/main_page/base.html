@@ -7,26 +7,26 @@
     <title>{% block title %}{% endblock %}</title>
     {% block css %} {% endblock %}
 </head>
-    <body>
-        <header class="page-header">
-            <div class="page-header__wrapper container">
+<body>
+    <header class="page-header">
+        <div class="page-header__wrapper container">
 
-                <nav class="site-nav page-header__site-nav">
-                    <div class="page-header__logo">
-                        <a href="{% url 'main_page:index' %}">
-                            <img src="{% static 'main_page/my_logo.svg' %}" width="80" height="80" alt="Логотип автора">
-                        </a>
-                    </div>
+            <nav class="site-nav page-header__site-nav">
+                <div class="page-header__logo">
+                    <a href="{% url 'main_page:index' %}">
+                        <img src="{% static 'main_page/my_logo.svg' %}" width="80" height="80" alt="Логотип автора">
+                    </a>
+                </div>
 
-                    <ul class="site-nav__list">
-                        {% for item in menu %}
-                            <li class="site-nav__item"><a href="{{ item.url }}">{{ item.title }}</a></li>
-                        {% endfor %}
-                    </ul>
-                </nav>
+                <ul class="site-nav__list">
+                    {% for item in menu %}
+                        <li class="site-nav__item"><a href="{{ item.url }}">{{ item.title }}</a></li>
+                    {% endfor %}
+                </ul>
+            </nav>
 
-                <div class="user-nav__user-block">
-                    {% if user.is_authenticated %}
+            <div class="user-nav__user-block">
+                {% if user.is_authenticated %}
 
                     <div class="user-nav__shop_block">
                         <span>{{ cart_prods.count }}</span>
@@ -67,38 +67,36 @@
                             </ul>
                         </div>
                     </div>
-                    {% else %}
+                {% else %}
 
                     <ul class="user-nav__user-auth">
                         <li><a href="{% url 'signup' %}">Зарегистрироваться</a></li>
                         <li><a href="{% url 'login' %}">Войти</a></li>
                     </ul>
-                    {% endif %}
-                </div>
+                {% endif %}
             </div>
-        </header>
+        </div>
+    </header>
 
-        <main>
-            {% block content %}
+    {% block content %}
 
-            {% endblock %}
-        </main>
+    {% endblock %}
 
-        <footer class="basement-content">
-            <div class="footer container">
-                <div class="info-line">
+    <footer class="basement-content">
+        <div class="footer container">
+            <div class="info-line">
 
-                    <div class="rights">
-                        <p>Designed and developed by Pavel Lukyanov</p>
-                        <p>Copyright © 2023</p>
-                    </div>
-
-                    <div class="info-line__menu">
-                        <a class="top-line__menu-item" href="{% url 'about' %}">Связь с разработчиком</a>
-                    </div>
-
+                <div class="rights">
+                    <p>Designed and developed by Pavel Lukyanov</p>
+                    <p>Copyright © 2023</p>
                 </div>
+
+                <div class="info-line__menu">
+                    <a class="top-line__menu-item" href="{% url 'about' %}">Связь с разработчиком</a>
+                </div>
+
             </div>
-        </footer>
-    </body>
+        </div>
+    </footer>
+</body>
 </html>

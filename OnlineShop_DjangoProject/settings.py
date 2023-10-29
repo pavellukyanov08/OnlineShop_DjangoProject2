@@ -37,7 +37,6 @@ INSTALLED_APPS = [
     'main_page.apps.MainPageConfig',
     'about.apps.AboutConfig',
     'shopping_cart.apps.ShoppingCartConfig',
-    'authentication.apps.AuthenticationConfig',
     'favourites.apps.FavouritesConfig',
     'prod_comparison.apps.ProdComparisonConfig',
     'home_page.apps.HomePageConfig',

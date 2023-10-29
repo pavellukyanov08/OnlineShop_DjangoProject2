@@ -1,8 +1,8 @@
 from django.db import models
 from django.urls import reverse
 from users.models import Profile
-from shopping_cart.models import ShoppingCart
 from django.contrib.auth.models import User
+from shopping_cart.models import ShoppingCart
 
 
 class Menu(models.Model):
@@ -48,8 +48,6 @@ class ProductAvailability(models.Model):
 
 
 class Product(models.Model):
-    card_prod = models.ForeignKey(ShoppingCart, on_delete=models.CASCADE, null=True)
-
     category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True,
                                  verbose_name='Категория')
     name = models.CharField(max_length=50, db_index=True, verbose_name='Наименование', null=True)
@@ -70,6 +68,8 @@ class Product(models.Model):
     created = models.DateTimeField(auto_now_add=True, null=True)
     updated = models.DateTimeField(auto_now=True, null=True)
 
+    cart_prods = models.ForeignKey(ShoppingCart, on_delete=models.CASCADE, null=True)
+    
     def __str__(self):
         return self.name
 

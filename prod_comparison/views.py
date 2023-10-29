@@ -1,18 +1,27 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
 
-from favourites.models import Favourite
 from main_page.models import Product, Menu
 from .models import Compare
 
 
+@login_required
 def get_all_products(request):
     menu = Menu.objects.all()
-    comp_prods = request.user
-    cart_prods = request.user.shoppingcart_set.all()
-    compare_items = comp_prods.compare_set.all()
+
+    cart_prods_counter = request.user.shoppingcart_set.all()
+    favourite_prods_counter = request.user.favourite_set.all()
+    compare_prods_counter = request.user.compare_set.all()
+
+    compare_items = request.user.compare_set.all()
     compare_items = [item.product for item in compare_items]
-    return render(request, 'prod_compare/compare_prod.html', {'compare_items': compare_items, 'menu': menu, 'cart_prods': cart_prods})
+    return render(request, 'prod_compare/compare_prod.html', {
+        'compare_items': compare_items,
+        'menu': menu,
+        'cart_prods_counter': cart_prods_counter,
+        'favourite_prods_counter': favourite_prods_counter,
+        'compare_prods_counter': compare_prods_counter,
+    })
 
 
 @login_required

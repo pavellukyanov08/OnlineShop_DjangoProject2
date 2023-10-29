@@ -29,9 +29,21 @@
                 {% if user.is_authenticated %}
 
                     <div class="user-nav__shop_block">
-                        <span>{{ cart_prods.count }}</span>
-                        <a href="{% url 'cart:cart' %}"><img src="{% static 'main_page/shop_cart.svg' %}" height="40"
-                                                             width="40" alt="Корзина товаров"></a>
+                        <span class="cart-counter">{{ cart_prods_counter.count }}</span>
+                        <span class="favourite-counter">{{ favourite_prods_counter.count }}</span>
+                        <span class="compare-counter">{{ compare_prods_counter.count }}</span>
+
+                        <a href="{% url 'cart:cart' %}"><img src="{% static 'main_page/shop_cart.svg' %}"
+                                                             height="32" width="33" alt="Корзина товаров">
+                        </a>
+
+                        <a href="{% url 'favourites:all_products' %}"><img src="{% static 'main_page/favourites-icon.svg' %}"
+                                                                           width="32" height="33" alt="Избранное">
+                        </a>
+
+                        <a href="{% url 'compare:all_compare' %}"><img src="{% static 'main_page/compare.svg' %}"
+                                                                           width="32" height="33" alt="Избранное">
+                        </a>
                     </div>
 
                     <div class="user-nav__profile">
@@ -51,10 +63,10 @@
                                 </li>
                             </ul>
 
-                            <ul class="user-dropdown-nav">
-                                <li><a href="{% url 'favourites:all_products' %}">Избранное</a></li>
-                                <li><a href="{% url 'compare:all_compare' %}">Сравнение</a></li>
-                            </ul>
+{#                            <ul class="user-dropdown-nav">#}
+{#                                <li><a href="{% url 'favourites:all_products' %}">Избранное</a></li>#}
+{#                                <li><a href="{% url 'compare:all_compare' %}">Сравнение</a></li>#}
+{#                            </ul>#}
 
                             <ul class="user-dropdown-auth">
                                 <li><a href="{% url 'login' %}">Сменить пользователя</a></li>
@@ -85,16 +97,14 @@
     <footer class="basement-content">
         <div class="footer container">
             <div class="info-line">
-
                 <div class="rights">
                     <p>Designed and developed by Pavel Lukyanov</p>
                     <p>Copyright © 2023</p>
                 </div>
 
                 <div class="info-line__menu">
-                    <a class="top-line__menu-item" href="{% url 'about' %}">Связь с разработчиком</a>
+                    <a class="top-line__menu-item" href="https://t.me/Lukianov08">Связь с разработчиком</a>
                 </div>
-
             </div>
         </div>
     </footer>

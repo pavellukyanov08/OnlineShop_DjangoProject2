@@ -5,15 +5,22 @@ from .models import ShoppingCart
 from django.db.models import Sum, ExpressionWrapper, F, DecimalField
 
 
+@login_required
 def cart_view(request):
     menu = Menu.objects.all()
     cart_items = ShoppingCart.objects.filter(user=request.user)
+    cart_prods_counter = request.user.shoppingcart_set.all()
+    favourite_prods_counter = request.user.favourite_set.all()
+    compare_prods_counter = request.user.compare_set.all()
     total_price = cart_items.aggregate(
         total_price=Sum(ExpressionWrapper(F('price') * F('quantity'),
                                           output_field=DecimalField())))
     return render(request, 'shopping_cart/shopping_cart.html',
                   {'menu': menu,
                    'cart_items': cart_items,
+                   'cart_prods_counter': cart_prods_counter,
+                   'favourite_prods_counter': favourite_prods_counter,
+                   'compare_prods_counter': compare_prods_counter,
                    'total_price': total_price['total_price']})
 
 

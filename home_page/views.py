@@ -5,7 +5,13 @@ from main_page.models import Menu
 def home_page(request):
     menu = Menu.objects.all()
 
-    cart_prods = request.user.shoppingcart_set.all()
+    # cart_prods_counter = request.user.shoppingcart_set.all()
+    favourite_prods_counter = request.user.favourite_set.all()
+    compare_prods_counter = request.user.compare_set.all()
+
     return render(request, 'home_page/home.html',
                   {'menu': menu,
-                   'cart_prods': cart_prods})
+                   # 'cart_prods_counter': cart_prods_counter,
+                   'favourite_prods_counter': favourite_prods_counter,
+                   'compare_prods_counter': compare_prods_counter,
+                   })

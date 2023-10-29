@@ -17,7 +17,7 @@ urlpatterns = [
     path('compare/', include('prod_comparison.urls')),
 
     # authentication
-    path('authentication/', include('authentication.urls')),
+    path('authentication/', include('users.urls')),
 
     # shopping_cart
     path('cart/', include('shopping_cart.urls')),

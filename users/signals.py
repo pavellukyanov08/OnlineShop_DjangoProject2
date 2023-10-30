@@ -9,9 +9,9 @@ def update_profile(sender, instance, created, **kwargs):
         user = instance
         profile = Profile.objects.create(
             user=user,
+            name=user.first_name,
             username=user.username,
             email=user.email,
-            name=user.first_name
         )
 
 
@@ -22,7 +22,7 @@ def update_user(sender, instance, created, **kwargs):
     if created is False:
         user.first_name = profile.name
         user.username = profile.username
-        user.email = profile.email
+        user.email = profile.email,
         user.save()
 
 

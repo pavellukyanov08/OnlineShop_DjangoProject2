@@ -55,18 +55,13 @@
                         <div class="dropdown-menu">
                             <ul class="controls-elem">
                                 <li class="user-section">
-                                    <a class="username" href="#">{{ user }}</a>
+                                    <a class="username" href="{% url 'profile'%}">{{ user }}</a>
 
                                     {% if user.is_superuser and user.is_staff %}
                                         <a class="product-controls" href="{% url 'main_page:add_product' %}">Добавить продукт</a>
                                     {% endif %}
                                 </li>
                             </ul>
-
-{#                            <ul class="user-dropdown-nav">#}
-{#                                <li><a href="{% url 'favourites:all_products' %}">Избранное</a></li>#}
-{#                                <li><a href="{% url 'compare:all_compare' %}">Сравнение</a></li>#}
-{#                            </ul>#}
 
                             <ul class="user-dropdown-auth">
                                 <li><a href="{% url 'login' %}">Сменить пользователя</a></li>

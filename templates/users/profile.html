@@ -1,0 +1,65 @@
+{% extends 'main_page/base.html' %}
+{% load static %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/profile.css' %}">
+{% endblock %}
+
+{% block content %}
+    <section class="profile-content">
+        <h2 class="title" style="text-align: center">Личный кабинет</h2>
+
+        <div class="person-block container">
+            {% if not user.is_staff and not user.is_superuser%}
+                <div class="person-card">
+                    <div class="person-details">
+                        <h2 class="personal-data-title">Персональные данные</h2>
+
+                        <div class="person-photo">
+                            <img src="{{ profile.img.url }}" alt="Фото профиля">
+                        </div>
+
+                        <div class="person-info">
+                            <p>Имя: <b>{{ profile.name }}</b></p>
+                            <p>Пользователь: <b>{{ profile.username }}</b></p>
+                            <p>Почта: <b>{{ profile.email }}</b></p>
+                        </div>
+                    </div>
+
+                    <div class="edit-button">
+                        <button class="edit-btn">Редактировать</button>
+                    </div>
+                </div>
+
+                <div class="person-reviews">
+                    <h2 class="user-reviews-title">Отзывы пользователя</h2>
+
+                    {% for review in reviews %}
+                        <div class="review-card">
+{#                            {% for product in products %}#}
+                            <p>Продукт: <b>{{ review.product }}</b></p>
+{#                            {% endfor %}#}
+                            <p>Отзыв: <b>{{ review.body }}</b></p>
+                            <p>Голос: <b>{{ review.value }}</b></p>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="person-card">
+                    <h2 class="personal-data-title">Персональные данные</h2>
+                    <div class="person-details">
+                        <div class="person-photo">
+                            <img src="{{ profile.img }}" alt="Фото профиля">
+                        </div>
+
+                        <div class="person-info">
+                            <p>Имя: <b>{{ profile.name }}</b></p>
+                            <p>Имя пользователя: <b>{{ profile.username }}</b></p>
+                            <p>Email: <b>{{ profile.email }}</b></p>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </section>
+{% endblock %}

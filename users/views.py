@@ -1,9 +1,10 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
 from django.db import IntegrityError
-from main_page.models import Menu
+from main_page.models import Menu, Product
 
 
 def signupuser(request):
@@ -46,8 +47,30 @@ def loginuser(request):
                             password=request.POST['password'])
         if user is None:
             return render(request, 'users/loginuser.html', {'form': AuthenticationForm(),
-                                                                     'error': 'Неверные данные для входа!',
-                                                                     'menu': menu})
+                                                            'error': 'Неверные данные для входа!',
+                                                            'menu': menu})
         else:
             login(request, user)
             return redirect('main_page:index')
+
+
+@login_required
+def user_profile(request):
+    menu = Menu.objects.all()
+    profile = request.user.profile
+    # products = Product.objects.
+    reviews = profile.review_set.all()
+
+    cart_prods_counter = request.user.shoppingcart_set.all()
+    favourite_prods_counter = request.user.favourite_set.all()
+    compare_prods_counter = request.user.compare_set.all()
+
+    return render(request, 'users/profile.html', {
+        'menu': menu,
+        'profile': profile,
+        'reviews': reviews,
+        # 'products': products,
+        'cart_prods_counter': cart_prods_counter,
+        'favourite_prods_counter': favourite_prods_counter,
+        'compare_prods_counter': compare_prods_counter,
+    })

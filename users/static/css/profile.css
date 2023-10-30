@@ -1,0 +1,65 @@
+.title {
+    padding: 30px 0 30px 0;
+}
+
+.person-block {
+    display: flex;
+    justify-content: space-between;
+}
+
+.person-card, .person-reviews {
+    border: 1px solid black;
+    padding: 10px 20px 10px 20px;
+    border-radius: 10px;
+}
+
+.person-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.personal-data-title, .user-reviews-title {
+    text-align: center;
+}
+
+.person-block h2 {
+    border-bottom: 2px solid black;
+}
+
+.person-photo {
+    padding: 10px 0 10px 0;
+    text-align: center;
+}
+
+.person-details {
+}
+
+.person-info {
+    line-height: 1.2;
+}
+
+.person-info p {
+    font-size: 25px;
+}
+
+.review-card {
+    margin: 10px 0 10px 0;
+    border: 1px solid black;
+    padding: 5px 7px 5px 7px;
+    border-radius: 10px;
+}
+
+.edit-button {
+    text-align: center;
+}
+
+.edit-btn {
+    background-color: #797979;
+    padding: 5px 7px 5px 7px;
+    border-radius: 10px;
+    color: white;
+    font-size: 17px;
+    cursor: pointer;
+    width: 100%;
+}

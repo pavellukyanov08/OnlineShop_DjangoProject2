@@ -88,19 +88,18 @@ class Product(models.Model):
 
     def get_vote_count(self):
         reviews = self.review_set.all()
-        up_votes = reviews.filter(value='up').count()
+        up_votes = reviews.filter(value='За').count()
         total_votes = reviews.count()
         ratio = int((up_votes / total_votes) * 100)
         self.vote_total = total_votes
         self.vote_ratio = ratio
-
         self.save()
 
 
 class Review(models.Model):
     VOTE_TYPE = (
-        ('За', 'За'),
-        ('Против', 'Против')
+        ('За', 'Голос за'),
+        ('Против', 'Голос против')
     )
 
     owner = models.ForeignKey(Profile, on_delete=models.CASCADE, verbose_name='Автор')
@@ -110,7 +109,7 @@ class Review(models.Model):
     created = models.DateTimeField(auto_now_add=True, verbose_name='Создан')
 
     def __str__(self):
-        return self.value
+        return f'Пользователь: {self.owner} -> Продукт: {self.product}'
 
     class Meta:
         verbose_name = 'Отзыв'

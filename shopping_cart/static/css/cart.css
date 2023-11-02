@@ -12,12 +12,12 @@ h1 {
     font-size: 25px;
 }
 
-.products-tape {
+.products-cart {
+    border-collapse: collapse;
     width: 100%;
     text-align: center;
     border-top: 1px solid rgb(128, 128, 128);
     border-bottom: 1px solid rgb(128, 128, 128);
-    padding: 10px;
     border-radius: 7px;
 }
 

@@ -7,6 +7,13 @@ class EditProfileForm(ModelForm):
         model = Profile
         fields = ['name', 'username', 'email', 'img']
 
+        labels = {
+            'name': 'Имя:',
+            'username': 'Пользователь:',
+            'email': 'Почта:',
+            'img': 'Фото профиля:'
+        }
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 

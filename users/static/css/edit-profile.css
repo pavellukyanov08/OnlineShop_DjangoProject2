@@ -1,4 +1,4 @@
-h2 {
+.main-title {
     text-align: center;
     padding: 30px 0 30px 0;
 }
@@ -10,35 +10,25 @@ h2 {
     flex-direction: column;
 }
 
-
-.edit-product {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 30px;
+.edit-profile {
+    padding: 10px 30px 10px 30px;
     border-radius: 10px;
-    /*background-color: rgba(176, 196, 222, 0.75);*/
     border: 3px dashed black;
 }
 
 .edit-form {
-    width: 600px;
+    width: 500px;
     font-size: 20px;
     border-radius: 7px;
     text-align: left;
     box-sizing: border-box;
 }
 
-.edit-form select {
-    width: 100px;
-}
-
 .edit-form label {
     margin: 0 0 7px 0;
 }
 
-.edit-form input, textarea {
+.edit-form input[type='text'], .edit-form input[type='email'], textarea {
     padding: 5px;
     width: 100%;
     border: 1px solid black;
@@ -93,5 +83,3 @@ h2 {
 .del-btn:hover {
     background-color: lightcoral;
 }
-
-

@@ -71,21 +71,46 @@ def add_product(request):
                            'error': 'Переданы неверные данные', 'menu': menu,
                            'cart_prods_counter': cart_prods_counter,
                            'favourite_prods_counter': favourite_prods_counter,
-                           'compare_prods_counter': compare_prods_counter, })
+                           'compare_prods_counter': compare_prods_counter
+                           })
 
 
 @login_required
 def product_detail(request, prod_id, slug):
     menu = Menu.objects.all()
-    product = get_object_or_404(Product, id=prod_id, slug=slug)
+    product = Product.objects.get(id=prod_id, slug=slug)
+
+    cart_prods_counter = request.user.shoppingcart_set.all()
+    favourite_prods_counter = request.user.favourite_set.all()
+    compare_prods_counter = request.user.compare_set.all()
 
     if request.method == 'GET':
         if request.user.is_staff or request.user.is_superuser:
             form_prod = ProductForm(instance=product)
-            return render(request, 'main_page/edit_prod.html', {'product': product, 'form_prod': form_prod, 'menu': menu})
+
+            return render(request, 'main_page/edit_prod.html', {
+                'product': product,
+                'form_prod': form_prod,
+                'menu': menu,
+                'cart_prods_counter': cart_prods_counter,
+                'favourite_prods_counter': favourite_prods_counter,
+                'compare_prods_counter': compare_prods_counter
+            })
         else:
             form_review = ReviewForm(request.GET)
-            return render(request, 'main_page/view_prod.html', {'product': product, 'form_review': form_review, 'menu': menu})
+            user_reviews = product.review_set.all()
+            user_prof_data = request.user.profile
+
+            return render(request, 'main_page/view_prod.html', {
+                'product': product,
+                'form_review': form_review,
+                'menu': menu,
+                'user_reviews': user_reviews,
+                'user_prof_data': user_prof_data,
+                'cart_prods_counter': cart_prods_counter,
+                'favourite_prods_counter': favourite_prods_counter,
+                'compare_prods_counter': compare_prods_counter
+            })
     else:
         form_review = ReviewForm(request.POST)
         try:

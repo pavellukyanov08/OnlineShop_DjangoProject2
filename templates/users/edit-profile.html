@@ -1,11 +1,12 @@
 {% extends 'main_page/base.html' %}
+{% load static %}
 
 {% block  css %}
-
+    <link rel="stylesheet" href="{% static 'css/edit-profile.css' %}">
 {% endblock %}
 
 {% block content %}
-    <h2>Редактирование пользователя: <b>{{ profile.username }}</b></h2>
+    <h2 class="main-title">Редактирование пользователя: <b>{{ profile.username }}</b></h2>
 
     <section>
         <div class="content container">
@@ -13,8 +14,12 @@
                 <form method="post" class="edit-form" enctype="multipart/form-data">
                     {% csrf_token %}
 
-                    {{ form_prod.as_p }}
-
+                    {% for field in edit_form %}
+                        <div class="form_field">
+                            <label>{{ field.label }}</label>
+                                {{ field }}
+                        </div>
+                    {% endfor %}
                     <div class="button">
                         <button class="save-btn btn">Сохранить</button>
                     </div>

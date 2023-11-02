@@ -8,8 +8,8 @@
 }
 
 .person-card, .person-reviews {
-    border: 1px solid black;
-    padding: 10px 20px 10px 20px;
+    border: 2px solid black;
+    padding: 15px 20px 15px 20px;
     border-radius: 10px;
 }
 
@@ -32,34 +32,54 @@
     text-align: center;
 }
 
-.person-details {
+.person-photo img {
+    border-radius: 100%;
 }
 
-.person-info {
-    line-height: 1.2;
+.person-details {
 }
 
 .person-info p {
     font-size: 25px;
+    padding: 3px 0 3px 0;
+}
+
+.reviews-tape {
+    margin-top: 10px;
 }
 
 .review-card {
-    margin: 10px 0 10px 0;
     border: 1px solid black;
     padding: 5px 7px 5px 7px;
     border-radius: 10px;
 }
 
-.edit-button {
+.review-card:not(:last-child) {
+    margin-bottom: 10px;
+}
+
+.review-card p {
+    font-size: 20px;
+}
+
+.review-card a:hover {
+    color: #d3d3d3;
+}
+
+.edit-profile-button {
     text-align: center;
+    padding: 5px 5px 5px 6px;
+    background-color: #797979;
+    border-radius: 10px;
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: 20px;
 }
 
 .edit-btn {
-    background-color: #797979;
-    padding: 5px 7px 5px 7px;
-    border-radius: 10px;
     color: white;
+    text-align: center;
+    padding: 10px;
     font-size: 17px;
-    cursor: pointer;
-    width: 100%;
 }
+

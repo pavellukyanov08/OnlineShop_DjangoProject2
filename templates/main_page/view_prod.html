@@ -74,19 +74,19 @@
 
         <div class="feedback-wrapper container">
             <div class="feedbacks-tape">
-                {% for review in product.review_set.all %}
+                {% for review in user_reviews %}
                     {% if review.body %}
                         <div class="feedback__item">
                             <div class="avatar-block">
-                                <img src="#" alt="">
+                                <img src="{{ user_prof_data.img.url }}" height="50" width="50" alt="Фото профиля">
                             </div>
 
-                            <div class="name-block">
-                                <h3>{{ review.owner.username }}</h3>
-                            </div>
+                            <div class="feedback-description">
+                                <p>Пользователь: <b>{{ review.owner }}</b></p>
 
-                            <div class="feedback-block">
-                                <p>{{ review.body | linebreaksbr }}</p>
+                                <p>Отзыв: <b>{{ review.body | linebreaksbr }}</b></p>
+
+                                <p>Голос: <b>{{ review.value }}</b></p>
                             </div>
                         </div>
                     {% endif %}

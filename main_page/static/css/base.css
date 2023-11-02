@@ -6,8 +6,17 @@ body {
   height: 100%;
   padding: 0;
   margin: 0;
-  background-color: #f6f6f6;
+  font-family: 'Gilroy Medium', 'Arial', sans-serif;
+  background-color: #ffffff;
   /*min-height: 100%;*/
+}
+
+.page-header {
+  left: 0;
+  background-image: url("../main_page/main-back-2.png"), url("../main_page/main-back-1.png");
+  background-size: 50% 100%, 50% 100%;
+  background-repeat: no-repeat, no-repeat;
+  background-position: left, right;
 }
 
 h1, h2, h3, p {
@@ -16,7 +25,7 @@ h1, h2, h3, p {
 }
 
 .container {
-  max-width: 1200px;
+  max-width: 1240px;
   min-width: 320px;
   margin: 0 auto;
   box-sizing: border-box
@@ -31,6 +40,7 @@ a {
 .page-header {
   position: sticky;
   top: 0;
+  z-index: 100;
 }
 
 ul {
@@ -42,16 +52,12 @@ ul {
   background-color: lightgray;
 }
 
-.page-header__logo {
-  display: inline-block;
-  padding-top: 5px;
-}
-
 .page-header__wrapper {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
+  height: 70px;
 }
 
 .page-header__site-nav {
@@ -75,7 +81,6 @@ ul {
   font-size: 18px;
   line-height: 19px;
   color: #303032;
-  text-transform: uppercase;
   letter-spacing: .13em;
 }
 
@@ -105,7 +110,6 @@ ul {
   align-items: center;
   margin-right: 30px;
 }
-
 
 /*Раскрывающийся список пользователя*/
 .user-nav__profile {
@@ -194,12 +198,13 @@ ul {
 }
 
 .user-nav__shop_block {
+  display: flex;
   position: relative;
   margin-right: 20px;
 }
 
 .user-nav__shop_block a:not(:last-child) {
-    margin-right: 20px;
+    margin-right: 25px;
 }
 
 .user-nav__shop_block span {
@@ -218,21 +223,21 @@ ul {
 }
 
 .favourite-counter {
-  top: -8px;
+  top: -6px;
   right:50px;
 }
 
 .compare-counter {
-  top: -5px;
+  top: -6px;
   right: -7px;
 }
 
 
 /*ФУТЕР */
 .basement-content {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
+  /*position: absolute;*/
+  /*bottom: 0;*/
+  /*width: 100%;*/
   margin-top: 40px;
   background-color: #d3d3d3;
 }

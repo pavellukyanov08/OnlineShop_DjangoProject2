@@ -16,7 +16,7 @@
                         <h2 class="personal-data-title">Персональные данные</h2>
 
                         <div class="person-photo">
-                            <img src="{{ profile.img.url }}" alt="Фото профиля">
+                            <img src="{{ profile.img.url }}" width="100" height="100" alt="Фото профиля">
                         </div>
 
                         <div class="person-info">
@@ -26,30 +26,34 @@
                         </div>
                     </div>
 
-                    <div class="edit-button">
-                        <button class="edit-btn">Редактировать</button>
+                    <div class="edit-profile-button">
+                        <a class="edit-btn" href="{% url 'edit-profile' %}">Редактировать</a>
                     </div>
                 </div>
 
                 <div class="person-reviews">
                     <h2 class="user-reviews-title">Отзывы пользователя</h2>
 
-                    {% for review in reviews %}
-                        <div class="review-card">
-{#                            {% for product in products %}#}
-                            <p>Продукт: <b>{{ review.product }}</b></p>
-{#                            {% endfor %}#}
-                            <p>Отзыв: <b>{{ review.body }}</b></p>
-                            <p>Голос: <b>{{ review.value }}</b></p>
-                        </div>
-                    {% endfor %}
+                    <div class="reviews-tape">
+                        {% for review in reviews %}
+                            <div class="review-card">
+                                <p>Продукт:
+                                    <a href="{% url 'main_page:product_detail' review.product.id review.product.slug %}">
+                                        <b>{{ review.product.name }}</b>
+                                    </a>
+                                </p>
+                                <p>Отзыв: <b>{{ review.body }}</b></p>
+                                <p>Голос: <b>{{ review.value }}</b></p>
+                            </div>
+                        {% endfor %}
+                    </div>
                 </div>
             {% else %}
                 <div class="person-card">
                     <h2 class="personal-data-title">Персональные данные</h2>
                     <div class="person-details">
                         <div class="person-photo">
-                            <img src="{{ profile.img }}" alt="Фото профиля">
+                            <img src="{{ profile.img.url }}" width="100" height="100" alt="Фото профиля">
                         </div>
 
                         <div class="person-info">
@@ -57,6 +61,10 @@
                             <p>Имя пользователя: <b>{{ profile.username }}</b></p>
                             <p>Email: <b>{{ profile.email }}</b></p>
                         </div>
+                    </div>
+
+                    <div class="edit-profile-button">
+                        <a class="edit-btn" href="{% url 'edit-profile' %}">Редактировать</a>
                     </div>
                 </div>
             {% endif %}

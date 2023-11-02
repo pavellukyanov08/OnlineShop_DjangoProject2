@@ -1,9 +1,49 @@
-h1 {
-    margin: 30px 0 30px 0;
+.slogan {
+    position: relative;
+}
+
+.high-quality {
+    background-color: #fdfbf8;
+    padding: 25px 50px 25px 50px;
+    position: absolute;
+    border-radius: 7px;
+    top: 30px;
+    left: 30px;
+    width: 500px;
+    opacity: 0.9;
+    box-sizing: border-box;
+}
+
+.high-quality h1 {
+    font-weight: 900;
+    font-size: 40px;
+    letter-spacing: 3px;
     text-align: center;
-    font-size: 30px;
-    letter-spacing: .13em;
-    border-bottom: 1px solid black;
+    padding: 0 0 15px 0;
+}
+
+.high-quality p {
+    font-size: 20px;
+    text-align: justify;
+    line-height: 1.5;
+    text-indent: 1.5em;
+}
+
+.go-shop {
+    margin: 20px auto 0 auto;
+    text-align: center;
+    background-color: #e89f71;
+    padding: 10px 20px 10px 20px;
+    width: 250px;
+}
+
+.go-shop-link {
+    color: white;
+    font-size: 20px;
+}
+
+.slogan img {
+    width: 100%;
 }
 
 span {
@@ -20,7 +60,7 @@ span {
 .our_advantages {
     display: flex;
     justify-content: space-between;
-    padding: 20px 0 20px 0;
+    padding: 50px 0 30px 0;
 }
 
 .advantages {
@@ -40,15 +80,14 @@ span {
     display: flex;
 }
 
-.list_advantages ul li {
-    padding-right: 20px;
-    padding-bottom: 20px;
-    font-size: 20px;
-    text-indent: 1.5em;
+.list_advantages ul {
+    margin-left: 20px;
 }
 
-.back-img {
-    margin-top: 30px;
+.list_advantages ul li {
+    margin: 0 20px 20px 0;
+    font-size: 20px;
+    text-indent: 1.5em;
 }
 
 

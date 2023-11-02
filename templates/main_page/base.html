@@ -4,17 +4,18 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'fonts/Gilroy-Medium.woff' %}">
     <title>{% block title %}{% endblock %}</title>
     {% block css %} {% endblock %}
 </head>
 <body>
-    <header class="page-header">
+    <header class="page-header page-header2">
         <div class="page-header__wrapper container">
 
             <nav class="site-nav page-header__site-nav">
                 <div class="page-header__logo">
                     <a href="{% url 'main_page:index' %}">
-                        <img src="{% static 'main_page/my_logo.svg' %}" width="80" height="80" alt="Логотип автора">
+                        <img src="{% static 'main_page/funiro-logo.svg' %}" alt="Логотип">
                     </a>
                 </div>
 

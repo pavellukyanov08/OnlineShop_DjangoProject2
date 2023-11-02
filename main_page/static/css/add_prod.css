@@ -51,6 +51,7 @@ select, input, p {
     margin: 7px 0 0 0;
     height: 30px;
     border-radius: 5px;
+    box-sizing: border-box;
 }
 
 .add-form textarea {

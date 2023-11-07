@@ -26,6 +26,19 @@
                 </ul>
             </nav>
 
+            <div class="site-nav__search-block">
+                <form action="{% url 'main_page:index' %}" method="get">
+                    <div class="form_field">
+                        <input class="search-bar" id="formInput#search" type="text" name="search_query"
+                                   value="{{ search_query }}" placeholder="Поиск по сайту"/>
+                        <img class="search-icon" src="{% static 'main_page/search-icon.svg' %}" alt="Поиск">
+
+                        <button class="btn btn--sub btn--lg" type="submit" value="Search"></button>
+                    </div>
+                </form>
+
+            </div>
+
             <div class="user-nav__user-block">
                 {% if user.is_authenticated %}
 

@@ -4,10 +4,13 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .forms import ProductForm, ReviewForm
 from .models import *
 from django.utils import timezone
+from .utils import search_products
 
 
 def products_list(request, category_slug=None, product_availability=None):
     curr_time = timezone.now()
+
+    products, search_query = search_products(request)
 
     menu = Menu.objects.all()
     categories = Category.objects.all()
@@ -33,16 +36,25 @@ def products_list(request, category_slug=None, product_availability=None):
         availability = get_object_or_404(ProductAvailability, availability_status=product_availability)
         products = products.filter(availability_status=availability)
 
-    return render(request, 'main_page/index.html', {'menu': menu,
-                                                    'category': category,
-                                                    'categories': categories,
-                                                    'availability': availability,
-                                                    'availabilities': availabilities,
-                                                    'products': products,
-                                                    'cart_prods_counter': cart_prods_counter,
-                                                    'favourite_prods_counter': favourite_prods_counter,
-                                                    'compare_prods_counter': compare_prods_counter,
-                                                    'curr_time': curr_time})
+    context = {'menu': menu,
+               'search_products': products,
+               'search_query': search_query,
+               'category': category,
+               'categories': categories,
+               'availability': availability,
+               'availabilities': availabilities,
+               'products': products,
+               'cart_prods_counter': cart_prods_counter,
+               'favourite_prods_counter': favourite_prods_counter,
+               'compare_prods_counter': compare_prods_counter,
+               'curr_time': curr_time}
+    return render(request, 'main_page/index.html', context)
+
+
+def search_prods(request):
+    context = {'products': products, 'search_query': search_query}
+
+    return render(request, 'main_page/base.html', context)
 
 
 @login_required

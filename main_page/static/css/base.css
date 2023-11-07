@@ -72,6 +72,25 @@ ul {
   list-style: none;
 }
 
+.site-nav__search-block {
+  position: relative;
+}
+
+.site-nav__search-block input {
+  width: 320px;
+  height: 25px;
+  border-radius: 15px;
+  padding: 3px 7px 3px 7px;
+  border: none;
+}
+
+.site-nav__search-block .search-icon {
+  position: absolute;
+  right: 10px;
+  top: 0;
+
+}
+
 .site-nav__item, .user-nav__logo {
   margin: 15px 0 15px 0;
   padding-left: 25px;

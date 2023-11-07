@@ -104,29 +104,30 @@ a {
 }
 
 .product-description {
+    display: flex;
+    justify-content: space-between;
     padding: 10px 0 25px 15px;
 }
 
 .product-info > *:not(:last-child) {
-    padding-bottom: 7px;
+    padding-bottom: 5px;
 }
 
 .product-info h3 {
     font-size: 20px;
-    padding-bottom: 7px;
+    padding-bottom: 5px;
 }
 
 .product-info p {
     font-size: 17px;
 }
 
-.product-description {
-    display: flex;
-    justify-content: space-between;
-}
-
 .disc-price {
     color: red;
+}
+
+.current-price, .disc-price {
+    font-size: 18px;
 }
 
 .interaction-item {

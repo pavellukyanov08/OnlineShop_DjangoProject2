@@ -1,5 +1,13 @@
+section {
+    margin-top: 30px;
+}
+
+.slogan {
+}
+
 .slogan {
     position: relative;
+    background-image: url("../home_page/main-back-2.png");
 }
 
 .high-quality {
@@ -9,7 +17,7 @@
     border-radius: 7px;
     top: 30px;
     left: 30px;
-    width: 500px;
+    width: 450px;
     opacity: 0.9;
     box-sizing: border-box;
 }
@@ -30,7 +38,7 @@
 }
 
 .go-shop {
-    margin: 20px auto 0 auto;
+    margin: 30px auto 0 auto;
     text-align: center;
     background-color: #e89f71;
     padding: 10px 20px 10px 20px;

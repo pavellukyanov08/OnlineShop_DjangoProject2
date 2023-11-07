@@ -60,11 +60,11 @@
                                 <p>{{ product.description }}</p>
                                 {% if product.discount_price and product.start_date <= curr_time and curr_time <= product.end_date %}
                                     <div class="current_and_disc_price">
-                                        <strike class="current-price"><b>{% language 'ru' %}{{ product.price|floatformat:'2' }} ₽ {% endlanguage %}</b></strike>
-                                        <span class="disc-price"><b>{% language 'ru' %}{{ product.discount_price|floatformat:'2' }} ₽ {% endlanguage %}</b></span>
+                                        <strike class="current-price">{% language 'ru' %}{{ product.price|floatformat:'2' }} ₽ {% endlanguage %}</strike>
+                                        <span class="disc-price">{% language 'ru' %}{{ product.discount_price|floatformat:'2' }} ₽ {% endlanguage %}</span>
                                     </div>
                                 {% else %}
-                                    <span class="current-price"><b>{% language 'ru' %}{{ product.price|floatformat:'2' }} ₽ {% endlanguage %}</b></span>
+                                    <span class="current-price">{% language 'ru' %}{{ product.price|floatformat:'2' }} ₽ {% endlanguage %}</span>
                                 {% endif %}
                             </div>
 

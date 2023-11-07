@@ -21,6 +21,10 @@ h1 {
     border-radius: 7px;
 }
 
+.products-cart tbody tr {
+    border-bottom: 1px dashed black;
+}
+
 .product-remove {
     padding-left: 10px;
     border-left: 1px solid rgb(128, 128, 128);

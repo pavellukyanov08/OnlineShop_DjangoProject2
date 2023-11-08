@@ -1,3 +1,4 @@
+from django.template.defaulttags import url
 from django.urls import path, include
 from . import views
 from django.conf import settings
@@ -22,6 +23,10 @@ urlpatterns = [
     # editing profile
     path('edit_profile/', views.edit_profile, name='edit-profile'),
 
+
+    # path('profile/', include('django.contrib.auth.urls')),
+
+
     path('reset_password/', auth_views.PasswordResetView.as_view(),
          name='reset_password'),
 
@@ -34,6 +39,11 @@ urlpatterns = [
     path('reset_password_complete/', auth_views.PasswordResetCompleteView.as_view(),
          name='password_reset_complete'),
 
+
+    path('password-change/', auth_views.PasswordChangeView.as_view(),
+         name='password_change'),
+    path('password-change/', auth_views.PasswordChangeView.as_view(),
+         name='password_change_done/'),
 ]
 
 if settings.DEBUG:

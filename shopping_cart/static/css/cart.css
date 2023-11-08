@@ -21,10 +21,6 @@ h1 {
     border-radius: 7px;
 }
 
-.products-cart thead tr th {
-    margin-right: 30px;
-}
-
 .products-cart tbody tr {
     border-bottom: 1px dashed black;
 }

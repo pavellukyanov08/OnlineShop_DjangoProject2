@@ -31,8 +31,8 @@ section {
     text-align: center;
 }
 
-.compare-product-table tr {
-    margin-bottom: 100px;
+.compare-product-table tbody tr {
+    border-bottom: 1px dashed black;
 }
 
 .product-action-section {

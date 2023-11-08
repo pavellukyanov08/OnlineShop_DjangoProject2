@@ -1,14 +1,22 @@
-html {
-  /*height: 100%;*/
+html, body {
+  height: 100%;
 }
 
 body {
-  height: 100%;
   padding: 0;
   margin: 0;
   font-family: 'Gilroy Medium', 'Arial', sans-serif;
   background-color: #ffffff;
-  /*min-height: 100%;*/
+}
+
+.wrapper {
+  min-height: 100%;
+  /*display: flex;*/
+  /*flex-direction: column;*/
+}
+
+.content {
+  /*flex: 1 1 auto;*/
 }
 
 .page-header {
@@ -77,8 +85,8 @@ ul {
 }
 
 .site-nav__search-block input {
-  width: 320px;
-  height: 25px;
+  width: 400px;
+  height: 30px;
   border-radius: 15px;
   padding: 3px 7px 3px 7px;
   border: none;
@@ -86,8 +94,8 @@ ul {
 
 .site-nav__search-block .search-icon {
   position: absolute;
-  right: 10px;
-  top: 0;
+  right: 30px;
+  top: 2px;
 
 }
 
@@ -162,12 +170,12 @@ ul {
 .controls-elem .user-section {
   display: flex;
   flex-direction: column;
-  padding-bottom: 10px;
+  padding-bottom: 5px;
   border-bottom: 2px solid white;
 }
 
 .username {
-  padding-bottom: 5px;
+  font-size: 18px;
 }
 
 .product-controls {
@@ -179,7 +187,11 @@ ul {
 }
 
 .dropdown-menu .user-dropdown-auth {
-  padding: 10px 0 10px 0;
+  padding-top: 5px;
+}
+
+.dropdown-menu .user-dropdown-auth li a {
+  font-size: 17px;
 }
 
 .user-nav__profile:hover .dropdown-menu {
@@ -188,7 +200,7 @@ ul {
 }
 
 .logout-btn {
-  width: 70%;
+  width: 80%;
 }
 
 .user-auth {
@@ -234,6 +246,10 @@ ul {
   border-radius: 100%;
   color: white;
   background-color: #f55123;
+}
+
+.logout-form {
+margin-top: 7px;
 }
 
 .cart-counter {

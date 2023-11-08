@@ -15,7 +15,6 @@ def products_list(request, category_slug=None, product_availability=None):
     menu = Menu.objects.all()
     categories = Category.objects.all()
     availabilities = ProductAvailability.objects.all()
-    products = Product.objects.all()
 
     cart_prods_counter = request.user.shoppingcart_set.all()
     favourite_prods_counter = request.user.favourite_set.all()
@@ -37,7 +36,6 @@ def products_list(request, category_slug=None, product_availability=None):
         products = products.filter(availability_status=availability)
 
     context = {'menu': menu,
-               'search_products': products,
                'search_query': search_query,
                'category': category,
                'categories': categories,
@@ -49,12 +47,6 @@ def products_list(request, category_slug=None, product_availability=None):
                'compare_prods_counter': compare_prods_counter,
                'curr_time': curr_time}
     return render(request, 'main_page/index.html', context)
-
-
-def search_prods(request):
-    context = {'products': products, 'search_query': search_query}
-
-    return render(request, 'main_page/base.html', context)
 
 
 @login_required

@@ -6,6 +6,6 @@ def search_products(request):
     search_query = request.GET.get('search_query') \
         if request.GET.get('search_query') else ''
 
-    products = Product.objects.filter(name__iexact=search_query)
+    products = Product.objects.distinct().filter(Q(name__icontains=search_query))
 
-    return products
+    return products, search_query

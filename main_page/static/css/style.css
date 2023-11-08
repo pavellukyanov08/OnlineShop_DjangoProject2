@@ -1,7 +1,8 @@
-body {
-    padding: 0;
-    margin: 0;
-    background-color: #f6f6f6;
+.main-content {
+    display: flex;
+    padding-top: 40px;
+    font-size: 22px;
+    flex: 1 1 auto;
 }
 
 a {
@@ -12,12 +13,6 @@ a {
 
 .product-link:hover {
     color: #d3d3d3;
-}
-
-.main-content {
-    display: flex;
-    padding-top: 40px;
-    font-size: 22px;
 }
 
 .user-section {

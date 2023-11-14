@@ -132,6 +132,10 @@ a {
     margin-right: 10px;
 }
 
+.interaction-item .prod-not-fav img {
+    opacity: 0.3;
+}
+
 .add_cart {
     text-align: center;
     padding: 10px;

@@ -68,8 +68,12 @@ class Product(models.Model):
     created = models.DateTimeField(auto_now_add=True, null=True)
     updated = models.DateTimeField(auto_now=True, null=True)
 
+    favorite_status = models.ManyToManyField(User, through="FavouriteStatus", blank=True)
+    compare_status = models.ManyToManyField(User, through="CompareStatus", blank=True,
+                                            related_name='compare_goods_set')
+
     cart_prods = models.ForeignKey(ShoppingCart, on_delete=models.CASCADE, null=True)
-    
+
     def __str__(self):
         return self.name
 
@@ -94,6 +98,30 @@ class Product(models.Model):
         self.vote_total = total_votes
         self.vote_ratio = ratio
         self.save()
+
+
+class FavouriteStatus(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f'Пользователь: {self.user} добавил в избранное товар: {self.product}'
+
+    class Meta:
+        verbose_name = 'Статус избранного'
+        verbose_name_plural = 'Статусы избранного'
+
+
+class CompareStatus(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f'Пользователь: {self.user} добавил в сравнения товар: {self.product}'
+
+    class Meta:
+        verbose_name = 'Статус сравнения'
+        verbose_name_plural = 'Статусы сравнения'
 
 
 class Review(models.Model):

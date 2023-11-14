@@ -39,4 +39,4 @@ def remove_item(request, product_id):
     product = get_object_or_404(Favourite, id=product_id, user=request.user)
     if request.method == 'GET':
         product.delete()
-    return redirect('favourites:all_products')
+    return redirect('favourites:remove_item')

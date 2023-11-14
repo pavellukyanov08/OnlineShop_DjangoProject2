@@ -13,6 +13,8 @@ def products_list(request, category_slug=None, product_availability=None):
 
     products, search_query = search_products(request)
 
+    favourites = request.user.product_set.all()
+
     menu = Menu.objects.all()
     categories = Category.objects.all()
     availabilities = ProductAvailability.objects.all()
@@ -43,6 +45,7 @@ def products_list(request, category_slug=None, product_availability=None):
                'availability': availability,
                'availabilities': availabilities,
                'products': products,
+               'favourites': favourites,
                'cart_prods_counter': cart_prods_counter,
                'favourite_prods_counter': favourite_prods_counter,
                'compare_prods_counter': compare_prods_counter,
@@ -140,3 +143,19 @@ def delete_prod(request, prod_id):
     if request.method == 'POST':
         product.delete()
         return redirect('main_page:index')
+
+
+@login_required
+def set_favourites_status(request, prod_id):
+    user = request.user
+
+    product = Product.objects.get(id=prod_id)
+    status = user.product_set.filter(id=prod_id)
+
+    if status:
+        favs_prods = FavouriteStatus.objects.get(user=user, product=product)
+        favs_prods.delete()
+    else:
+        favs_prods = FavouriteStatus(user=user, product=product)
+        favs_prods.save()
+

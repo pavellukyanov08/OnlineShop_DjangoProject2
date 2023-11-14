@@ -68,17 +68,19 @@
                                 {% endif %}
                             </div>
 
-                            <div class="interaction-item">
-                                <a href="{% url 'favourites:add_item' product.id %}">
-                                    <img src="{% static 'main_page/favourites-icon.svg' %}" height="30" width="30"
-                                         alt="Избранное">
-                                </a>
+                            {% if request.user.is_authenticated %}
+                                <div class="interaction-item">
+                                    <a {% if prod in favourites %} class="prod-is-fav" {% else %} class="prod-not-fav" href="{% url 'favourites:add_item' product.id %}" {% endif %}>
+                                        <img src="{% static 'main_page/favourites-icon.svg' %}" height="30" width="30"
+                                             alt="Избранное">
+                                    </a>
 
-                                <a href="{% url 'compare:add_item' product.id %}">
-                                    <img src="{% static 'main_page/compare.svg' %}" height="30" width="30"
-                                         alt="Сравнить">
-                                </a>
-                            </div>
+                                    <a href="{% url 'compare:add_item' product.id %}">
+                                        <img src="{% static 'main_page/compare.svg' %}" height="30" width="30"
+                                             alt="Сравнить">
+                                    </a>
+                                </div>
+                            {% endif %}
                         </div>
 
                         <div class="add_cart">

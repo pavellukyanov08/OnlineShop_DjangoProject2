@@ -7,6 +7,7 @@ from django.utils import timezone
 from .utils import search_products
 
 
+@login_required(login_url='login')
 def products_list(request, category_slug=None, product_availability=None):
     curr_time = timezone.now()
 

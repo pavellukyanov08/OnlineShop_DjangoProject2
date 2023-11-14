@@ -1,8 +1,10 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from main_page.models import Menu
 from shopping_cart.models import ShoppingCart
 
 
+@login_required(login_url='login')
 def about(request):
     menu = Menu.objects.all()
 

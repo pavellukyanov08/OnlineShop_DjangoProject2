@@ -96,6 +96,7 @@ a {
 .product-card {
     margin: 0 20px 20px 0;
     background-color: #ffffff;
+    border: 1px solid black;
 }
 
 .product-description {

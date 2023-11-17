@@ -68,9 +68,7 @@ class Product(models.Model):
     created = models.DateTimeField(auto_now_add=True, null=True)
     updated = models.DateTimeField(auto_now=True, null=True)
 
-    favorite_status = models.ManyToManyField(User, through="FavouriteStatus", blank=True)
-    compare_status = models.ManyToManyField(User, through="CompareStatus", blank=True,
-                                            related_name='compare_goods_set')
+    favorite_status = models.ManyToManyField(User, through='FavouriteStatus', blank=True)
 
     cart_prods = models.ForeignKey(ShoppingCart, on_delete=models.CASCADE, null=True)
 

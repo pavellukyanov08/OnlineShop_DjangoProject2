@@ -25,8 +25,9 @@ def get_favourites_products(request):
 
 
 @login_required
-def add_item(request, product_id):
+def add_favourite_status(request, product_id):
     product = get_object_or_404(Product, id=product_id)
+
     favourite_item, added = Favourite.objects.get_or_create(product=product,
                                                             user=request.user)
     if not added:
@@ -35,7 +36,7 @@ def add_item(request, product_id):
 
 
 @login_required
-def remove_item(request, product_id):
+def remove_favourite_status(request, product_id):
     product = get_object_or_404(Favourite, id=product_id, user=request.user)
     if request.method == 'GET':
         product.delete()

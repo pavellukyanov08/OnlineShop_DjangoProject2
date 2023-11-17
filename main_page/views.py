@@ -13,15 +13,16 @@ def products_list(request, category_slug=None, product_availability=None):
 
     products, search_query = search_products(request)
 
-    favourites = request.user.product_set.all()
+    user = request.user
+    favourites = user.product_set.all()
 
     menu = Menu.objects.all()
     categories = Category.objects.all()
     availabilities = ProductAvailability.objects.all()
 
-    cart_prods_counter = request.user.shoppingcart_set.all()
-    favourite_prods_counter = request.user.favourite_set.all()
-    compare_prods_counter = request.user.compare_set.all()
+    cart_prods_counter = user.shoppingcart_set.all()
+    favourite_prods_counter = user.favourite_set.all()
+    compare_prods_counter = user.compare_set.all()
 
     category, availability = None, None
     # функционал сортировки

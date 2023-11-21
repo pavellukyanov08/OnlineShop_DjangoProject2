@@ -6,7 +6,7 @@ from .models import Compare
 
 
 @login_required
-def get_all_products(request):
+def get_compare_products(request):
     menu = Menu.objects.all()
 
     cart_prods_counter = request.user.shoppingcart_set.all()
@@ -25,18 +25,23 @@ def get_all_products(request):
 
 
 @login_required
-def add_item(request, product_id):
+def add_compare_status(request, product_id):
     product = get_object_or_404(Product, id=product_id)
-    compare_item, added = Compare.objects.get_or_create(product=product,
-                                                        user=request.user)
-    if not added:
-        compare_item.save()
+    user = request.user
+
+    is_compare = Compare.objects.filter(product=product, user=request.user)
+
+    if is_compare:
+        Compare.objects.filter(user=user, product=product).delete()
+    else:
+        Compare.objects.create(user=user, product=product)
     return redirect('main_page:index')
 
 
 @login_required
-def remove_item(request, product_id):
-    product = get_object_or_404(Compare, id=product_id, user=request.user)
+def remove_compare_status(request, product_id):
+    fav_prods = Compare.objects.filter(product_id=product_id).get(user_id=request.user.id)
+    products = get_object_or_404(Compare, id=fav_prods.id, user=request.user)
     if request.method == 'GET':
-        product.delete()
+        products.delete()
     return redirect('compare:all_compare')

@@ -11,10 +11,6 @@ class ProductAdmin(admin.ModelAdmin):
 
 admin.site.register(Product, ProductAdmin)
 
-admin.site.register(FavouriteStatus)
-
-admin.site.register(CompareStatus)
-
 admin.site.register(Review)
 
 admin.site.register(ProductAvailability)

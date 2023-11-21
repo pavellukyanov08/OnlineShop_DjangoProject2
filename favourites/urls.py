@@ -9,6 +9,6 @@ urlpatterns = [
 
     path('favourites/<int:product_id>/', views.add_favourite_status, name='add_item'),
 
-    path('', views.get_favourites_products, name='all_products'),
+    path('', views.get_favourite_products, name='all_products'),
 
 ]

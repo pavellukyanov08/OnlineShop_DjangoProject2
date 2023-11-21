@@ -13,4 +13,4 @@ class Compare(models.Model):
         verbose_name_plural = 'Сравнение товаров'
 
     def __str__(self):
-        return f'Продукт {self.product}'
+        return f'Сравниваемый товар {self.product} пользователя {self.user}'

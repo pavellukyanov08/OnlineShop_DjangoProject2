@@ -1,3 +1,4 @@
+from django.db import IntegrityError
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
@@ -14,7 +15,7 @@ def products_list(request, category_slug=None, product_availability=None):
     products, search_query = search_products(request)
 
     user = request.user
-    favourites = user.product_set.all()
+    favourite_prods = user.favourite_set.all()
 
     menu = Menu.objects.all()
     categories = Category.objects.all()
@@ -46,7 +47,7 @@ def products_list(request, category_slug=None, product_availability=None):
                'availability': availability,
                'availabilities': availabilities,
                'products': products,
-               'favourites': favourites,
+               'favourite_prods': favourite_prods,
                'cart_prods_counter': cart_prods_counter,
                'favourite_prods_counter': favourite_prods_counter,
                'compare_prods_counter': compare_prods_counter,
@@ -87,7 +88,7 @@ def add_product(request):
 @login_required
 def product_detail(request, prod_id, slug):
     menu = Menu.objects.all()
-    product = Product.objects.get(id=prod_id, slug=slug)
+    prod = Product.objects.get(id=prod_id, slug=slug)
 
     cart_prods_counter = request.user.shoppingcart_set.all()
     favourite_prods_counter = request.user.favourite_set.all()
@@ -95,10 +96,10 @@ def product_detail(request, prod_id, slug):
 
     if request.method == 'GET':
         if request.user.is_staff or request.user.is_superuser:
-            form_prod = ProductForm(instance=product)
+            form_prod = ProductForm(instance=prod)
 
             return render(request, 'main_page/edit_prod.html', {
-                'product': product,
+                'product': prod,
                 'form_prod': form_prod,
                 'menu': menu,
                 'cart_prods_counter': cart_prods_counter,
@@ -107,11 +108,11 @@ def product_detail(request, prod_id, slug):
             })
         else:
             form_review = ReviewForm(request.GET)
-            user_reviews = product.review_set.all()
+            user_reviews = prod.review_set.all()
             user_prof_data = request.user.profile
 
             return render(request, 'main_page/view_prod.html', {
-                'product': product,
+                'product': prod,
                 'form_review': form_review,
                 'menu': menu,
                 'user_reviews': user_reviews,
@@ -122,18 +123,19 @@ def product_detail(request, prod_id, slug):
             })
     else:
         form_review = ReviewForm(request.POST)
+
         try:
             review = form_review.save(commit=False)
-            review.product = product
+            review.product = prod
             review.owner = request.user.profile
             review.save()
-            product.get_vote_count()
+            prod.get_vote_count()
 
             messages.success(request, 'Ваш отзыв успешно сохранен')
-            return redirect('main_page:product_detail', prod_id=product.id, slug=product.slug)
+            return redirect('main_page:product_detail', prod_id=prod.id, slug=prod.slug)
         except ValueError:
             return render(request, 'main_page/view_prod.html',
-                          {'product': product,
+                          {'product': prod,
                            'form_review': form_review,
                            'error': 'Неверные данные!'})
 
@@ -146,17 +148,17 @@ def delete_prod(request, prod_id):
         return redirect('main_page:index')
 
 
-@login_required
-def set_favourites_status(request, prod_id):
-    user = request.user
-
-    product = Product.objects.get(id=prod_id)
-    status = user.product_set.filter(id=prod_id)
-
-    if status:
-        favs_prods = FavouriteStatus.objects.get(user=user, product=product)
-        favs_prods.delete()
-    else:
-        favs_prods = FavouriteStatus(user=user, product=product)
-        favs_prods.save()
+# @login_required
+# def set_favourites_status(request, prod_id):
+#     user = request.user
+#
+#     fav_product = FavouriteStatus.objects.get(prod_id=prod_id)
+#     status = user.favourite_set.filter(product_id=prod_id)
+#
+#     if status:
+#         favs_prods = FavouriteStatus.objects.get(user=user, product=fav_product)
+#         favs_prods.delete()
+#     else:
+#         favs_prods = FavouriteStatus(user=user, product=fav_product)
+#         favs_prods.save()
 

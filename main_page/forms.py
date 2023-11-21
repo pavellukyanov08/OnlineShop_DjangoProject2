@@ -8,11 +8,6 @@ class ReviewForm(ModelForm):
         model = Review
         fields = ['body', 'value']
 
-        # labels = {
-        #     'body': 'Добавьте комментарий к своему голосу',
-        #     'value': 'Оставьте свой голос',
-        # }
-
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 

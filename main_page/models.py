@@ -68,8 +68,6 @@ class Product(models.Model):
     created = models.DateTimeField(auto_now_add=True, null=True)
     updated = models.DateTimeField(auto_now=True, null=True)
 
-    favorite_status = models.ManyToManyField(User, through='FavouriteStatus', blank=True)
-
     cart_prods = models.ForeignKey(ShoppingCart, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
@@ -98,30 +96,6 @@ class Product(models.Model):
         self.save()
 
 
-class FavouriteStatus(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
-
-    def __str__(self):
-        return f'Пользователь: {self.user} добавил в избранное товар: {self.product}'
-
-    class Meta:
-        verbose_name = 'Статус избранного'
-        verbose_name_plural = 'Статусы избранного'
-
-
-class CompareStatus(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
-
-    def __str__(self):
-        return f'Пользователь: {self.user} добавил в сравнения товар: {self.product}'
-
-    class Meta:
-        verbose_name = 'Статус сравнения'
-        verbose_name_plural = 'Статусы сравнения'
-
-
 class Review(models.Model):
     VOTE_TYPE = (
         ('За', 'Голос за'),
@@ -135,9 +109,9 @@ class Review(models.Model):
     created = models.DateTimeField(auto_now_add=True, verbose_name='Создан')
 
     def __str__(self):
-        return f'Пользователь: {self.owner} -> Продукт: {self.product}'
+        return f'Пользователь {self.owner} оставил отзыв на {self.product}'
 
     class Meta:
+        unique_together = [['owner', 'product'], ]
         verbose_name = 'Отзыв'
         verbose_name_plural = 'Отзывы'
-        unique_together = [['owner', 'product'], ]

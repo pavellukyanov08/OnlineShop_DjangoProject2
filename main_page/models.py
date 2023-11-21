@@ -69,7 +69,7 @@ class Product(models.Model):
     updated = models.DateTimeField(auto_now=True, null=True)
 
     cart_prods = models.ForeignKey(ShoppingCart, on_delete=models.CASCADE, null=True)
-    
+
     def __str__(self):
         return self.name
 
@@ -109,9 +109,9 @@ class Review(models.Model):
     created = models.DateTimeField(auto_now_add=True, verbose_name='Создан')
 
     def __str__(self):
-        return f'Пользователь: {self.owner} -> Продукт: {self.product}'
+        return f'Пользователь {self.owner} оставил отзыв на {self.product}'
 
     class Meta:
+        unique_together = [['owner', 'product'], ]
         verbose_name = 'Отзыв'
         verbose_name_plural = 'Отзывы'
-        unique_together = [['owner', 'product'], ]

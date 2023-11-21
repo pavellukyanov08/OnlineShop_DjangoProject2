@@ -31,9 +31,9 @@ h1 {
 }
 
 .update-quantity-form input[type='number'] {
-    width: 50px;
+    width: 40px;
     font-size: 20px;
-    border: 1px solid rgb(128, 128, 128);
+    font-weight: 200;
 }
 
 .update-quantity-form button[type='submit'] {

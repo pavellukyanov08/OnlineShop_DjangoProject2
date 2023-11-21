@@ -41,6 +41,8 @@ a {
     flex-direction: column;
     justify-content: space-evenly;
     padding: 0 10px 0 20px;
+    min-width: 170px;
+    text-align: justify;
 }
 
 .interaction-item {

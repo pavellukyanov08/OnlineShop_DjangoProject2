@@ -38,14 +38,6 @@ def add_item(request, product_id):
 
 
 @login_required
-def remove_item(request, product_id):
-    product = get_object_or_404(ShoppingCart, id=product_id, user=request.user)
-    if request.method == 'GET':
-        product.delete()
-    return redirect('cart:cart')
-
-
-@login_required
 def update_cart(request):
     if request.method == "POST":
         item_id = request.POST['item_id']
@@ -54,3 +46,13 @@ def update_cart(request):
         cart_item.quantity = new_quantity
         cart_item.save()
         return redirect('cart:cart')
+
+
+@login_required
+def remove_item(request, product_id):
+    product = get_object_or_404(ShoppingCart, id=product_id, user=request.user)
+    if request.method == 'GET':
+        product.delete()
+    return redirect('cart:cart')
+
+

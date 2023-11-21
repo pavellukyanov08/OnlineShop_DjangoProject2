@@ -13,5 +13,4 @@ class Favourite(models.Model):
         verbose_name_plural = 'Избранное'
 
     def __str__(self):
-        return f'{self.product}'
-
+        return f'Избранный товар {self.product} пользователя {self.user}'

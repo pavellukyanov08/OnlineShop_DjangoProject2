@@ -9,101 +9,108 @@
     {% block css %} {% endblock %}
 </head>
 <body>
-{#    <section class="wrapper">#}
-        <header class="page-header">
-            <div class="page-header__wrapper container">
+    <header class="page-header">
+        <div class="page-header__wrapper container">
 
-                <nav class="site-nav page-header__site-nav">
-                    <div class="page-header__logo">
-                        <a href="{% url 'home_page' %}">
-                            <img src="{% static 'main_page/funiro-logo.svg' %}" alt="Логотип">
+            <nav class="site-nav page-header__site-nav">
+                <div class="page-header__logo">
+                    <a href="{% url 'home_page' %}">
+                        <img src="{% static 'main_page/funiro-logo.svg' %}" alt="Логотип">
+                    </a>
+                </div>
+
+                <ul class="site-nav__list">
+                    {% for item in menu %}
+                        <li class="site-nav__item"><a href="{{ item.url }}">{{ item.title }}</a></li>
+                    {% endfor %}
+                </ul>
+            </nav>
+
+            <div class="site-nav__search-block">
+                <form action="{% url 'main_page:index' %}" method="get">
+                    <div class="form_field">
+                        <input class="search-bar" id="formInput#search" type="text" name="search_query"
+                               value="{{ search_query }}" placeholder="Поиск по продуктам"/>
+                    </div>
+
+                    <input type="submit" hidden="hidden" value="Search"/>
+                </form>
+
+            </div>
+
+            <div class="user-nav__user-block">
+                {% if user.is_authenticated %}
+
+                    <div class="user-nav__shop_block">
+                        <span class="cart-counter">{{ cart_prods_counter.count }}</span>
+                        <span class="favourite-counter">{{ favourite_prods_counter.count }}</span>
+                        <span class="compare-counter">{{ compare_prods_counter.count }}</span>
+
+                        <a href="{% url 'cart:cart' %}"><img src="{% static 'main_page/shop_cart.svg' %}"
+                                                             height="32" width="33" alt="Корзина товаров">
+                        </a>
+
+                        <a href="{% url 'favourites:all_products' %}"><img src="{% static 'main_page/favourites-icon.svg' %}"
+                                                                           width="32" height="33" alt="Избранное">
+                        </a>
+
+                        <a href="{% url 'compare:all_compare' %}"><img src="{% static 'main_page/compare.svg' %}"
+                                                                       width="32" height="33" alt="Избранное">
                         </a>
                     </div>
 
-                    <ul class="site-nav__list">
-                        {% for item in menu %}
-                            <li class="site-nav__item"><a href="{{ item.url }}">{{ item.title }}</a></li>
-                        {% endfor %}
+                    <div class="user-nav__profile">
+                        <a class="user-nav__logo" id="user-icon" href="{% url 'main_page:index' %}">
+                            <img src="{% static 'main_page/user_logo.svg' %}"
+                                 width="32" height="33" alt="Пользователь">
+                        </a>
+
+                        <div class="dropdown-menu">
+                            <ul class="controls-elem">
+                                <li class="user-section">
+                                    <a class="username" href="{% url 'profile' %}">{{ user }}</a>
+
+                                    {% if user.is_superuser and user.is_staff %}
+                                        <a class="product-controls" href="{% url 'main_page:add_product' %}">Добавить продукт</a>
+                                    {% endif %}
+                                </li>
+                            </ul>
+
+                            <ul class="user-dropdown-auth">
+                                <li><a href="{% url 'login' %}">Сменить пользователя</a></li>
+                                <li>
+                                    <div class="logout-form">
+                                        <form action="{% url 'logout' %}" method="post">
+                                            {% csrf_token %}
+                                            <button class="logout-btn">Выйти</button>
+                                        </form>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                {% else %}
+
+                    <ul class="user-nav__user-auth">
+                        <li><a href="{% url 'signup' %}">Зарегистрироваться</a></li>
+                        <li><a href="{% url 'login' %}">Войти</a></li>
                     </ul>
-                </nav>
-
-                <div class="site-nav__search-block">
-                    <form action="{% url 'main_page:index' %}" method="get">
-                        <div class="form_field">
-                            <input class="search-bar" id="formInput#search" type="text" name="search_query"
-                                       value="{{ search_query }}" placeholder="Поиск по продуктам"/>
-                        </div>
-
-                        <input type="submit" hidden="hidden" value="Search"/>
-                    </form>
-
-                </div>
-
-                <div class="user-nav__user-block">
-                    {% if user.is_authenticated %}
-
-                        <div class="user-nav__shop_block">
-                            <span class="cart-counter">{{ cart_prods_counter.count }}</span>
-                            <span class="favourite-counter">{{ favourite_prods_counter.count }}</span>
-                            <span class="compare-counter">{{ compare_prods_counter.count }}</span>
-
-                            <a href="{% url 'cart:cart' %}"><img src="{% static 'main_page/shop_cart.svg' %}"
-                                                                 height="32" width="33" alt="Корзина товаров">
-                            </a>
-
-                            <a href="{% url 'favourites:all_products' %}"><img src="{% static 'main_page/favourites-icon.svg' %}"
-                                                                               width="32" height="33" alt="Избранное">
-                            </a>
-
-                            <a href="{% url 'compare:all_compare' %}"><img src="{% static 'main_page/compare.svg' %}"
-                                                                               width="32" height="33" alt="Избранное">
-                            </a>
-                        </div>
-
-                        <div class="user-nav__profile">
-                            <a class="user-nav__logo" id="user-icon" href="{% url 'main_page:index' %}">
-                                <img src="{% static 'main_page/user_logo.svg' %}"
-                                     width="32" height="33" alt="Пользователь">
-                            </a>
-
-                            <div class="dropdown-menu">
-                                <ul class="controls-elem">
-                                    <li class="user-section">
-                                        <a class="username" href="{% url 'profile'%}">{{ user }}</a>
-
-                                        {% if user.is_superuser and user.is_staff %}
-                                            <a class="product-controls" href="{% url 'main_page:add_product' %}">Добавить продукт</a>
-                                        {% endif %}
-                                    </li>
-                                </ul>
-
-                                <ul class="user-dropdown-auth">
-                                    <li><a href="{% url 'login' %}">Сменить пользователя</a></li>
-                                    <li>
-                                        <div class="logout-form">
-                                            <form action="{% url 'logout' %}" method="post">
-                                                {% csrf_token %}
-                                                <button class="logout-btn">Выйти</button>
-                                            </form>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    {% else %}
-
-                        <ul class="user-nav__user-auth">
-                            <li><a href="{% url 'signup' %}">Зарегистрироваться</a></li>
-                            <li><a href="{% url 'login' %}">Войти</a></li>
-                        </ul>
-                    {% endif %}
-                </div>
+                {% endif %}
             </div>
-        </header>
+        </div>
+    </header>
 
-        {% block content %}{% endblock %}
+    {% for message in messages %}
+        <div>
+            <div class="alert alert--{{ message.tags }}">
+                <p class="alert__message">{{ message }}</p>
+                <button class="alert__close">x</button>
+            </div>
+        </div>
+    {% endfor %}
+
+{% block content %}{% endblock %}
 
 {#        {% include 'main_page/footer.html' %}#}
-{#    </section>#}
 </body>
 </html>

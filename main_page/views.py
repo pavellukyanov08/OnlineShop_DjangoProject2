@@ -6,6 +6,8 @@ from .forms import ProductForm, ReviewForm
 from .models import *
 from django.utils import timezone
 from .utils import search_products
+from favourites.models import Favourite
+from prod_comparison.models import Compare
 
 
 @login_required(login_url='login')
@@ -15,7 +17,12 @@ def products_list(request, category_slug=None, product_availability=None):
     products, search_query = search_products(request)
 
     user = request.user
-    favourite_prods = user.favourite_set.all()
+
+    favourite_prods = user.favourite_set.filter(user=user).values_list('product__id', flat=True)
+
+    # compare_prods = user.compare_set.filter(user=user).values_list('product__id', flat=True)
+    compare_prods = user.compare_set.filter(user=user).values_list('product_id', flat=True)
+    print(compare_prods)
 
     menu = Menu.objects.all()
     categories = Category.objects.all()
@@ -48,6 +55,7 @@ def products_list(request, category_slug=None, product_availability=None):
                'availabilities': availabilities,
                'products': products,
                'favourite_prods': favourite_prods,
+               'compare_prods': compare_prods,
                'cart_prods_counter': cart_prods_counter,
                'favourite_prods_counter': favourite_prods_counter,
                'compare_prods_counter': compare_prods_counter,
@@ -76,43 +84,63 @@ def add_product(request):
             new_product.save()
             return redirect('main_page:index')
         except ValueError:
-            return render(request, 'main_page/add_product.html',
-                          {'form': ProductForm(),
-                           'error': 'Переданы неверные данные', 'menu': menu,
-                           'cart_prods_counter': cart_prods_counter,
-                           'favourite_prods_counter': favourite_prods_counter,
-                           'compare_prods_counter': compare_prods_counter
-                           })
+
+            context = {
+                'form': ProductForm(),
+                'error': 'Переданы неверные данные', 'menu': menu,
+                'cart_prods_counter': cart_prods_counter,
+                'favourite_prods_counter': favourite_prods_counter,
+                'compare_prods_counter': compare_prods_counter
+            }
+            return render(request, 'main_page/add_product.html', context)
 
 
 @login_required
 def product_detail(request, prod_id, slug):
     menu = Menu.objects.all()
-    prod = Product.objects.get(id=prod_id, slug=slug)
+    product = Product.objects.get(id=prod_id, slug=slug)
 
     cart_prods_counter = request.user.shoppingcart_set.all()
     favourite_prods_counter = request.user.favourite_set.all()
     compare_prods_counter = request.user.compare_set.all()
 
-    if request.method == 'GET':
-        if request.user.is_staff or request.user.is_superuser:
-            form_prod = ProductForm(instance=prod)
+    if request.user.is_staff or request.user.is_superuser:
+        if request.method == 'GET':
+            form_prod = ProductForm(instance=product)
 
-            return render(request, 'main_page/edit_prod.html', {
-                'product': prod,
-                'form_prod': form_prod,
+            context = {
                 'menu': menu,
+                'product': product,
+                'form_prod': form_prod,
                 'cart_prods_counter': cart_prods_counter,
                 'favourite_prods_counter': favourite_prods_counter,
                 'compare_prods_counter': compare_prods_counter
-            })
+            }
+            return render(request, 'main_page/edit_prod.html', context)
         else:
+            try:
+                form_prod = ProductForm(request.POST, instance=product)
+                form_prod.save()
+
+                return redirect('main_page:index')
+            except ValueError:
+
+                context = {
+                    'product': product,
+                    'menu': menu,
+                    'cart_prods_counter': cart_prods_counter,
+                    'favourite_prods_counter': favourite_prods_counter,
+                    'compare_prods_counter': compare_prods_counter
+                }
+                return render(request, 'main_page/edit_prod.html', context)
+    else:
+        if request.method == 'GET':
             form_review = ReviewForm(request.GET)
-            user_reviews = prod.review_set.all()
+            user_reviews = product.review_set.all()
             user_prof_data = request.user.profile
 
-            return render(request, 'main_page/view_prod.html', {
-                'product': prod,
+            context = {
+                'product': product,
                 'form_review': form_review,
                 'menu': menu,
                 'user_reviews': user_reviews,
@@ -120,24 +148,25 @@ def product_detail(request, prod_id, slug):
                 'cart_prods_counter': cart_prods_counter,
                 'favourite_prods_counter': favourite_prods_counter,
                 'compare_prods_counter': compare_prods_counter
-            })
-    else:
-        form_review = ReviewForm(request.POST)
+            }
+            return render(request, 'main_page/view_prod.html', context)
+        else:
+            form_review = ReviewForm(request.POST)
 
-        try:
+            # try:
             review = form_review.save(commit=False)
-            review.product = prod
+            review.product = product
             review.owner = request.user.profile
             review.save()
-            prod.get_vote_count()
-
+            product.get_vote_count()
             messages.success(request, 'Ваш отзыв успешно сохранен')
-            return redirect('main_page:product_detail', prod_id=prod.id, slug=prod.slug)
-        except ValueError:
-            return render(request, 'main_page/view_prod.html',
-                          {'product': prod,
-                           'form_review': form_review,
-                           'error': 'Неверные данные!'})
+
+            return redirect('main_page:product_detail', prod_id=product.id, slug=product.slug)
+            # except IntegrityError:
+    # return render(request, 'main_page/view_prod.html',
+    #                           {'product': product,
+    #                            'form_review': form_review,
+    #                            'error': 'Неверные данные!'})
 
 
 @login_required
@@ -146,19 +175,3 @@ def delete_prod(request, prod_id):
     if request.method == 'POST':
         product.delete()
         return redirect('main_page:index')
-
-
-# @login_required
-# def set_favourites_status(request, prod_id):
-#     user = request.user
-#
-#     fav_product = FavouriteStatus.objects.get(prod_id=prod_id)
-#     status = user.favourite_set.filter(product_id=prod_id)
-#
-#     if status:
-#         favs_prods = FavouriteStatus.objects.get(user=user, product=fav_product)
-#         favs_prods.delete()
-#     else:
-#         favs_prods = FavouriteStatus(user=user, product=fav_product)
-#         favs_prods.save()
-

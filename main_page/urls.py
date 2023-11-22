@@ -10,6 +10,9 @@ urlpatterns = [
     # adding product
     path('add_product/', views.add_product, name='add_product'),
 
+    # edit product page
+    path('product/<int:prod_id>/<slug:slug>', views.product_detail, name='product_detail'),
+
     # delete prod
     path('product/<int:prod_id>/delete', views.delete_prod, name='delete'),
 
@@ -19,6 +22,6 @@ urlpatterns = [
     # product availability
     path('<str:product_availability>/', views.products_list, name='product_list_by_availability'),
 
-    # viewing specific product
-    path('product/<int:prod_id>/<slug:slug>', views.product_detail, name='product_detail'),
+    # view product page
+    # path('product/<int:prod_id>/<slug:slug>', views.view_product, name='view_product'),
 ]

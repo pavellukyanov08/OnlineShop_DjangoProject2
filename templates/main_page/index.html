@@ -70,16 +70,27 @@
                                 {% endif %}
                             </div>
 
-                            {% if user.is_authenticated %}
+                            {% if request.user.is_authenticated %}
                                 <div class="interaction-item">
-                                    <a {% if request.user.product.id in favourite_prods %} class="prods-is-fav"
-                                        {% else %} class="prods-not-fav" href="{% url 'favourites:add_item' product.id %}" {% endif %}>
-                                        <img src="{% static 'main_page/favourites-icon.svg' %}" height="30" width="30" alt="Избранное">
-                                    </a>
+                                    {% if product.id in favourite_prods %}
+                                        <a class="prod-is-fav" href="{% url 'favourites:add_item' product.id %}">
+                                            <img src="{% static 'main_page/favourites-icon.svg' %}" alt="Избранное">
+                                        </a>
+                                    {% else %}
+                                        <a class="prod-not-fav" href="{% url 'favourites:add_item' product.id %}">
+                                            <img src="{% static 'main_page/favourites-icon.svg' %}" alt="Избранное">
+                                        </a>
+                                    {% endif %}
 
-                                    <a href="{% url 'compare:add_item' product.id %}">
-                                        <img src="{% static 'main_page/compare.svg' %}" height="30" width="30" alt="Сравнить">
-                                    </a>
+                                    {% if product.id in compare_prods %}
+                                        <a class="prod-is-comp" href="{% url 'compare:add_item' product.id %}">
+                                            <img src="{% static 'main_page/compare.svg' %}" alt="Избранное">
+                                        </a>
+                                    {% else %}
+                                        <a class="prod-not-comp" href="{% url 'compare:add_item' product.id %}">
+                                            <img src="{% static 'main_page/compare.svg' %}" alt="Избранное">
+                                        </a>
+                                    {% endif %}
                                 </div>
                             {% endif %}
                         </div>

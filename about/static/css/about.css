@@ -1,37 +1,37 @@
 /* Начало блога */
 
 h1 {
-  text-align: center;
-  padding: 30px 30px;
-  text-transform: uppercase;
+    text-align: center;
+    padding: 30px 30px;
+    text-transform: uppercase;
 
 }
 
 .auth-info p {
-  font-size: 19px;
+    font-size: 20px;
 }
 
 .info-block {
-  margin: 0 auto;
-  width: 1050px;
+    margin: 0 auto;
+    /*width: 1050px;*/
 }
 
 .dev-block {
-  display: flex;
-  padding: 10px;
-  border: 2px solid black;
-  font-size: 20px;
-  border-radius: 10px;
+    display: flex;
+    padding: 15px;
+    border: 2px solid black;
+    font-size: 20px;
+    border-radius: 10px;
 }
 
 .auth-img {
-  border-right: 2px solid black;
+    border-right: 2px solid black;
 }
 
 .auth-info {
-  padding: 0 10px;
-  line-height: 1.5;
-  border-right: 2px solid black;
+    padding: 0 15px;
+    line-height: 1.5;
+    border-right: 2px solid black;
 }
 
 .auth-info p {
@@ -39,18 +39,30 @@ h1 {
 }
 
 h3 {
-  text-align: center;
-  padding: 10px 0;
+    text-align: center;
+    padding: 10px 0;
 }
 
 .auth-info ul {
-  margin-left: 30px;
-  font-size: 20px;
+    margin-left: 30px;
+    font-size: 20px;
+}
+
+.other-links {
+    padding: 0 15px;
+}
+
+.other-links ul li a:hover {
+    text-decoration: underline;
 }
 
 .other-links p {
-  text-decoration: none;
-  color: black;
-  padding: 0 10px;
-  text-align: justify;
+    text-decoration: none;
+    line-height: 1.5;
+    color: black;
+    text-align: justify;
+}
+
+.other-links ul {
+    margin-left: 25px;
 }

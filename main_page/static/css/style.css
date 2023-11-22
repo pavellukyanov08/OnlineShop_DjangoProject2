@@ -132,8 +132,16 @@ a {
     margin-right: 10px;
 }
 
-.interaction-item .prods-is-fav img {
-    opacity: 0.3;
+.interaction-item .prod-is-fav,
+.interaction-item .prod-is-comp,
+.interaction-item .prod-not-fav:hover,
+.interaction-item .prod-not-comp:hover {
+    opacity: 1;
+}
+
+.interaction-item .prod-not-fav,
+.interaction-item .prod-not-comp {
+    opacity: 0.5;
 }
 
 .add_cart {

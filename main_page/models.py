@@ -62,7 +62,6 @@ class Product(models.Model):
     start_date = models.DateTimeField(null=True, blank=True, verbose_name='Дата старта распродажи')
     end_date = models.DateTimeField(null=True, blank=True, verbose_name='Дата окончания распродажи')
     availability_status = models.ForeignKey(ProductAvailability, on_delete=models.CASCADE, null=True, verbose_name='Наличие')
-    reviewer = models.ForeignKey(Profile, on_delete=models.CASCADE, null=True, blank=True)
     vote_total = models.IntegerField(default=0, null=True, blank=True)
     vote_ratio = models.IntegerField(default=0, null=True, blank=True)
     created = models.DateTimeField(auto_now_add=True, null=True)
@@ -83,7 +82,7 @@ class Product(models.Model):
         return reverse('main_page:product_detail', args=[self.id, self.slug])
 
     def reviewers(self):
-        queryset = self.review_set.all().values_list('reviewer_id', flat=True)
+        queryset = self.review_set.all().values_list('owner_id', flat=True)
         return queryset
 
     def get_vote_count(self):

@@ -125,7 +125,13 @@ USE_THOUSAND_SEPARATOR = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
+# Static files
+
 STATIC_URL = 'static/'
+
+STATIC_ROOT = BASE_DIR / STATIC_URL
+
+# Media files
 
 MEDIA_URL = 'media/'
 

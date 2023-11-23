@@ -1,0 +1,301 @@
+html, body {
+  height: 100%;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  font-family: 'Gilroy Medium', 'Arial', sans-serif;
+  background-color: #ffffff;
+}
+
+.wrapper {
+  min-height: 100%;
+  /*display: flex;*/
+  /*flex-direction: column;*/
+}
+
+.content {
+  /*flex: 1 1 auto;*/
+}
+
+.page-header {
+  left: 0;
+  background-image: url("../main_page/main-back-2.png"), url("../main_page/main-back-1.png");
+  background-size: 50% 100%, 50% 100%;
+  background-repeat: no-repeat, no-repeat;
+  background-position: left, right;
+}
+
+h1, h2, h3, p {
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 1240px;
+  min-width: 320px;
+  margin: 0 auto;
+  box-sizing: border-box
+}
+
+a {
+  text-decoration: none;
+  color: black;
+  cursor: pointer;
+}
+
+.page-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+.page-header {
+  background-color: lightgray;
+}
+
+.page-header__wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  height: 70px;
+}
+
+.page-header__site-nav {
+  display: flex;
+  align-items: center;
+  /*margin-left: 10px*/
+}
+
+.site-nav__list {
+  display: flex;
+  margin-left: 20px;
+  list-style: none;
+}
+
+.site-nav__search-block {
+  position: relative;
+}
+
+.site-nav__search-block input {
+  width: 400px;
+  height: 30px;
+  border-radius: 15px;
+  padding: 3px 7px 3px 7px;
+  border: none;
+}
+
+.site-nav__search-block .search-icon {
+  position: absolute;
+  right: 30px;
+  top: 2px;
+
+}
+
+.site-nav__item, .user-nav__logo {
+  margin: 15px 0 15px 0;
+  padding-left: 25px;
+}
+
+.site-nav__item a {
+  font-size: 18px;
+  line-height: 19px;
+  color: #303032;
+  letter-spacing: .13em;
+}
+
+.site-nav__item a:focus,
+.site-nav__item a:hover {
+  opacity: 0.8;
+}
+
+.site-nav__item a:active {
+  opacity: 0.6;
+}
+
+.user-nav__user-block {
+  display: flex;
+  align-items: center;
+}
+
+.user-nav__logo {
+  margin: 0;
+  padding: 0;
+}
+
+.user-nav__profile {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 30px;
+}
+
+/*Раскрывающийся список пользователя*/
+.user-nav__profile {
+  position: relative;
+  display: block;
+}
+.dropdown-menu {
+  position: absolute;
+  display: none;
+  padding: 10px;
+  top: 0;
+  right: 0;
+  text-align: center;
+  background-color: #d3d3d3;
+  border-radius: 7px;
+  border: 1px solid white;
+  font-size: 20px;
+}
+
+.dropdown-menu ul li {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  line-height: 25px;
+}
+
+.controls-elem li {
+  padding: 5px;
+}
+
+.controls-elem .user-section {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 5px;
+  border-bottom: 2px solid white;
+}
+
+.username {
+  font-size: 18px;
+}
+
+.product-controls {
+  font-size: 17px;
+}
+
+.dropdown-menu a:hover {
+  color: white;
+}
+
+.dropdown-menu .user-dropdown-auth {
+  padding-top: 5px;
+}
+
+.dropdown-menu .user-dropdown-auth li a {
+  font-size: 17px;
+}
+
+.user-nav__profile:hover .dropdown-menu {
+  display: block;
+  width: 200px;
+}
+
+.logout-btn {
+  width: 80%;
+}
+
+.user-auth {
+  border-top: 2px solid white;
+}
+
+.user-nav__user-profile a {
+  font-size: 18px;
+  line-height: 19px;
+  color: #303032;
+}
+
+.user-nav__user-auth {
+  align-items: center;
+  list-style: none;
+}
+
+.logout-link {
+  font-size: 15px;
+}
+
+.user-nav__user-auth a {
+  font-size: 17px;
+  line-height: 20px;
+  color: #303032;
+}
+
+.user-nav__shop_block {
+  display: flex;
+  position: relative;
+  margin-right: 20px;
+}
+
+.user-nav__shop_block a:not(:last-child) {
+    margin-right: 25px;
+}
+
+.user-nav__shop_block span {
+  position: absolute;
+  text-transform: uppercase;
+  font-size: 17px;
+  padding: 0 5px 0 5px;
+  border-radius: 100%;
+  color: white;
+  background-color: #f55123;
+}
+
+.logout-form {
+margin-top: 7px;
+}
+
+.cart-counter {
+  top: -6px;
+  left: 20px;
+}
+
+.favourite-counter {
+  top: -6px;
+  right:50px;
+}
+
+.compare-counter {
+  top: -6px;
+  right: -7px;
+}
+
+
+/*ФУТЕР */
+.basement-content {
+  /*position: absolute;*/
+  /*bottom: 0;*/
+  /*width: 100%;*/
+  margin-top: 40px;
+  background-color: #d3d3d3;
+}
+
+.info-line {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 17px;
+}
+
+.info-line__menu-item {
+  margin-left: 0;
+  margin-top: 0;
+  width: 140px;
+  text-decoration: none;
+  color: #303032;
+  text-transform: uppercase;
+  padding-left: 40px;
+  font-weight: 600;
+}
+
+.rights p {
+  text-align: center;
+  font-weight: 400;
+}

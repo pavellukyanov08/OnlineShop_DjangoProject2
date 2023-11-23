@@ -87,7 +87,7 @@ def edit_profile(request):
         if edit_form.is_valid():
             edit_form.save()
 
-            messages.success(request, 'Account edited successfully!')
+            # messages.success(request, 'Account edited successfully!')
             return redirect('profile')
 
     context = {
